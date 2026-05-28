@@ -29,7 +29,7 @@
 (function () {
   /* ── 1. Social footer links ──────────────────────────────── */
   var SOCIAL_LINKS = {
-    youtube:   'https://youtube.com/@fzrum',
+    youtube:   'https://youtube.com/@feumm',
     instagram: 'https://www.instagram.com/fzerium',
     behance:   'https://www.behance.net/feum',
     discord:   'https://discord.com/users/1071929676223762452',
@@ -42,7 +42,7 @@
   var CREATORS = [
     {
       name: 'Icynutella',
-      subs: '39.7K Subscribers',
+      subs: '40.0K Subscribers',
       url:  'https://youtube.com/@icynutella',
       img:  'https://yt3.googleusercontent.com/pOdPN9SZ13Dy6pumjp5jl_vBA4-xHP7Vh55kqG1On8zvCg1Bb2PUAUmk81rIFXxR1Qus8N2I0A=s200-c-k-c0x00ffffff-no-rj',
       glow: 'rgba(56, 189, 248, 0.55)'
@@ -67,8 +67,8 @@
 
   /* ── 3. Page meta text ───────────────────────────────────── */
   var META = {
-    title:       'feum — Minecraft Thumbnail Designer',
-    description: 'Scroll-stoppers, made to click. Professional Minecraft thumbnail design by feum.'
+    title:       'feum',
+    description: 'Professional Minecraft thumbnail design by @feum.'
   };
 
   /* ── 4. Toolkit app labels (shown as tooltip on mobile) ─── */
