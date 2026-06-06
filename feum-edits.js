@@ -29,11 +29,11 @@
 (function () {
   /* ── 1. Social footer links ──────────────────────────────── */
   var SOCIAL_LINKS = {
-    youtube:   'https://youtube.com/@feumm',
-    instagram: 'https://www.instagram.com/fzerium',
+    youtube:   'https://youtube.com/@eufms',
+    instagram: 'https://www.instagram.com/@eufm3',
     behance:   'https://www.behance.net/feum',
     discord:   'https://discord.com/users/1071929676223762452',
-    pinterest: 'https://pinterest.com/feum',
+    pinterest: 'https://pinterest.com/eufms_',
     gumroad:   'https://gumroad.com/feum'
   };
 
