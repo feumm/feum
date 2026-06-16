@@ -1,563 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>feumrp</title>
+  <meta name="description" content="Browse curated premium texture packs for Minecraft Bedrock" />
+  <meta property="og:title" content="feumrp" />
+  <meta property="og:description" content="Browse curated premium texture packs for Minecraft Bedrock." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://feumm.github.io/feumrp/images/hero.gif" />
+  <meta property="og:image:width" content="1920" />
+  <meta property="og:image:height" content="1080" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="feumrp" />
+  <meta name="twitter:description" content="Browse curated premium texture packs for Minecraft Bedrock." />
+  <meta name="twitter:image" content="https://feumm.github.io/feumrp/images/hero.gif" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
 
-    <!-- ═══════════════════════════════════════════════
-         SEO & Social Sharing
-    ═══════════════════════════════════════════════ -->
-    <title>feum</title>
-    <meta name="description" content="Professional Minecraft thumbnail designer, High-CTR visuals trusted by creators worldwide." />
-    <meta name="keywords" content="minecraft thumbnail designer, feum, minecraft thumbnail, youtube thumbnail designer, gaming thumbnail, feum portfolio, thumbnail artist" />
-    <meta name="author" content="feum" />
-    <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#000000" />
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="./" class="navbar-logo">
+      <img src="images/logo.png" alt="feumrp logo" />
+    </a>
+    <div class="navbar-actions">
+      <div class="support-wrap">
+        <a href="https://feum.gumroad.com/coffee" target="_blank" rel="noopener" class="btn-support">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+            <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+            <line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
+          </svg>
+          <span>Support</span>
+        </a>
+        <div class="support-tooltip">Love what feum's doing? Give feum some support ☕</div>
+      </div>
+      <a href="./browse.html" class="btn-browse">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <span>Browse Packs</span>
+      </a>
+    </div>
+  </nav>
 
-    <!-- Open Graph (Discord, Facebook, LinkedIn, Telegram) -->
-    <meta property="og:type"        content="website" />
-    <meta property="og:title"       content="feum" />
-    <meta property="og:description" content="Professional Minecraft thumbnail designer, High-CTR visuals trusted by creators worldwide." />
-    <meta property="og:image"       content="https://feumm.github.io/feum/opengraph.jpg">
-    <meta property="og:image"       content="opengraph.jpg" />
-    <meta property="og:image:width"  content="1920" />
-    <meta property="og:image:height" content="1080" />
-    <meta property="og:image:alt"   content="feum" />
-    <meta property="og:site_name"   content="feum" />
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">
+        Elevate your<br /><span>Bedrock</span> experience
+      </h1>
+      <p class="hero-sub">
+        Browse curated premium texture packs for Minecraft Bedrock.
+      </p>
+      <div class="hero-actions">
+        <a href="browse.html" class="btn-primary">Browse Packs</a>
+        <a href="https://feum.gumroad.com/coffee" target="_blank" rel="noopener" class="btn-secondary">Support feum</a>
+      </div>
+    </div>
+  </section>
 
-    <!-- Twitter / X Card -->
-    <meta name="twitter:card"        content="summary_large_image" />
-    <meta name="twitter:title"       content="feum" />
-    <meta name="twitter:description" content="Professional Minecraft thumbnail designer, High-CTR visuals trusted by creators worldwide." />
-    <meta name="twitter:image" content="https://feumm.github.io/feum/opengraph.jpg">
+  <!-- Featured packs -->
+  <main class="page">
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Featured Packs</h2>
+        <p class="section-sub">Selected by feum</p>
+      </div>
+      <div class="pack-grid" id="featured-grid">
+        <!-- Cards injected by app.js -->
+      </div>
+    </section>
 
-    <!-- PWA -->
-    <link rel="manifest" href="./manifest.webmanifest" />
-    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="feum" />
-    <meta name="application-name" content="feum" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="generator" content="" />
+    <!-- Discord Invite Widget -->
+    <section class="discord-section">
+      <div class="discord-card">
+        <div class="discord-main">
+          <div class="discord-icon-wrapper">
+            <svg class="discord-logo-svg" viewBox="0 0 127.14 96.36">
+              <path fill="currentColor" d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,52.18,6.83,77.19,77.19,0,0,0,48.88,0,105.15,105.15,0,0,0,18.44,8.07C-3.41,40.73-1,72.59,10.09,87.78a105.81,105.81,0,0,0,32,16.22,80.12,80.12,0,0,0,6.75-11,68.86,68.86,0,0,1-10.66-5.12c.9-.66,1.8-1.34,2.65-2a75.58,75.58,0,0,0,103.35,0c.85.69,1.75,1.37,2.65,2a68.86,68.86,0,0,1-10.66,5.12,80.12,80.12,0,0,0,6.75,11,105.81,105.81,0,0,0,32-16.22C128.14,72.59,129.7,40.73,107.7,8.07ZM42.45,71.69c-6.27,0-11.45-5.75-11.45-12.82S36.1,46.05,42.45,46.05,53.9,51.8,53.9,58.87,48.72,71.69,42.45,71.69Zm41.15,0c-6.27,0-11.45-5.75-11.45-12.82S77.25,46.05,83.6,46.05,95.05,51.8,95.05,58.87,89.87,71.69,83.6,71.69Z"/>
+            </svg>
+          </div>
+          <div class="discord-info">
+            <h3 class="discord-server-name">feum Community</h3>
+            <div class="discord-stats">
+              <span class="discord-status-text">
+                <span class="discord-dot-online"></span>
+                1,432 Online
+              </span>
+              <span class="discord-status-text">
+                <span class="discord-dot-total"></span>
+                8,540 Members
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="discord-action-wrap">
+          <a href="https://dsc.gg/feum" target="_blank" rel="noopener" class="btn-discord-join">Join Server</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2026 feumrp &nbsp;·&nbsp; all right reserved.</p>
+  </footer>
 
-    <!-- JSON-LD Structured Data (Google rich results) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "feum",
-      "url": "https://feumm.github.io/feum",
-      "image": "https://feumm.github.io/feum/opengraph.jpg",
-      "jobTitle": "feum",
-      "description": "Professional Minecraft thumbnail designer, High-CTR visuals trusted by creators worldwide.",
-      "sameAs": [
-        "https://youtube.com/@eufms",
-        "https://www.instagram.com/eufm3",
-        "https://www.behance.net/feum"
-      ]
-    }
-    </script>
-
-    <!-- Perf CSS -->
-    <link rel="stylesheet" href="./perf.css" />
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Archivo:ital,wght@1,800&display=swap" rel="stylesheet">
-    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,600,700&f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
-    <style>
-      /* ── Self-hosted Open Sans ─────────────────────────── */
-      @font-face {
-        font-family: 'OpenSans';
-        src: url('./fonts/OpenSans-ExtraBold.ttf') format('truetype');
-        font-weight: 800;
-        font-style: normal;
-        font-display: swap;
-      }
-      @font-face {
-        font-family: 'OpenSans';
-        src: url('./fonts/OpenSans-Semibold.ttf') format('truetype');
-        font-weight: 600;
-        font-style: normal;
-        font-display: swap;
-      }
-      @font-face {
-        font-family: 'OpenSans';
-        src: url('./fonts/OpenSans-Regular.ttf') format('truetype');
-        font-weight: 400;
-        font-style: normal;
-        font-display: swap;
-      }
-
-      /* ── Base overrides ────────────────────────────────── */
-      html, body, #root {
-        background-color: hsl(240, 10%, 4%) !important;
-      }
-      section {
-        border: none !important;
-        border-top: none !important;
-        border-bottom: none !important;
-        outline: none !important;
-      }
-      hr {
-        display: none !important;
-      }
-      [class*="divider"],
-      [class*="separator"],
-      [class*="border-t"],
-      [class*="border-b"],
-      [class*="border-y"] {
-        border-top-color: transparent !important;
-        border-bottom-color: transparent !important;
-      }
-      .bg-muted\/20 {
-        background-color: transparent !important;
-      }
-
-      /* ── Hero ──────────────────────────────────────────── */
-      .feum-hero-bg {
-        filter: grayscale(100%) brightness(0.45) !important;
-      }
-      .feum-meta-grid {
-        display: none !important;
-      }
-      section:first-of-type {
-        position: relative !important;
-      }
-      section:first-of-type::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 280px;
-        background: linear-gradient(to bottom, transparent 0%, hsl(240, 10%, 4%) 100%);
-        pointer-events: none;
-        z-index: 20;
-      }
-
-      /* ── Typography ────────────────────────────────────── */
-      h1[class*="font-serif"] {
-        font-family: 'OpenSans', sans-serif !important;
-        font-weight: 800 !important;
-        font-style: normal !important;
-        letter-spacing: -0.02em !important;
-      }
-      h1[class*="font-serif"] .italic {
-        font-style: italic !important;
-      }
-      h2[class*="font-serif"] {
-        font-family: 'OpenSans', sans-serif !important;
-        font-weight: 600 !important;
-        letter-spacing: -0.02em !important;
-      }
-      .feum-meta-value {
-        font-family: 'Archivo', sans-serif !important;
-        font-weight: 800 !important;
-        font-style: italic !important;
-        font-size: 1rem !important;
-        letter-spacing: -0.02em !important;
-      }
-      p.text-\[10px\] {
-        font-family: 'Space Grotesk', sans-serif !important;
-        font-weight: 500 !important;
-        letter-spacing: 0.2em !important;
-      }
-
-      /* ── Nav pill bar ──────────────────────────────────── */
-      .feum-nav-link {
-        font-family: 'Satoshi', sans-serif !important;
-        font-weight: 800 !important;
-        letter-spacing: 0.01em !important;
-        text-transform: capitalize !important;
-        display: inline-flex !important;
-        align-items: center !important;
-        padding: 12px 24px !important;
-        border-radius: 0 !important;
-        background: transparent !important;
-        border: none !important;
-        font-size: 13px !important;
-        font-weight: 500 !important;
-        color: rgba(255,255,255,0.75) !important;
-        text-decoration: none !important;
-        transition: background 0.2s, color 0.2s !important;
-        position: relative !important;
-      }
-      .feum-nav-link:hover {
-        background: rgba(255,255,255,0.13) !important;
-        color: rgba(255,255,255,1) !important;
-      }
-      .flex:has(> a.feum-nav-link) {
-        gap: 0 !important;
-        background: rgba(255,255,255,0.07) !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
-        border-radius: 999px !important;
-        backdrop-filter: blur(14px) !important;
-        -webkit-backdrop-filter: blur(14px) !important;
-        overflow: hidden !important;
-      }
-
-      /* ── Toolkit glow ──────────────────────────────────── */
-      *:has(> .toolkit-glow) {
-        animation: feum-outer-glow 6s ease-in-out infinite !important;
-      }
-      @keyframes feum-outer-glow {
-        0%, 100% { box-shadow: 0 0 40px 4px #31a8ff2e, 0 0 70px 10px #9f82ff33, 0 0 110px 20px #d291ff29, 0 0 160px 30px #4f7bff1a !important; }
-        50%       { box-shadow: 0 0 40px 4px #31a8ff47, 0 0 70px 10px #9f82ff52, 0 0 110px 20px #d291ff42, 0 0 160px 30px #4f7bff2b !important; }
-      }
-
-      /* ── Selected Work — hide labels, tighten gap ──────── */
-      .group > div.mt-5.flex {
-        display: none !important;
-      }
-      .grid.gap-y-14 {
-        row-gap: 1.25rem !important;
-      }
-      @media (min-width: 640px) {
-        .grid.gap-y-14 { row-gap: 1.5rem !important; }
-      }
-      @media (min-width: 768px) {
-        .grid.gap-y-14 { row-gap: 1.75rem !important; }
-      }
-
-      /* ════════════════════════════════════════════════════
-         MOBILE OVERRIDES  (max-width: 767px)
-         ════════════════════════════════════════════════════ */
-      @media (max-width: 767px) {
-
-        /* Hide scrollbar */
-        ::-webkit-scrollbar { display: none !important; }
-        body { -ms-overflow-style: none !important; scrollbar-width: none !important; }
-
-        /* ── 1. Selected Work — 2-column grid ────────────── */
-        .grid.gap-y-14 {
-          grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-          gap: 0.5rem !important;
-        }
-        /* Keep thumbnail aspect-video, smaller text */
-        .grid.gap-y-14 h3 {
-          font-size: 12px !important;
-          white-space: nowrap !important;
-          overflow: hidden !important;
-          text-overflow: ellipsis !important;
-        }
-
-        /* ── 2. Toolkit — single horizontal row, icon only ─ */
-        .toolkit-glow ~ div ul {
-          grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-          gap: 0 !important;
-        }
-        .toolkit-glow ~ div ul li {
-          padding: 0.875rem 0.25rem !important;
-          justify-content: center !important;
-          flex-direction: row !important;
-          gap: 0 !important;
-        }
-        /* Hide the name text on mobile */
-        .toolkit-glow ~ div ul li span.truncate {
-          display: none !important;
-        }
-        /* Tooltip shown on hover / tap-and-hold */
-        .toolkit-glow ~ div ul li {
-          position: relative !important;
-        }
-        .toolkit-glow ~ div ul li[data-tool]:hover::after,
-        .toolkit-glow ~ div ul li[data-tool]:active::after {
-          content: attr(data-tool);
-          position: absolute;
-          bottom: calc(100% + 6px);
-          left: 50%;
-          transform: translateX(-50%);
-          background: rgba(10, 10, 18, 0.96);
-          border: 1px solid rgba(255, 255, 255, 0.18);
-          color: #fff;
-          font-size: 11px;
-          font-weight: 600;
-          font-family: 'Satoshi', 'Inter', sans-serif;
-          padding: 5px 11px;
-          border-radius: 7px;
-          white-space: nowrap;
-          z-index: 200;
-          pointer-events: none;
-          animation: feum-tooltip-in 0.15s ease forwards;
-        }
-        @keyframes feum-tooltip-in {
-          from { opacity: 0; transform: translateX(-50%) translateY(3px); }
-          to   { opacity: 1; transform: translateX(-50%) translateY(0);   }
-        }
-
-        /* ── 3. "Trusted by creators" — badge beside text ── */
-        /* Shrink h2 so the badge stays on the same line */
-        h2.text-4xl.flex.items-center {
-          font-size: 1.875rem !important;
-          flex-wrap: nowrap !important;
-          gap: 0.5rem !important;
-        }
-        /* Smaller badge on mobile */
-        h2.text-4xl.flex.items-center svg {
-          width: 1.4rem !important;
-          height: 1.4rem !important;
-        }
-        /* Marquee creator cards — smaller on mobile */
-        a.liquid-glass {
-          padding: 0.45rem 0.85rem !important;
-          gap: 0.6rem !important;
-        }
-        a.liquid-glass img {
-          width: 2.25rem !important;
-          height: 2.25rem !important;
-        }
-        a.liquid-glass .font-semibold {
-          font-size: 0.7rem !important;
-        }
-        a.liquid-glass .text-xs.text-muted-foreground {
-          font-size: 0.6rem !important;
-        }
-
-        /* ── 4. Section spacing — tighter ───────────────── */
-        section:not(:first-of-type) {
-          padding-top: 2.75rem !important;
-          padding-bottom: 2.75rem !important;
-        }
-        .mb-20 { margin-bottom: 1.5rem !important; }
-        .mb-16 { margin-bottom: 1.25rem !important; }
-        .mb-10 { margin-bottom: 0.875rem !important; }
-
-        /* ── 5. Footer socials — single scrollable row ───── */
-        ul.flex.flex-wrap.justify-center.gap-3 {
-          flex-wrap: nowrap !important;
-          overflow-x: auto !important;
-          justify-content: flex-start !important;
-          padding: 0 1.25rem 0.5rem !important;
-          gap: 0.4rem !important;
-          -webkit-overflow-scrolling: touch !important;
-          scrollbar-width: none !important;
-        }
-        ul.flex.flex-wrap.justify-center.gap-3::-webkit-scrollbar {
-          display: none !important;
-        }
-        /* Compact social buttons */
-        ul.flex.flex-wrap.justify-center.gap-3 a {
-          padding: 0.35rem 0.7rem 0.35rem 0.35rem !important;
-          font-size: 0.7rem !important;
-          gap: 0.45rem !important;
-          white-space: nowrap !important;
-        }
-        ul.flex.flex-wrap.justify-center.gap-3 a span:first-child {
-          width: 1.5rem !important;
-          height: 1.5rem !important;
-        }
-
-        /* ── Beyond Thumbnails 3-col grid ────────────────── */
-        .grid.grid-cols-3 {
-          gap: 0.25rem !important;
-        }
-        .aspect-\[4\/3\] {
-          aspect-ratio: 3/4 !important;
-        }
-        .grid.grid-cols-3 .p-5 {
-          padding: 0.5rem !important;
-        }
-        .grid.grid-cols-3 .mb-5 {
-          margin-bottom: 0.25rem !important;
-        }
-        .grid.grid-cols-3 h3 {
-          font-size: 12px !important;
-          white-space: nowrap !important;
-          overflow: hidden !important;
-          text-overflow: ellipsis !important;
-        }
-        .grid.grid-cols-3 .text-muted-foreground {
-          font-size: 11px !important;
-          line-height: 1.35 !important;
-        }
-        .grid.grid-cols-3 > * {
-          min-width: 0 !important;
-        }
-        .grid.grid-cols-3 img {
-          object-fit: cover !important;
-        }
-
-        /* General mobile text scaling */
-        .text-sm  { font-size: 13px !important; }
-        .text-xs  { font-size: 11px !important; }
-        .text-base { font-size: 14px !important; }
-      }
-      /* End mobile overrides */
-
-    </style>
-
-    <!-- Main bundle -->
-    <script defer src="./assets/index-CESmVvPT.js"></script>
-
-    <!-- Right-click / DevTools protection -->
-    <script>
-      (function(){
-        try {
-          document.addEventListener('contextmenu', function(e){ e.preventDefault(); }, { capture: true });
-          document.addEventListener('dragstart', function(e){
-            var t = e.target;
-            if (t && (t.tagName === 'IMG' || t.tagName === 'VIDEO')) e.preventDefault();
-          }, { capture: true });
-          document.addEventListener('keydown', function(e){
-            var k = (e.key || '').toLowerCase();
-            var ctrl = e.ctrlKey || e.metaKey;
-            if (e.key === 'F12') e.preventDefault();
-            if (ctrl && e.shiftKey && (k === 'i' || k === 'j' || k === 'c')) e.preventDefault();
-            if (ctrl && (k === 'u' || k === 's')) e.preventDefault();
-          }, { capture: true });
-        } catch(_){}
-      })();
-    </script>
-
-    <!-- Perf worker -->
-    <script defer src="./perf.js"></script>
-
-    <!-- Easy-edit config + patches -->
-    <script defer src="./feum-edits.js"></script>
-
-    <!-- Creator card injection (fast bootstrap — also in feum-edits.js as fallback) -->
-    <script>
-      (function() {
-        var newCreators = [
-          {
-            name: 'Icynutella',
-            subs: '40.0K Subscribers',
-            url: 'https://youtube.com/@icynutella',
-            img: 'https://yt3.googleusercontent.com/pOdPN9SZ13Dy6pumjp5jl_vBA4-xHP7Vh55kqG1On8zvCg1Bb2PUAUmk81rIFXxR1Qus8N2I0A=s200-c-k-c0x00ffffff-no-rj',
-            glow: 'rgba(56, 189, 248, 0.55)'
-          },
-          {
-            name: 'Icynutella2',
-            subs: '8.77K Subscribers',
-            url: 'https://youtube.com/@icynutella2',
-            img: 'https://yt3.googleusercontent.com/bzcNeMUIU7iD_Bb67Q5YYNlCnW9q8TvpKeLeBk14_i1_UaRly6Yqg-jA4RZ_th_klG0jmkZycUQ=s200-c-k-c0x00ffffff-no-rj',
-            glow: 'rgba(34, 211, 238, 0.55)'
-          },
-          {
-            name: 'H0nri',
-            subs: '2.40K Subscribers',
-            url:  'https://youtube.com/@H0nriTV',
-            img:  'https://yt3.googleusercontent.com/a3R2p40NuzXQckqZqWY2-quan4AGpFhaiNG3sJs5sIVTHZiAqm3JEwU80FGeCcpSC84thUF1qg=s160-c-k-c0x00ffffff-no-rj',
-            glow: 'rgba(109, 109, 181)'
-          }
-        ];
-
-        function createCard(creator) {
-          var a = document.createElement('a');
-          a.href = creator.url;
-          a.target = '_blank';
-          a.rel = 'noopener noreferrer';
-          a.className = 'liquid-glass group flex items-center gap-5 px-7 md:px-8 py-4 md:py-5 rounded-full shrink-0';
-          a.innerHTML =
-            '<span class="relative inline-flex items-center justify-center shrink-0">' +
-              '<span aria-hidden="true" class="absolute inset-0 rounded-full blur-md" style="background-color:' + creator.glow + ';opacity:0.65;"></span>' +
-              '<img src="' + creator.img + '" alt="' + creator.name + '" loading="lazy" class="relative w-14 h-14 md:w-16 md:h-16 rounded-full object-cover ring-1 ring-white/15 group-hover:ring-white/30 transition-shadow duration-300" />' +
-            '</span>' +
-            '<span class="flex flex-col">' +
-              '<span class="font-semibold text-sm">' + creator.name + '</span>' +
-              '<span class="text-xs text-muted-foreground">' + creator.subs + '</span>' +
-            '</span>';
-          return a;
-        }
-
-        function injectCreators() {
-          var containers = document.querySelectorAll('.w-max');
-          var injected = false;
-          containers.forEach(function(container) {
-            if (container.hasAttribute('data-ci')) return;
-            var links = Array.from(container.querySelectorAll('a.liquid-glass'));
-            if (links.length < 4) return;
-            container.setAttribute('data-ci', '1');
-            var groupSize = 4;
-            var numGroups = Math.floor(links.length / groupSize);
-            for (var r = numGroups - 1; r >= 0; r--) {
-              var insertAfter = links[r * groupSize + groupSize - 1];
-              newCreators.slice().reverse().forEach(function(creator) {
-                insertAfter.insertAdjacentElement('afterend', createCard(creator));
-              });
-            }
-            injected = true;
-          });
-          return injected;
-        }
-
-        var attempts = 0;
-        function poll() {
-          var container = document.querySelector('.w-max');
-          if (container && container.querySelectorAll('a').length >= 4) {
-            injectCreators();
-            return;
-          }
-          if (++attempts < 60) setTimeout(poll, 250);
-        }
-        if (document.readyState === 'complete') poll();
-        else window.addEventListener('load', poll);
-
-        /* Live sub-count fetch */
-        function formatSubs(raw) {
-          var m = raw.match(/([\d.]+)\s*([KMB]?)\s*subscriber/i);
-          if (!m) return null;
-          return m[1] + (m[2] ? m[2].toUpperCase() : '') + ' Subscribers';
-        }
-        function updateSubCount(name, count) {
-          document.querySelectorAll('a.liquid-glass').forEach(function(card) {
-            var nameEl = card.querySelector('span.font-semibold');
-            var subEl  = card.querySelector('span.text-muted-foreground');
-            if (nameEl && subEl && nameEl.textContent.trim() === name) subEl.textContent = count;
-          });
-        }
-        function fetchSubs(handle, displayName) {
-          var proxy = 'https://corsproxy.io/?url=' + encodeURIComponent('https://www.youtube.com/@' + handle);
-          fetch(proxy)
-            .then(function(r) { return r.text(); })
-            .then(function(html) {
-              var m = html.match(/"([\d.]+\s*[KMB]?\s*subscriber[^"]*?)"/i);
-              if (m) { var c = formatSubs(m[1]); if (c) updateSubCount(displayName, c); }
-            }).catch(function() {});
-        }
-        window.addEventListener('load', function() {
-          setTimeout(function() {
-            fetchSubs('icynutella',  'Icynutella');
-            fetchSubs('icynutella2', 'Icynutella2');
-          }, 1500);
-        });
-      })();
-    </script>
-
-    <!-- Nav icon removal -->
-    <script>
-      (function() {
-        function removeNavIcons() {
-          document.querySelectorAll('a.feum-nav-link svg').forEach(function(svg) { svg.remove(); });
-        }
-        var attempts = 0;
-        function poll() {
-          if (document.querySelector('a.feum-nav-link')) removeNavIcons();
-          else if (++attempts < 40) setTimeout(poll, 150);
-        }
-        if (document.readyState === 'complete') poll();
-        else window.addEventListener('load', poll);
-      })();
-    </script>
-
-    <!-- Service worker -->
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function () {
-          navigator.serviceWorker.register('./sw.js').catch(function(){});
-        });
-      }
-    </script>
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+  <script src="js/packs.js"></script>
+  <script src="js/app.js"></script>
+</body>
 </html>
