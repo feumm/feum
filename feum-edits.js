@@ -29,11 +29,11 @@
 (function () {
   /* ── 1. Social footer links ──────────────────────────────── */
   var SOCIAL_LINKS = {
-    youtube:   'https://youtube.com/@eufms',
-    instagram: 'https://www.instagram.com/@eufm3',
+    youtube:   'https://youtube.com/@fzrum',
+    instagram: 'https://www.instagram.com/fzerium',
     behance:   'https://www.behance.net/feum',
     discord:   'https://discord.com/users/1071929676223762452',
-    pinterest: 'https://pinterest.com/eufms_',
+    pinterest: 'https://pinterest.com/feum',
     gumroad:   'https://gumroad.com/feum'
   };
 
@@ -42,7 +42,7 @@
   var CREATORS = [
     {
       name: 'Icynutella',
-      subs: '40.0K Subscribers',
+      subs: '39.7K Subscribers',
       url:  'https://youtube.com/@icynutella',
       img:  'https://yt3.googleusercontent.com/pOdPN9SZ13Dy6pumjp5jl_vBA4-xHP7Vh55kqG1On8zvCg1Bb2PUAUmk81rIFXxR1Qus8N2I0A=s200-c-k-c0x00ffffff-no-rj',
       glow: 'rgba(56, 189, 248, 0.55)'
@@ -53,15 +53,7 @@
       url:  'https://youtube.com/@icynutella2',
       img:  'https://yt3.googleusercontent.com/bzcNeMUIU7iD_Bb67Q5YYNlCnW9q8TvpKeLeBk14_i1_UaRly6Yqg-jA4RZ_th_klG0jmkZycUQ=s200-c-k-c0x00ffffff-no-rj',
       glow: 'rgba(34, 211, 238, 0.55)'
-    },
-    {
-      name: 'H0nri',
-      subs: '2.40K Subscribers',
-      url:  'https://youtube.com/@H0nriTV',
-      img:  'https://yt3.googleusercontent.com/a3R2p40NuzXQckqZqWY2-quan4AGpFhaiNG3sJs5sIVTHZiAqm3JEwU80FGeCcpSC84thUF1qg=s160-c-k-c0x00ffffff-no-rj',
-      glow: 'rgba(109, 109, 181)'
     }
-
     /* Add more creators here:
     {
       name: 'CreatorName',
@@ -75,8 +67,8 @@
 
   /* ── 3. Page meta text ───────────────────────────────────── */
   var META = {
-    title:       'feum',
-    description: 'Professional Minecraft thumbnail design by @feum.'
+    title:       'feum — Minecraft Thumbnail Designer',
+    description: 'Scroll-stoppers, made to click. Professional Minecraft thumbnail design by feum.'
   };
 
   /* ── 4. Toolkit app labels (shown as tooltip on mobile) ─── */
