@@ -4,9 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
 
-    <!-- ═══════════════════════════════════════════════
-         SEO & Social Sharing
-    ═══════════════════════════════════════════════ -->
     <title>eufm</title>
     <meta name="description" content="Professional Minecraft thumbnail designer. Scroll-stoppers, made to click. Trusted by creators worldwide." />
     <meta name="keywords" content="minecraft thumbnail designer, feum, minecraft thumbnail, youtube thumbnail designer, gaming thumbnail, feum portfolio, thumbnail artist" />
@@ -14,7 +11,6 @@
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#000000" />
 
-    <!-- Open Graph (Discord, Facebook, LinkedIn, Telegram) -->
     <meta property="og:type"        content="website" />
     <meta property="og:title"       content="eufm" />
     <meta property="og:description" content="Professional Minecraft thumbnail designer, trusted by creators worldwide." />
@@ -25,13 +21,11 @@
     <meta property="og:image:alt"   content="eufm" />
     <meta property="og:site_name"   content="feum" />
 
-    <!-- Twitter / X Card -->
     <meta name="twitter:card"        content="summary_large_image" />
     <meta name="twitter:title"       content="eufm" />
     <meta name="twitter:description" content="Professional Minecraft thumbnail designer, trusted by creators worldwide." />
     <meta name="twitter:image"       content="https://feumm.github.io/feum/opengraph.jpg" />
 
-    <!-- PWA -->
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -41,10 +35,8 @@
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="generator" content="" />
 
-    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
 
-    <!-- JSON-LD Structured Data (Google rich results) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -54,7 +46,7 @@
       "image": "https://feumm.github.io/feum/opengraph.jpg",
       "jobTitle": "Minecraft Thumbnail Designer",
       "description": "Professional Minecraft thumbnail designer, trusted by creators worldwide.",
-      "sameAs": 
+      "sameAs": [
         "https://youtube.com/@eufms",
         "https://www.instagram.com/eufmj",
         "https://www.behance.net/feum"
@@ -62,10 +54,8 @@
     }
     </script>
 
-    <!-- Perf CSS -->
     <link rel="stylesheet" href="./perf.css" />
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Archivo:ital,wght@1,800&display=swap" rel="stylesheet">
@@ -73,30 +63,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
     <style>
-      /* ── Self-hosted Open Sans ─────────────────────────── */
       @font-face {
         font-family: 'OpenSans';
-        src: url('./fonts/OpenSans-ExtraBold.ttf') format('truetype');
+        src: url('/fonts/OpenSans-ExtraBold.ttf') format('truetype');
         font-weight: 800;
         font-style: normal;
         font-display: swap;
       }
       @font-face {
         font-family: 'OpenSans';
-        src: url('./fonts/OpenSans-Semibold.ttf') format('truetype');
+        src: url('/fonts/OpenSans-Semibold.ttf') format('truetype');
         font-weight: 600;
         font-style: normal;
         font-display: swap;
       }
       @font-face {
         font-family: 'OpenSans';
-        src: url('./fonts/OpenSans-Regular.ttf') format('truetype');
+        src: url('/fonts/OpenSans-Regular.ttf') format('truetype');
         font-weight: 400;
         font-style: normal;
         font-display: swap;
       }
 
-      /* ── Base overrides ────────────────────────────────── */
       html, body, #root {
         background-color: hsl(240, 10%, 4%) !important;
       }
@@ -121,7 +109,6 @@
         background-color: transparent !important;
       }
 
-      /* ── Hero ──────────────────────────────────────────── */
       .feum-hero-bg {
         filter: grayscale(100%) brightness(0.45) !important;
       }
@@ -143,7 +130,6 @@
         z-index: 20;
       }
 
-      /* ── Typography ────────────────────────────────────── */
       h1[class*="font-serif"] {
         font-family: 'OpenSans', sans-serif !important;
         font-weight: 800 !important;
@@ -171,7 +157,59 @@
         letter-spacing: 0.2em !important;
       }
 
-      /* ── Nav pill bar ──────────────────────────────────── */
+      /* Frosted glass marquee cards */
+      a.liquid-glass {
+        background: rgba(255, 255, 255, 0.03) !important;
+        backdrop-filter: blur(20px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.05) !important;
+        box-shadow:
+          0 4px 24px rgba(0, 0, 0, 0.35),
+          inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+        transition: background 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease !important;
+        padding: 1.25rem 2.25rem !important;
+        gap: 1.25rem !important;
+      }
+      a.liquid-glass img {
+        width: 5rem !important;
+        height: 5rem !important;
+      }
+      a.liquid-glass .font-semibold {
+        font-size: 1rem !important;
+      }
+      a.liquid-glass .text-xs.text-muted-foreground {
+        font-size: 0.8rem !important;
+      }
+      a.liquid-glass:hover {
+        background: rgba(255, 255, 255, 0.06) !important;
+        border-color: rgba(255, 255, 255, 0.09) !important;
+        box-shadow:
+          0 8px 32px rgba(0, 0, 0, 0.45),
+          inset 0 1px 0 rgba(255, 255, 255, 0.07) !important;
+      }
+      /* Remove pulsing glow behind profile pictures */
+      a.liquid-glass span[aria-hidden="true"] {
+        display: none !important;
+      }
+
+      /* Frosted glass — footer social link pills */
+      footer ul li a,
+      footer ul a {
+        background: rgba(255, 255, 255, 0.03) !important;
+        backdrop-filter: blur(20px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.05) !important;
+        box-shadow:
+          0 4px 24px rgba(0, 0, 0, 0.35),
+          inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+        transition: background 0.25s ease, border-color 0.25s ease !important;
+      }
+      footer ul li a:hover,
+      footer ul a:hover {
+        background: rgba(255, 255, 255, 0.06) !important;
+        border-color: rgba(255, 255, 255, 0.09) !important;
+      }
+
       .feum-nav-link {
         font-family: 'Satoshi', sans-serif !important;
         font-weight: 800 !important;
@@ -204,7 +242,6 @@
         overflow: hidden !important;
       }
 
-      /* ── Toolkit glow ──────────────────────────────────── */
       *:has(> .toolkit-glow) {
         animation: feum-outer-glow 6s ease-in-out infinite !important;
       }
@@ -213,7 +250,6 @@
         50%       { box-shadow: 0 0 40px 4px #31a8ff47, 0 0 70px 10px #9f82ff52, 0 0 110px 20px #d291ff42, 0 0 160px 30px #4f7bff2b !important; }
       }
 
-      /* ── Selected Work — hide labels, tighten gap ──────── */
       .group > div.mt-5.flex {
         display: none !important;
       }
@@ -227,21 +263,14 @@
         .grid.gap-y-14 { row-gap: 1.75rem !important; }
       }
 
-      /* ════════════════════════════════════════════════════
-         MOBILE OVERRIDES  (max-width: 767px)
-         ════════════════════════════════════════════════════ */
       @media (max-width: 767px) {
-
-        /* Hide scrollbar */
         ::-webkit-scrollbar { display: none !important; }
         body { -ms-overflow-style: none !important; scrollbar-width: none !important; }
 
-        /* ── 1. Selected Work — 2-column grid ────────────── */
         .grid.gap-y-14 {
           grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
           gap: 0.5rem !important;
         }
-        /* Keep thumbnail aspect-video, smaller text */
         .grid.gap-y-14 h3 {
           font-size: 12px !important;
           white-space: nowrap !important;
@@ -249,7 +278,6 @@
           text-overflow: ellipsis !important;
         }
 
-        /* ── 2. Toolkit — single horizontal row, icon only ─ */
         .toolkit-glow ~ div ul {
           grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
           gap: 0 !important;
@@ -260,11 +288,9 @@
           flex-direction: row !important;
           gap: 0 !important;
         }
-        /* Hide the name text on mobile */
         .toolkit-glow ~ div ul li span.truncate {
           display: none !important;
         }
-        /* Tooltip shown on hover / tap-and-hold */
         .toolkit-glow ~ div ul li {
           position: relative !important;
         }
@@ -293,35 +319,30 @@
           to   { opacity: 1; transform: translateX(-50%) translateY(0);   }
         }
 
-        /* ── 3. "Trusted by creators" — badge beside text ── */
-        /* Shrink h2 so the badge stays on the same line */
         h2.text-4xl.flex.items-center {
           font-size: 1.875rem !important;
           flex-wrap: nowrap !important;
           gap: 0.5rem !important;
         }
-        /* Smaller badge on mobile */
         h2.text-4xl.flex.items-center svg {
           width: 1.4rem !important;
           height: 1.4rem !important;
         }
-        /* Marquee creator cards — smaller on mobile */
         a.liquid-glass {
-          padding: 0.45rem 0.85rem !important;
-          gap: 0.6rem !important;
+          padding: 0.7rem 1.25rem !important;
+          gap: 0.8rem !important;
         }
         a.liquid-glass img {
-          width: 2.25rem !important;
-          height: 2.25rem !important;
+          width: 3rem !important;
+          height: 3rem !important;
         }
         a.liquid-glass .font-semibold {
-          font-size: 0.7rem !important;
+          font-size: 0.85rem !important;
         }
         a.liquid-glass .text-xs.text-muted-foreground {
-          font-size: 0.6rem !important;
+          font-size: 0.72rem !important;
         }
 
-        /* ── 4. Section spacing — tighter ───────────────── */
         section:not(:first-of-type) {
           padding-top: 2.75rem !important;
           padding-bottom: 2.75rem !important;
@@ -330,32 +351,8 @@
         .mb-16 { margin-bottom: 1.25rem !important; }
         .mb-10 { margin-bottom: 0.875rem !important; }
 
-        /* ── 5. Footer socials — single scrollable row ───── */
-        ul.flex.flex-wrap.justify-center.gap-3 {
-          flex-wrap: nowrap !important;
-          overflow-x: auto !important;
-          justify-content: flex-start !important;
-          padding: 0 1.25rem 0.5rem !important;
-          gap: 0.4rem !important;
-          -webkit-overflow-scrolling: touch !important;
-          scrollbar-width: none !important;
-        }
-        ul.flex.flex-wrap.justify-center.gap-3::-webkit-scrollbar {
-          display: none !important;
-        }
-        /* Compact social buttons */
-        ul.flex.flex-wrap.justify-center.gap-3 a {
-          padding: 0.35rem 0.7rem 0.35rem 0.35rem !important;
-          font-size: 0.7rem !important;
-          gap: 0.45rem !important;
-          white-space: nowrap !important;
-        }
-        ul.flex.flex-wrap.justify-center.gap-3 a span:first-child {
-          width: 1.5rem !important;
-          height: 1.5rem !important;
-        }
+        /* footer social links handled by feum-edits.js fixMobileFooterLinks() */
 
-        /* ── Beyond Thumbnails 3-col grid ────────────────── */
         .grid.grid-cols-3 {
           gap: 0.25rem !important;
         }
@@ -385,19 +382,15 @@
           object-fit: cover !important;
         }
 
-        /* General mobile text scaling */
         .text-sm  { font-size: 13px !important; }
         .text-xs  { font-size: 11px !important; }
         .text-base { font-size: 14px !important; }
       }
-      /* End mobile overrides */
 
     </style>
 
-    <!-- Main bundle -->
     <script defer src="./assets/index-CESmVvPT.js"></script>
 
-    <!-- Right-click / DevTools protection -->
     <script>
       (function(){
         try {
@@ -417,13 +410,9 @@
       })();
     </script>
 
-    <!-- Perf worker -->
     <script defer src="./perf.js"></script>
-
-    <!-- Easy-edit config + patches -->
     <script defer src="./feum-edits.js"></script>
 
-    <!-- Creator card injection (fast bootstrap — also in feum-edits.js as fallback) -->
     <script>
       (function() {
         var newCreators = [
@@ -463,7 +452,6 @@
 
         function injectCreators() {
           var containers = document.querySelectorAll('.w-max');
-          var injected = false;
           containers.forEach(function(container) {
             if (container.hasAttribute('data-ci')) return;
             var links = Array.from(container.querySelectorAll('a.liquid-glass'));
@@ -477,9 +465,7 @@
                 insertAfter.insertAdjacentElement('afterend', createCard(creator));
               });
             }
-            injected = true;
           });
-          return injected;
         }
 
         var attempts = 0;
@@ -494,7 +480,6 @@
         if (document.readyState === 'complete') poll();
         else window.addEventListener('load', poll);
 
-        /* Live sub-count fetch */
         function formatSubs(raw) {
           var m = raw.match(/([\d.]+)\s*([KMB]?)\s*subscriber/i);
           if (!m) return null;
@@ -525,7 +510,6 @@
       })();
     </script>
 
-    <!-- Nav icon removal -->
     <script>
       (function() {
         function removeNavIcons() {
@@ -541,7 +525,6 @@
       })();
     </script>
 
-    <!-- Service worker -->
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function () {

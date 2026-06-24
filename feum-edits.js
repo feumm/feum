@@ -139,6 +139,53 @@
     });
   }
 
+  /* Fix footer social links on mobile — force 3-column grid via inline styles */
+  function fixMobileFooterLinks() {
+    if (window.innerWidth > 767) return;
+    if (document.querySelector('[data-mobile-footer-fixed]')) return;
+
+    /* Find the social links list by looking for a ul with social platform hrefs */
+    var ul = null;
+    document.querySelectorAll('ul').forEach(function(el) {
+      if (ul) return;
+      var anchors = Array.from(el.querySelectorAll('a'));
+      if (anchors.length < 4) return;
+      var hasSocial = anchors.some(function(a) {
+        var h = (a.getAttribute('href') || '').toLowerCase();
+        return h.includes('instagram') || h.includes('behance') || h.includes('discord') || h.includes('youtube') || h.includes('pinterest') || h.includes('gumroad');
+      });
+      if (hasSocial) ul = el;
+    });
+    if (!ul) return;
+
+    ul.setAttribute('data-mobile-footer-fixed', '1');
+
+    /* Force 3-column grid via setProperty (priority 'important' overrides any class) */
+    var P = 'important';
+    ul.style.setProperty('display', 'grid', P);
+    ul.style.setProperty('grid-template-columns', 'repeat(3, 1fr)', P);
+    ul.style.setProperty('gap', '0.5rem', P);
+    ul.style.setProperty('padding', '0 1rem 0.5rem', P);
+    ul.style.setProperty('overflow', 'visible', P);
+    ul.style.setProperty('flex-wrap', 'unset', P);
+    ul.style.setProperty('width', '100%', P);
+
+    /* Style each direct child (li or a) */
+    Array.from(ul.children).forEach(function(child) {
+      child.style.setProperty('width', '100%', P);
+      var a = child.tagName === 'A' ? child : child.querySelector('a');
+      if (!a) return;
+      a.style.setProperty('display', 'flex', P);
+      a.style.setProperty('width', '100%', P);
+      a.style.setProperty('justify-content', 'center', P);
+      a.style.setProperty('padding', '0.5rem 0.25rem', P);
+      a.style.setProperty('font-size', '0.7rem', P);
+      a.style.setProperty('white-space', 'nowrap', P);
+      a.style.setProperty('border-radius', '10px', P);
+      a.style.setProperty('box-sizing', 'border-box', P);
+    });
+  }
+
   /* Patch thumbnail src */
   function patchThumbnails() {
     if (!Object.keys(THUMBNAIL_SRC_OVERRIDES).length) return;
@@ -203,14 +250,40 @@
     });
   }
 
+  /* Frosted glass on the "Start a project" CTA button */
+  function frostedGlassCTA() {
+    var done = false;
+    document.querySelectorAll('a').forEach(function(a) {
+      if (done) return;
+      if (!(a.textContent || '').includes('Start a project')) return;
+      if (a.hasAttribute('data-frosted-cta')) return;
+      a.setAttribute('data-frosted-cta', '1');
+      done = true;
+      var P = 'important';
+      a.style.setProperty('background', 'rgba(255, 255, 255, 0.03)', P);
+      a.style.setProperty('backdrop-filter', 'blur(20px) saturate(180%)', P);
+      a.style.setProperty('-webkit-backdrop-filter', 'blur(20px) saturate(180%)', P);
+      a.style.setProperty('border', '1px solid rgba(255, 255, 255, 0.05)', P);
+      a.style.setProperty('box-shadow', '0 4px 24px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.04)', P);
+      /* Make all text spans white so they're readable on the dark frosted bg */
+      a.querySelectorAll('span, p').forEach(function(el) {
+        el.style.setProperty('color', 'rgba(255, 255, 255, 0.9)', P);
+      });
+    });
+    return done;
+  }
+
   /* Run all patches with polling for React hydration */
   var tries = 0;
   function runPatches() {
     patchSocialLinks();
     patchThumbnails();
     injectToolkitTooltips();
-    /* Retry until toolkit is visible in DOM */
-    if (!document.querySelector('.toolkit-glow') && ++tries < 60) {
+    fixMobileFooterLinks();
+    frostedGlassCTA();
+    var needsRetry = !document.querySelector('.toolkit-glow') ||
+                     (window.innerWidth <= 767 && !document.querySelector('[data-mobile-footer-fixed]'));
+    if (needsRetry && ++tries < 60) {
       setTimeout(runPatches, 200);
     }
   }
