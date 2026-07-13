@@ -250,6 +250,101 @@
     });
   }
 
+  /* Hide "Selected work." section header */
+  function hideSelectedWorkHeader() {
+    document.querySelectorAll('*').forEach(function(el) {
+      if (el.children.length === 0 && (el.textContent || '').trim() === 'Scroll-stoppers, made to click.') {
+        /* parent is the flex row containing the heading + this subtitle */
+        var row = el.parentElement;
+        if (row) row.style.setProperty('display', 'none', 'important');
+      }
+    });
+  }
+
+  /* Hide "Available for new projects" badge */
+  function hideAvailableBadge() {
+    document.querySelectorAll('*').forEach(function(el) {
+      if (el.children.length === 0 && (el.textContent || '').trim().toUpperCase().includes('AVAILABLE FOR NEW')) {
+        var target = el.closest('[class]') || el;
+        target.style.setProperty('display', 'none', 'important');
+      }
+    });
+  }
+
+  /* Patch "Trusted by creators" section */
+  function patchTrustedSection() {
+    /* 1. Capitalise "creators" → "Creators" */
+    document.querySelectorAll('.trusted-gradient-text').forEach(function(el) {
+      if ((el.textContent || '').trim() === 'creators') el.textContent = 'Creators';
+    });
+    /* 2. Remove "Creating thumbnails for creators worldwide." */
+    document.querySelectorAll('p.text-muted-foreground.max-w-xs, p[class*="max-w-xs"]').forEach(function(el) {
+      if ((el.textContent || '').includes('Creating thumbnails for creators')) {
+        el.style.setProperty('display', 'none', 'important');
+      }
+    });
+    /* 3. Center the row containing the heading + the removed subtitle */
+    document.querySelectorAll('.trusted-gradient-text').forEach(function(el) {
+      var section = el.closest('section') || el.closest('[class*="py-"]') || el.parentElement;
+      /* Walk up to find the flex row that holds heading + subtitle */
+      var row = el.parentElement;
+      for (var i = 0; i < 6; i++) {
+        if (!row || row === document.body) break;
+        if (row.style || row.className) {
+          row.style.setProperty('justify-content', 'center', 'important');
+          row.style.setProperty('text-align', 'center', 'important');
+        }
+        row = row.parentElement;
+      }
+    });
+  }
+
+  /* Patch hero headline */
+  function patchHeroHeadline() {
+    var done = { line1: false, line2: false };
+    document.querySelectorAll('*').forEach(function(el) {
+      /* Line 1: plain text node element */
+      if (!done.line1 && el.children.length === 0 && (el.textContent || '').trim() === 'Built for retention.') {
+        el.textContent = 'Professional designs.';
+        done.line1 = true;
+      }
+      /* Line 2: find the italic "eye." span and work from its direct parent */
+      if (!done.line2 && el.children.length === 0 && (el.textContent || '').trim() === 'eye.' && el.classList.contains('italic')) {
+        var parent = el.parentElement;
+        if (parent) {
+          parent.childNodes.forEach(function(node) {
+            if (node.nodeType === 3) node.textContent = node.textContent.replace('designed for the', 'Better views.');
+          });
+          el.style.setProperty('display', 'none', 'important');
+          done.line2 = true;
+        }
+      }
+    });
+    return done.line1 && done.line2;
+  }
+
+  /* Rename CTA button text */
+  function renameCTA() {
+    document.querySelectorAll('a, button').forEach(function(el) {
+      if ((el.textContent || '').includes('Start a project')) {
+        /* Replace the label spans while keeping the arrow icon */
+        el.childNodes.forEach(function(node) {
+          if (node.nodeType === 3 && node.textContent.trim()) {
+            node.textContent = node.textContent.replace(/LET'S TALK/gi, "LET'S WORK TOGETHER").replace(/Start a project/gi, '');
+          }
+        });
+        el.querySelectorAll('span, p').forEach(function(span) {
+          if ((span.textContent || '').includes("LET'S TALK") || (span.textContent || '').toLowerCase().includes("let's talk")) {
+            span.textContent = "LET'S WORK TOGETHER";
+          }
+          if ((span.textContent || '').includes('Start a project')) {
+            span.textContent = '';
+          }
+        });
+      }
+    });
+  }
+
   /* Frosted glass on the "Start a project" CTA button */
   function frostedGlassCTA() {
     var done = false;
@@ -273,16 +368,119 @@
     return done;
   }
 
+  /* ── Show More thumbnails ────────────────────────────────── */
+  var SHOW_MORE_LIMIT = 5;
+
+  function applyShowMore() {
+    if (document.querySelector('[data-show-more-applied]')) return false;
+
+    /* Target the thumbnail grid directly — it has the known class gap-y-14 */
+    var thumbGrid = document.querySelector('.gap-y-14');
+    if (!thumbGrid) return false;
+
+    /* Make sure it actually contains thumbnails */
+    if (!thumbGrid.querySelector('img[src*="thumb-"]')) return false;
+
+    var items = Array.from(thumbGrid.children);
+    if (items.length <= SHOW_MORE_LIMIT) return true; /* nothing to hide */
+
+    thumbGrid.setAttribute('data-show-more-applied', '1');
+
+    /* Hide items beyond the limit */
+    items.forEach(function(item, i) {
+      if (i >= SHOW_MORE_LIMIT) {
+        item.style.display = 'none';
+        item.setAttribute('data-hidden-by-show-more', '1');
+      }
+    });
+
+    /* Create "Show More" button */
+    var hiddenCount = items.length - SHOW_MORE_LIMIT;
+    var btn = document.createElement('button');
+    btn.setAttribute('data-show-more-btn', '1');
+    btn.textContent = 'Show more (' + hiddenCount + ')';
+
+    var P = 'important';
+    btn.style.setProperty('display', 'flex', P);
+    btn.style.setProperty('align-items', 'center', P);
+    btn.style.setProperty('justify-content', 'center', P);
+    btn.style.setProperty('margin', '2rem auto 0', P);
+    btn.style.setProperty('padding', '0.75rem 2.25rem', P);
+    btn.style.setProperty('background', 'rgba(255,255,255,0.05)', P);
+    btn.style.setProperty('border', '1px solid rgba(255,255,255,0.12)', P);
+    btn.style.setProperty('border-radius', '999px', P);
+    btn.style.setProperty('color', 'rgba(255,255,255,0.85)', P);
+    btn.style.setProperty('font-family', "'Satoshi','Inter',sans-serif", P);
+    btn.style.setProperty('font-size', '0.875rem', P);
+    btn.style.setProperty('font-weight', '600', P);
+    btn.style.setProperty('letter-spacing', '0.02em', P);
+    btn.style.setProperty('cursor', 'pointer', P);
+    btn.style.setProperty('backdrop-filter', 'blur(14px)', P);
+    btn.style.setProperty('-webkit-backdrop-filter', 'blur(14px)', P);
+    btn.style.setProperty('transition', 'background 0.2s, border-color 0.2s', P);
+
+    btn.addEventListener('mouseenter', function() {
+      btn.style.setProperty('background', 'rgba(255,255,255,0.1)', P);
+      btn.style.setProperty('border-color', 'rgba(255,255,255,0.22)', P);
+    });
+    btn.addEventListener('mouseleave', function() {
+      btn.style.setProperty('background', 'rgba(255,255,255,0.05)', P);
+      btn.style.setProperty('border-color', 'rgba(255,255,255,0.12)', P);
+    });
+
+    var expanded = false;
+    btn.addEventListener('click', function() {
+      expanded = !expanded;
+      if (expanded) {
+        /* Reveal all hidden items */
+        items.forEach(function(item, i) {
+          if (i >= SHOW_MORE_LIMIT) item.style.display = '';
+        });
+        btn.textContent = 'Show less';
+      } else {
+        /* Hide again */
+        items.forEach(function(item, i) {
+          if (i >= SHOW_MORE_LIMIT) item.style.display = 'none';
+        });
+        btn.textContent = 'Show more (' + hiddenCount + ')';
+        /* Scroll back to the top of the grid so it's in view */
+        thumbGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+
+    thumbGrid.insertAdjacentElement('afterend', btn);
+    return true;
+  }
+
+  /* Remove the existing "VIEW MORE" button from the bundle */
+  function removeViewMoreButton() {
+    document.querySelectorAll('a, button').forEach(function(el) {
+      var text = (el.textContent || '').trim().toUpperCase();
+      if (text === 'VIEW MORE') {
+        el.style.setProperty('display', 'none', 'important');
+      }
+    });
+  }
+
   /* Run all patches with polling for React hydration */
   var tries = 0;
+  var showMoreApplied = false;
   function runPatches() {
     patchSocialLinks();
     patchThumbnails();
     injectToolkitTooltips();
     fixMobileFooterLinks();
     frostedGlassCTA();
+    renameCTA();
+    patchHeroHeadline();
+    patchTrustedSection();
+    hideAvailableBadge();
+    hideSelectedWorkHeader();
+    removeViewMoreButton();
+    if (!showMoreApplied) showMoreApplied = applyShowMore();
     var needsRetry = !document.querySelector('.toolkit-glow') ||
-                     (window.innerWidth <= 767 && !document.querySelector('[data-mobile-footer-fixed]'));
+                     (window.innerWidth <= 767 && !document.querySelector('[data-mobile-footer-fixed]')) ||
+                     !showMoreApplied;
     if (needsRetry && ++tries < 60) {
       setTimeout(runPatches, 200);
     }
