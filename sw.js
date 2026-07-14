@@ -1,5 +1,5 @@
 /* feum service worker — enables install + offline cache */
-  const CACHE = 'feum-v23';
+  const CACHE = 'feum-v33';
   self.addEventListener('install', (e) => { self.skipWaiting(); });
   self.addEventListener('activate', (e) => { e.waitUntil(self.clients.claim()); });
   self.addEventListener('fetch', (e) => {
