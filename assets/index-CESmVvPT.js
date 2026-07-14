@@ -28900,7 +28900,7 @@ Error generating stack: ` +
             children: [
               T.jsxs("div", {
                 className:
-                  "mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6",
+                  "mb-20 flex flex-col items-center justify-center gap-6 text-center",
                 children: [
                   T.jsxs(_t.h2, {
                     initial: { opacity: 0, y: 20 },
@@ -28915,15 +28915,6 @@ Error generating stack: ` +
                         children: "thumbnails.",
                       }),
                     ],
-                  }),
-                  T.jsx(_t.p, {
-                    initial: { opacity: 0 },
-                    whileInView: { opacity: 1 },
-                    viewport: { once: !0 },
-                    className:
-                      "text-muted-foreground max-w-sm text-sm md:text-base",
-                    children:
-                      "Long-form, motion, and everything that moves frame to frame.",
                   }),
                 ],
               }),
@@ -29001,123 +28992,11 @@ Error generating stack: ` +
                             }),
                           ],
                         }),
-                        T.jsx("p", {
-                          className:
-                            "text-center text-foreground/80 font-serif italic text-base md:text-[17px] leading-snug max-w-[28ch] mx-auto",
-                          children: s.description,
-                        }),
                       ],
                     },
                     l,
                   ),
                 ),
-              }),
-            ],
-          }),
-          T.jsxs("section", {
-            className:
-              "pt-20 md:pt-24 pb-10 md:pb-12 px-6 md:px-12 lg:px-24 bg-background",
-            children: [
-              T.jsxs("div", {
-                className:
-                  "mb-10 md:mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4",
-                children: [
-                  T.jsxs(_t.h2, {
-                    initial: { opacity: 0, y: 20 },
-                    whileInView: { opacity: 1, y: 0 },
-                    viewport: { once: !0 },
-                    className:
-                      "text-4xl md:text-5xl font-serif font-normal tracking-tight leading-[0.95]",
-                    children: [
-                      "The ",
-                      T.jsx("span", {
-                        className: "italic text-muted-foreground",
-                        children: "toolkit.",
-                      }),
-                    ],
-                  }),
-                  T.jsx(_t.p, {
-                    initial: { opacity: 0 },
-                    whileInView: { opacity: 1 },
-                    viewport: { once: !0 },
-                    className:
-                      "text-muted-foreground max-w-sm text-sm md:text-base",
-                    children: "What every frame is built in.",
-                  }),
-                ],
-              }),
-              T.jsxs("div", {
-                className: "relative",
-                children: [
-                  T.jsx("div", {
-                    "aria-hidden": "true",
-                    className:
-                      "pointer-events-none absolute inset-0 rounded-[2rem] md:rounded-[2.5rem] toolkit-glow",
-                  }),
-                  T.jsxs("div", {
-                    className:
-                      "relative rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border border-border/40 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.6)] p-2 md:p-3",
-                    children: [
-                      T.jsx("div", {
-                        "aria-hidden": "true",
-                        className:
-                          "absolute inset-0 toolkit-gradient opacity-90",
-                      }),
-                      T.jsx("div", {
-                        "aria-hidden": "true",
-                        className: "absolute inset-0 bg-background/55",
-                      }),
-                      T.jsx("ul", {
-                        className: "relative grid grid-cols-2 md:grid-cols-4",
-                        children: MM.map(
-                          ({ name: s, letters: l, bg: d, fg: u }, h) =>
-                            T.jsxs(
-                              _t.li,
-                              {
-                                initial: { opacity: 0, y: 12 },
-                                whileInView: { opacity: 1, y: 0 },
-                                viewport: { once: !0, amount: 0.4 },
-                                transition: {
-                                  duration: 0.5,
-                                  delay: h * 0.06,
-                                  ease: [0.22, 1, 0.36, 1],
-                                },
-                                className:
-                                  "group relative flex items-center gap-3 px-5 py-6 md:px-6 md:py-7 cursor-default",
-                                children: [
-                                  T.jsx(_t.span, {
-                                    "aria-hidden": "true",
-                                    animate: { y: [0, -2.5, 0] },
-                                    transition: {
-                                      duration: 3.5 + h * 0.4,
-                                      repeat: 1 / 0,
-                                      ease: "easeInOut",
-                                      delay: h * 0.3,
-                                    },
-                                    className:
-                                      "relative shrink-0 w-9 h-9 md:w-10 md:h-10",
-                                    children: T.jsx(kM, {
-                                      letters: l,
-                                      bg: d,
-                                      fg: u,
-                                      className:
-                                        "relative w-full h-full rounded-xl ring-1 ring-white/10 shadow-[0_4px_12px_-4px_rgba(0,0,0,0.6)] transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-rotate-3",
-                                    }),
-                                  }),
-                                  T.jsx("span", {
-                                    className:
-                                      "relative font-sans text-sm md:text-[15px] font-bold tracking-[-0.01em] text-foreground/85 transition-colors duration-300 group-hover:text-foreground truncate",
-                                    children: s,
-                                  }),
-                                ],
-                              },
-                              s,
-                            ),
-                        ),
-                      }),
-                    ],
-                  }),
-                ],
               }),
             ],
           }),
