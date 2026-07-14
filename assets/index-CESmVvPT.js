@@ -28001,7 +28001,7 @@ Error generating stack: ` +
   }
   const oM = [
     {
-      value: 2,
+      value: 5,
       suffix: "M+",
       label: "Views Generated",
       format: (e) => e.toFixed(e < 10 ? 1 : 0).replace(/\.0$/, ""),
