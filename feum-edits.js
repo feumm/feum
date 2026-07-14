@@ -29,7 +29,7 @@
 (function () {
   /* ── 1. Social footer links ──────────────────────────────── */
   var SOCIAL_LINKS = {
-    youtube:   'https://youtube.com/@fzrum',
+    youtube:   'https://www.youtube.com/@eufms',
     instagram: 'https://www.instagram.com/fzerium',
     behance:   'https://www.behance.net/feum',
     discord:   'https://discord.com/users/1071929676223762452',
@@ -53,6 +53,13 @@
       url:  'https://youtube.com/@icynutella2',
       img:  'https://yt3.googleusercontent.com/bzcNeMUIU7iD_Bb67Q5YYNlCnW9q8TvpKeLeBk14_i1_UaRly6Yqg-jA4RZ_th_klG0jmkZycUQ=s200-c-k-c0x00ffffff-no-rj',
       glow: 'rgba(34, 211, 238, 0.55)'
+    },
+    {
+      name: 'H0nri',
+      subs: '2.75K Subscribers',
+      url:  'https://youtube.com/@h0nritv',
+      img:  './assets/h0nritv.jpg',
+      glow: 'rgba(147, 112, 219, 0.55)'
     }
     /* Add more creators here:
     {
