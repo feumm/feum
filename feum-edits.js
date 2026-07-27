@@ -29,11 +29,11 @@
 (function () {
   /* ── 1. Social footer links ──────────────────────────────── */
   var SOCIAL_LINKS = {
-    youtube:   'https://www.youtube.com/@eufms',
-    instagram: 'https://www.instagram.com/fzerium',
-    behance:   'https://www.behance.net/feum',
+    youtube:   'https://www.youtube.com/@paidh',
+    instagram: 'https://www.instagram.com/',
+    behance:   'https://www.behance.net/paidd',
     discord:   'https://discord.com/users/1071929676223762452',
-    pinterest: 'https://pinterest.com/feum',
+    pinterest: 'https://pinterest.com/',
     gumroad:   'https://gumroad.com/feum'
   };
 
@@ -74,7 +74,7 @@
 
   /* ── 3. Page meta text ───────────────────────────────────── */
   var META = {
-    title:       'feum — Minecraft Thumbnail Designer',
+    title:       '@Paid',
     description: 'Scroll-stoppers, made to click. Professional Minecraft thumbnail design by feum.'
   };
 

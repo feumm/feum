@@ -29,11 +29,11 @@
 (function () {
   /* ── 1. Social footer links ──────────────────────────────── */
   var SOCIAL_LINKS = {
-    youtube:   'https://youtube.com/@fzrum',
-    instagram: 'https://www.instagram.com/fzerium',
-    behance:   'https://www.behance.net/feum',
+    youtube:   'https://youtube.com/@paidh',
+    instagram: '',
+    behance:   'https://www.behance.net/paidd',
     discord:   'https://discord.com/users/1071929676223762452',
-    pinterest: 'https://pinterest.com/feum',
+    pinterest: '',
     gumroad:   'https://gumroad.com/feum'
   };
 
@@ -60,8 +60,8 @@
 
   /* ── 3. Page meta text ───────────────────────────────────── */
   var META = {
-    title:       'feum — Minecraft Thumbnail Designer',
-    description: 'Scroll-stoppers, made to click. Professional Minecraft thumbnail design by feum.'
+    title:       '@Paid',
+    description: 'Scroll-stoppers, made to click. professional minecraft thumbnail design by paid.'
   };
 
   /* ── 4. Toolkit app labels (shown as tooltip on mobile) ─── */
@@ -113,17 +113,17 @@
     var links = document.querySelectorAll('footer a, [class*="footer"] a, ul li a');
     links.forEach(function(a) {
       var href = (a.getAttribute('href') || '').toLowerCase();
-      if (href.includes('youtube.com/@fzrum') && SOCIAL_LINKS.youtube)
+      if (href.includes('youtube.com/@paidh') && SOCIAL_LINKS.youtube)
         a.href = SOCIAL_LINKS.youtube;
       if (href.includes('instagram.com') && SOCIAL_LINKS.instagram)
         a.href = SOCIAL_LINKS.instagram;
-      if (href.includes('behance.net/feum') && SOCIAL_LINKS.behance)
+      if (href.includes('behance.net/paidd') && SOCIAL_LINKS.behance)
         a.href = SOCIAL_LINKS.behance;
       if (href.includes('discord.com') && SOCIAL_LINKS.discord)
         a.href = SOCIAL_LINKS.discord;
       if (href.includes('pinterest') && SOCIAL_LINKS.pinterest)
         a.href = SOCIAL_LINKS.pinterest;
-      if (href.includes('gumroad') && SOCIAL_LINKS.gumroad)
+      if (href.includes('gumroad.com/feum') && SOCIAL_LINKS.gumroad)
         a.href = SOCIAL_LINKS.gumroad;
     });
     /* View more link */
