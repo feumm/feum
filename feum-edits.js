@@ -29,12 +29,12 @@
 (function () {
   /* ── 1. Social footer links ──────────────────────────────── */
   var SOCIAL_LINKS = {
-    youtube:   'https://www.youtube.com/@paidh',
+    youtube:   'https://www.youtube.com/@falws',
     instagram: 'https://www.instagram.com/',
-    behance:   'https://www.behance.net/paidd',
+    behance:   'https://www.behance.net/falw',
     discord:   'https://discord.com/users/1071929676223762452',
     pinterest: 'https://pinterest.com/',
-    gumroad:   'https://gumroad.com/feum'
+    gumroad:   'https://gumroad.com/falw'
   };
 
   /* ── 2. Marquee creator cards ────────────────────────────── */
@@ -271,9 +271,9 @@
   /* Hide "Available for new projects" badge */
   function hideAvailableBadge() {
     document.querySelectorAll('*').forEach(function(el) {
-      if (el.children.length === 0 && (el.textContent || '').trim().toUpperCase().includes('AVAILABLE FOR NEW')) {
-        var target = el.closest('[class]') || el;
-        target.style.setProperty('display', 'none', 'important');
+      var text = (el.textContent || '').trim();
+      if (text.toUpperCase().includes('AVAILABLE FOR NEW') && text.length < 40) {
+        el.style.setProperty('display', 'none', 'important');
       }
     });
   }
@@ -381,12 +381,11 @@
   function applyShowMore() {
     if (document.querySelector('[data-show-more-applied]')) return false;
 
-    /* Target the thumbnail grid directly — it has the known class gap-y-14 */
-    var thumbGrid = document.querySelector('.gap-y-14');
+    /* Find the thumbnail grid — use the exact class combination from the bundle */
+    var thumbGrid =
+      document.querySelector('[class*="gap-x-8"][class*="gap-y-14"]') ||
+      document.querySelector('[class*="gap-y-14"][class*="gap-x-8"]');
     if (!thumbGrid) return false;
-
-    /* Make sure it actually contains thumbnails */
-    if (!thumbGrid.querySelector('img[src*="thumb-"]')) return false;
 
     var items = Array.from(thumbGrid.children);
     if (items.length <= SHOW_MORE_LIMIT) return true; /* nothing to hide */
@@ -469,11 +468,61 @@
     });
   }
 
+  /* ── Reorder sections: Trusted + Stats right after Hero ─── */
+  var sectionsReordered = false;
+  function reorderSections() {
+    if (sectionsReordered) return true;
+
+    // Find all top-level sections inside the page root
+    var sections = Array.from(document.querySelectorAll('main > section, #root > div > section, body > div > section, div[class] > section'));
+    if (sections.length < 3) return false; // not ready yet
+
+    // Identify sections by content
+    var trustedSection = null;
+    var statsSection   = null;
+    var heroSection    = null;
+
+    sections.forEach(function(s) {
+      if (!trustedSection && s.querySelector('.trusted-gradient-text')) trustedSection = s;
+      if (!statsSection && (s.textContent || '').toUpperCase().includes('VIEWS GENERATED')) statsSection = s;
+      if (!heroSection) heroSection = s; // first section is always the hero
+    });
+
+    if (!trustedSection || !statsSection || !heroSection) return false;
+    if (trustedSection === heroSection || statsSection === heroSection) return false;
+
+    var parent = heroSection.parentNode;
+    if (!parent) return false;
+
+    // Insert trusted immediately after hero, then stats right after trusted
+    var heroNext = heroSection.nextSibling;
+    parent.insertBefore(trustedSection, heroNext);
+    parent.insertBefore(statsSection, trustedSection.nextSibling);
+
+    sectionsReordered = true;
+    return true;
+  }
+
+  /* ── Patch footer brand logo ("PAID" image → new falw* logo) ── */
+  function patchFooterLogo() {
+    /* The bundle renders the footer logo as <img alt="feum" src="...Photoroom...">
+       at two locations (main footer + a blurred bg copy). Replace both. */
+    var imgs = document.querySelectorAll('img[alt="feum"], img[src*="Photoroom"]');
+    if (!imgs.length) return false;
+    imgs.forEach(function(img) {
+      img.src = './assets/falw-logo-new.png';
+      img.alt = 'falw*';
+    });
+    return true;
+  }
+
   /* Run all patches with polling for React hydration */
   var tries = 0;
   var showMoreApplied = false;
+  var footerLogoPatched = false;
   function runPatches() {
     patchSocialLinks();
+    if (!footerLogoPatched) footerLogoPatched = patchFooterLogo();
     patchThumbnails();
     injectToolkitTooltips();
     fixMobileFooterLinks();
@@ -484,10 +533,13 @@
     hideAvailableBadge();
     hideSelectedWorkHeader();
     removeViewMoreButton();
+    reorderSections();
     if (!showMoreApplied) showMoreApplied = applyShowMore();
     var needsRetry = !document.querySelector('.toolkit-glow') ||
                      (window.innerWidth <= 767 && !document.querySelector('[data-mobile-footer-fixed]')) ||
-                     !showMoreApplied;
+                     !showMoreApplied ||
+                     !sectionsReordered ||
+                     !footerLogoPatched;
     if (needsRetry && ++tries < 60) {
       setTimeout(runPatches, 200);
     }

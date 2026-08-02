@@ -29,9 +29,9 @@
 (function () {
   /* ── 1. Social footer links ──────────────────────────────── */
   var SOCIAL_LINKS = {
-    youtube:   'https://youtube.com/@paidh',
+    youtube:   'https://youtube.com/@falws',
     instagram: '',
-    behance:   'https://www.behance.net/paidd',
+    behance:   'https://www.behance.net/falw',
     discord:   'https://discord.com/users/1071929676223762452',
     pinterest: '',
     gumroad:   'https://gumroad.com/feum'
@@ -257,9 +257,9 @@
   /* Hide "Available for new projects" badge */
   function hideAvailableBadge() {
     document.querySelectorAll('*').forEach(function(el) {
-      if (el.children.length === 0 && (el.textContent || '').trim().toUpperCase().includes('AVAILABLE FOR NEW')) {
-        var target = el.closest('[class]') || el;
-        target.style.setProperty('display', 'none', 'important');
+      var text = (el.textContent || '').trim();
+      if (text.toUpperCase().includes('AVAILABLE FOR NEW') && text.length < 40) {
+        el.style.setProperty('display', 'none', 'important');
       }
     });
   }

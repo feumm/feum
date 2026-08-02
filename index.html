@@ -4,25 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
 
-    <title>eufm</title>
+    <title>falw</title>
     <meta name="description" content="Professional Minecraft thumbnail designer. Scroll-stoppers, made to click. Trusted by creators worldwide." />
     <meta name="keywords" content="minecraft thumbnail designer, feum, minecraft thumbnail, youtube thumbnail designer, gaming thumbnail, paid portfolio, thumbnail artist" />
-    <meta name="author" content="feum" />
+    <meta name="author" content="falw" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#000000" />
 
     <meta property="og:type"        content="website" />
-    <meta property="og:title"       content="paid" />
+    <meta property="og:title"       content="falw" />
     <meta property="og:description" content="Professional Minecraft thumbnail designer, trusted by creators worldwide." />
     <meta property="og:url"         content="https://feumm.github.io/feum/" />
     <meta property="og:image"       content="https://feumm.github.io/feum/opengraph.jpg" />
     <meta property="og:image:width"  content="1280" />
     <meta property="og:image:height" content="720" />
-    <meta property="og:image:alt"   content="paid" />
-    <meta property="og:site_name"   content="paid" />
+    <meta property="og:image:alt"   content="falw" />
+    <meta property="og:site_name"   content="falw" />
 
     <meta name="twitter:card"        content="summary_large_image" />
-    <meta name="twitter:title"       content="paid" />
+    <meta name="twitter:title"       content="falw" />
     <meta name="twitter:description" content="Professional Minecraft thumbnail designer, trusted by creators worldwide." />
     <meta name="twitter:image"       content="https://feumm.github.io/feum/opengraph.jpg" />
 
@@ -47,9 +47,9 @@
       "jobTitle": "Minecraft Thumbnail Designer",
       "description": "Professional Minecraft thumbnail designer, trusted by creators worldwide.",
       "sameAs": [
-        "https://youtube.com/@paidh",
+        "https://youtube.com/@falws",
         "https://www.instagram.com/",
-        "https://www.behance.net/paidd"
+        "https://www.behance.net/falw"
       ]
     }
     </script>
@@ -86,7 +86,11 @@
       }
 
       html, body, #root {
-        background-color: hsl(240, 10%, 4%) !important;
+        background-color: #000 !important;
+      }
+      /* Override bundle's --background (240 10% 4% = dark navy) to pure black */
+      :root, .dark {
+        --background: 0 0% 0% !important;
       }
       section {
         border: none !important;
@@ -179,7 +183,7 @@
           rgba(0, 0, 0, 0.66) 65%,
           rgba(0, 0, 0, 0.82) 78%,
           rgba(0, 0, 0, 0.93) 88%,
-          hsl(240, 10%, 4%) 100%
+          #000 100%
         ) !important;
       }
       section:first-of-type [class*="h-40"][class*="bg-gradient-to-b"] {
@@ -187,7 +191,7 @@
         background: linear-gradient(
           to bottom,
           transparent 0%,
-          hsl(240, 10%, 4%) 100%
+          #000 100%
         ) !important;
       }
 
@@ -307,12 +311,13 @@
       }
       .flex:has(> a.feum-nav-link) {
         gap: 0 !important;
-        background: rgba(255,255,255,0.07) !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
+        background: rgba(20,20,20,0.72) !important;
+        border: 1px solid rgba(255,255,255,0.12) !important;
         border-radius: 999px !important;
-        backdrop-filter: blur(14px) !important;
-        -webkit-backdrop-filter: blur(14px) !important;
+        backdrop-filter: blur(24px) saturate(140%) !important;
+        -webkit-backdrop-filter: blur(24px) saturate(140%) !important;
         overflow: hidden !important;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.5) !important;
       }
 
       *:has(> .toolkit-glow) {
@@ -460,6 +465,57 @@
         .text-base { font-size: 14px !important; }
       }
 
+      /* Reduce card ambient glows by 60%
+         Target the blurred image copies behind each card:
+         opacity-25 → 10  (25 × 0.4)
+         opacity-50 → 20  (50 × 0.4)
+      */
+      .blur-3xl.object-cover {
+        opacity: 0.1 !important;
+      }
+      /* Keep hover state proportionally reduced */
+      .group:hover .blur-3xl.object-cover {
+        opacity: 0.18 !important;
+      }
+      /* Catch the saturate-150 variant (opacity-50 base) */
+      .blur-3xl.saturate-150 {
+        opacity: 0.2 !important;
+      }
+      .group:hover .blur-3xl.saturate-150 {
+        opacity: 0.32 !important;
+      }
+
+      /* falw* nav logo */
+      .feum-nav-logo-wrap {
+        display: flex;
+        align-items: center;
+      }
+      .feum-nav-logo {
+        display: block;
+        height: 36px;
+        width: auto;
+        mix-blend-mode: screen;
+        pointer-events: none;
+        user-select: none;
+      }
+
+      /* falw* hero logo */
+      .feum-hero-logo-wrap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+      }
+      .feum-hero-logo {
+        display: block;
+        max-width: min(680px, 85vw);
+        width: 100%;
+        height: auto;
+        mix-blend-mode: screen;
+        pointer-events: none;
+        user-select: none;
+      }
+
     </style>
 
     <script defer src="./assets/index-CESmVvPT.js"></script>
@@ -485,6 +541,60 @@
 
     <script defer src="./perf.js"></script>
     <script defer src="./feum-edits.js"></script>
+
+    <script>
+      (function() {
+        function injectNavLogo() {
+          // The nav logo is typically the first link or a heading/span in the nav/header
+          // Try common selectors for the brand/logo element
+          var logo =
+            document.querySelector('nav a:first-child') ||
+            document.querySelector('header a:first-child') ||
+            document.querySelector('a[href="/"]') ||
+            document.querySelector('a[href="./"]') ||
+            document.querySelector('[class*="logo"]') ||
+            document.querySelector('[class*="brand"]');
+          if (!logo) return false;
+          var wrap = document.createElement('div');
+          wrap.className = 'feum-nav-logo-wrap';
+          var img = document.createElement('img');
+          img.src = './assets/falw-logo-new.png';
+          img.alt = 'falw*';
+          img.className = 'feum-nav-logo';
+          wrap.appendChild(img);
+          logo.parentNode.replaceChild(wrap, logo);
+          return true;
+        }
+        var navTries = 0;
+        function pollNav() {
+          if (injectNavLogo()) return;
+          if (++navTries < 80) setTimeout(pollNav, 100);
+        }
+        if (document.readyState === 'complete') pollNav();
+        else window.addEventListener('load', pollNav);
+
+        function injectHeroLogo() {
+          var h1 = document.querySelector('h1');
+          if (!h1) return false;
+          var wrap = document.createElement('div');
+          wrap.className = 'feum-hero-logo-wrap';
+          var img = document.createElement('img');
+          img.src = './assets/falw-logo-new.png';
+          img.alt = 'falw*';
+          img.className = 'feum-hero-logo';
+          wrap.appendChild(img);
+          h1.parentNode.replaceChild(wrap, h1);
+          return true;
+        }
+        var tries = 0;
+        function poll() {
+          if (injectHeroLogo()) return;
+          if (++tries < 80) setTimeout(poll, 100);
+        }
+        if (document.readyState === 'complete') poll();
+        else window.addEventListener('load', poll);
+      })();
+    </script>
 
     <script>
       (function() {
