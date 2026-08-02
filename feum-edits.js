@@ -74,7 +74,7 @@
 
   /* ── 3. Page meta text ───────────────────────────────────── */
   var META = {
-    title:       '@Paid',
+    title:       '@falw',
     description: 'Scroll-stoppers, made to click. Professional Minecraft thumbnail design by feum.'
   };
 
@@ -127,17 +127,17 @@
     var links = document.querySelectorAll('footer a, [class*="footer"] a, ul li a');
     links.forEach(function(a) {
       var href = (a.getAttribute('href') || '').toLowerCase();
-      if (href.includes('youtube.com/@fzrum') && SOCIAL_LINKS.youtube)
+      if (href.includes('youtube.com/@falws') && SOCIAL_LINKS.youtube)
         a.href = SOCIAL_LINKS.youtube;
       if (href.includes('instagram.com') && SOCIAL_LINKS.instagram)
         a.href = SOCIAL_LINKS.instagram;
-      if (href.includes('behance.net/feum') && SOCIAL_LINKS.behance)
+      if (href.includes('behance.net/falw') && SOCIAL_LINKS.behance)
         a.href = SOCIAL_LINKS.behance;
       if (href.includes('discord.com') && SOCIAL_LINKS.discord)
         a.href = SOCIAL_LINKS.discord;
       if (href.includes('pinterest') && SOCIAL_LINKS.pinterest)
         a.href = SOCIAL_LINKS.pinterest;
-      if (href.includes('gumroad') && SOCIAL_LINKS.gumroad)
+      if (href.includes('gumroad.con/falw') && SOCIAL_LINKS.gumroad)
         a.href = SOCIAL_LINKS.gumroad;
     });
     /* View more link */
