@@ -34,7 +34,7 @@
     behance:   'https://www.behance.net/falw',
     discord:   'https://discord.com/users/1071929676223762452',
     pinterest: '',
-    gumroad:   'https://gumroad.com/feum'
+    gumroad:   'https://gumroad.com/falw'
   };
 
   /* ── 2. Marquee creator cards ────────────────────────────── */
@@ -60,7 +60,7 @@
 
   /* ── 3. Page meta text ───────────────────────────────────── */
   var META = {
-    title:       '@Paid',
+    title:       '@falw',
     description: 'Scroll-stoppers, made to click. professional minecraft thumbnail design by paid.'
   };
 
@@ -113,17 +113,17 @@
     var links = document.querySelectorAll('footer a, [class*="footer"] a, ul li a');
     links.forEach(function(a) {
       var href = (a.getAttribute('href') || '').toLowerCase();
-      if (href.includes('youtube.com/@paidh') && SOCIAL_LINKS.youtube)
+      if (href.includes('youtube.com/@falws') && SOCIAL_LINKS.youtube)
         a.href = SOCIAL_LINKS.youtube;
       if (href.includes('instagram.com') && SOCIAL_LINKS.instagram)
         a.href = SOCIAL_LINKS.instagram;
-      if (href.includes('behance.net/paidd') && SOCIAL_LINKS.behance)
+      if (href.includes('behance.net/falw') && SOCIAL_LINKS.behance)
         a.href = SOCIAL_LINKS.behance;
       if (href.includes('discord.com') && SOCIAL_LINKS.discord)
         a.href = SOCIAL_LINKS.discord;
       if (href.includes('pinterest') && SOCIAL_LINKS.pinterest)
         a.href = SOCIAL_LINKS.pinterest;
-      if (href.includes('gumroad.com/feum') && SOCIAL_LINKS.gumroad)
+      if (href.includes('gumroad.com/falw') && SOCIAL_LINKS.gumroad)
         a.href = SOCIAL_LINKS.gumroad;
     });
     /* View more link */
