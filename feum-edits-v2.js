@@ -496,6 +496,27 @@
     });
   }
 
+  /* Inject a stylesheet to strip nav pill — survives React re-renders */
+  (function injectNavPillReset() {
+    if (document.getElementById('feum-nav-pill-reset')) return;
+    var s = document.createElement('style');
+    s.id = 'feum-nav-pill-reset';
+    s.textContent = [
+      /* strip drop-shadow from each link */
+      'a.feum-nav-link { filter: none !important; text-shadow: none !important; }',
+      /* nuke any container styling on the wrapper div */
+      'a.feum-nav-link:first-child, a.feum-nav-link { }',
+      'nav a.feum-nav-link:first-of-type, nav a.feum-nav-link { }',
+      /* target the flex wrapper that holds both pills */
+      'nav .flex.items-center { background: none !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border: none !important; border-radius: 0 !important; padding: 0 !important; box-shadow: none !important; outline: none !important; }'
+    ].join('\n');
+    document.head.appendChild(s);
+  })();
+
+  function frostedNavPill() {
+    return document.querySelectorAll('a.feum-nav-link').length > 0;
+  }
+
   /* Run all patches with polling for React hydration */
   var tries = 0;
   var showMoreApplied = false;
@@ -503,6 +524,7 @@
     patchSocialLinks();
     patchThumbnails();
     injectToolkitTooltips();
+    frostedNavPill();
     frostedGlassCTA();
     renameCTA();
     patchHeroHeadline();

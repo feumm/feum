@@ -516,6 +516,17 @@
     return true;
   }
 
+  /* Inject stylesheet to strip nav pill outline — survives React re-renders */
+  (function () {
+    if (document.getElementById('feum-nav-pill-reset')) return;
+    var s = document.createElement('style');
+    s.id = 'feum-nav-pill-reset';
+    s.textContent =
+      'a.feum-nav-link { filter: none !important; text-shadow: none !important; }' +
+      'nav .flex.items-center { background: rgba(255,255,255,0.06) !important; backdrop-filter: blur(18px) saturate(180%) !important; -webkit-backdrop-filter: blur(18px) saturate(180%) !important; border: none !important; border-radius: 999px !important; padding: 0.4rem 1.25rem !important; box-shadow: none !important; outline: none !important; }';
+    document.head.appendChild(s);
+  })();
+
   /* Run all patches with polling for React hydration */
   var tries = 0;
   var showMoreApplied = false;
@@ -542,6 +553,10 @@
                      !footerLogoPatched;
     if (needsRetry && ++tries < 60) {
       setTimeout(runPatches, 200);
+    } else {
+      /* All patches done — reveal the app */
+      var root = document.getElementById('root');
+      if (root) root.classList.add('feum-ready');
     }
   }
 

@@ -723,6 +723,29 @@
         });
       }
     </script>
+  <style>
+    /* hide "Trusted by Creators" heading */
+    h2:has(.trusted-gradient-text) { display: none !important; }
+    section:has(.trusted-gradient-text) .relative.w-full.overflow-hidden {
+      -webkit-mask-image: linear-gradient(to right, transparent 0, black 25%, black 75%, transparent 100%) !important;
+      mask-image: linear-gradient(to right, transparent 0, black 25%, black 75%, transparent 100%) !important;
+    }
+    /* hide app until feum-edits patches have run — prevents flash of original content */
+    #root { opacity: 0; }
+    #root.feum-ready { opacity: 1; transition: opacity 0.15s ease; }
+    /* nav pill — applied immediately so it's correct from first paint */
+    a.feum-nav-link { filter: none !important; text-shadow: none !important; }
+    nav .flex.items-center {
+      background: rgba(255,255,255,0.06) !important;
+      backdrop-filter: blur(18px) saturate(180%) !important;
+      -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
+      border: none !important;
+      border-radius: 999px !important;
+      padding: 0.4rem 1.25rem !important;
+      box-shadow: none !important;
+      outline: none !important;
+    }
+  </style>
   </head>
   <body>
     <div id="root"></div>
