@@ -404,22 +404,22 @@
     var hiddenCount = items.length - SHOW_MORE_LIMIT;
     var btn = document.createElement('button');
     btn.setAttribute('data-show-more-btn', '1');
-    btn.textContent = 'Show more (' + hiddenCount + ')';
+    btn.textContent = 'Show more';
 
     var P = 'important';
     btn.style.setProperty('display', 'flex', P);
     btn.style.setProperty('align-items', 'center', P);
     btn.style.setProperty('justify-content', 'center', P);
     btn.style.setProperty('margin', '2rem auto 0', P);
-    btn.style.setProperty('padding', '0.75rem 2.25rem', P);
+    btn.style.setProperty('padding', '11px 26px', P);
     btn.style.setProperty('background', 'rgba(255,255,255,0.05)', P);
     btn.style.setProperty('border', '1px solid rgba(255,255,255,0.12)', P);
     btn.style.setProperty('border-radius', '999px', P);
     btn.style.setProperty('color', 'rgba(255,255,255,0.85)', P);
-    btn.style.setProperty('font-family', "'Satoshi','Inter',sans-serif", P);
-    btn.style.setProperty('font-size', '0.875rem', P);
+    btn.style.setProperty('font-family', "'Clash Display','Satoshi','Inter',sans-serif", P);
+    btn.style.setProperty('font-size', '15px', P);
     btn.style.setProperty('font-weight', '600', P);
-    btn.style.setProperty('letter-spacing', '0.02em', P);
+    btn.style.setProperty('letter-spacing', '-0.01em', P);
     btn.style.setProperty('cursor', 'pointer', P);
     btn.style.setProperty('backdrop-filter', 'blur(14px)', P);
     btn.style.setProperty('-webkit-backdrop-filter', 'blur(14px)', P);
@@ -448,7 +448,7 @@
         items.forEach(function(item, i) {
           if (i >= SHOW_MORE_LIMIT) item.style.display = 'none';
         });
-        btn.textContent = 'Show more (' + hiddenCount + ')';
+        btn.textContent = 'Show more';
         /* Scroll back to the top of the grid so it's in view */
         thumbGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
@@ -503,6 +503,42 @@
     return true;
   }
 
+  /* ── Patch stats section: apply Clash Display 700 to numbers ── */
+  var statsFontPatched = false;
+  function patchStatsFonts() {
+    if (statsFontPatched) return true;
+
+    /* Find the stats section the same way reorderSections does */
+    var statsSection = null;
+    var sections = Array.from(document.querySelectorAll(
+      'main > section, #root > div > section, body > div > section, div[class] > section'
+    ));
+    sections.forEach(function(s) {
+      if (!statsSection && (s.textContent || '').toUpperCase().includes('VIEWS GENERATED')) {
+        statsSection = s;
+      }
+    });
+    if (!statsSection) return false;
+
+    /* Target the large number elements — font-serif class + big text-size classes */
+    var targets = statsSection.querySelectorAll(
+      '[class*="font-serif"], [class*="text-5xl"], [class*="text-6xl"], ' +
+      '[class*="text-7xl"], [class*="text-8xl"], [class*="text-9xl"]'
+    );
+    if (!targets.length) return false;
+
+    var P = 'important';
+    targets.forEach(function(el) {
+      el.style.setProperty('font-family', "'Clash Display', 'OpenSans', sans-serif", P);
+      el.style.setProperty('font-weight', '700', P);
+      el.style.setProperty('letter-spacing', '-0.035em', P);
+      el.style.setProperty('font-style', 'normal', P);
+    });
+
+    statsFontPatched = true;
+    return true;
+  }
+
   /* ── Patch footer brand logo ("PAID" image → new falw* logo) ── */
   function patchFooterLogo() {
     /* The bundle renders the footer logo as <img alt="feum" src="...Photoroom...">
@@ -523,7 +559,7 @@
     s.id = 'feum-nav-pill-reset';
     s.textContent =
       'a.feum-nav-link { filter: none !important; text-shadow: none !important; }' +
-      'nav .flex.items-center { background: rgba(255,255,255,0.06) !important; backdrop-filter: blur(18px) saturate(180%) !important; -webkit-backdrop-filter: blur(18px) saturate(180%) !important; border: none !important; border-radius: 999px !important; padding: 0.4rem 1.25rem !important; box-shadow: none !important; outline: none !important; }';
+      'nav .flex.items-center { background: rgba(255,255,255,0.06) !important; backdrop-filter: blur(18px) saturate(180%) !important; -webkit-backdrop-filter: blur(18px) saturate(180%) !important; border: none !important; border-radius: 999px !important; padding: 5px !important; box-shadow: none !important; outline: none !important; }';
     document.head.appendChild(s);
   })();
 
@@ -546,11 +582,13 @@
     removeViewMoreButton();
     reorderSections();
     if (!showMoreApplied) showMoreApplied = applyShowMore();
+    if (!statsFontPatched) statsFontPatched = patchStatsFonts();
     var needsRetry = !document.querySelector('.toolkit-glow') ||
                      (window.innerWidth <= 767 && !document.querySelector('[data-mobile-footer-fixed]')) ||
                      !showMoreApplied ||
                      !sectionsReordered ||
-                     !footerLogoPatched;
+                     !footerLogoPatched ||
+                     !statsFontPatched;
     if (needsRetry && ++tries < 60) {
       setTimeout(runPatches, 200);
     } else {
