@@ -34,7 +34,9 @@
     behance:   'https://www.behance.net/falw',
     discord:   'https://discord.com/users/1071929676223762452',
     pinterest: 'https://pinterest.com/',
-    gumroad:   'https://gumroad.com/falw'
+    gumroad:   'https://gumroad.com/falw',
+    twitter:   'https://twitter.com/@designerfalw',
+    linkme:    'https://link.me/falw'
   };
 
   /* ── 2. Marquee creator cards ────────────────────────────── */
@@ -330,6 +332,113 @@
     return done.line1 && done.line2;
   }
 
+  /* Inject Twitter + link.me into footer social list */
+  var socialInjected = false;
+  function injectNewSocialLinks() {
+    if (socialInjected) return true;
+
+    /* Find the footer social <ul> */
+    var ul = null;
+    document.querySelectorAll('ul').forEach(function(el) {
+      if (ul) return;
+      var anchors = Array.from(el.querySelectorAll('a'));
+      if (anchors.length < 3) return;
+      var hasSocial = anchors.some(function(a) {
+        var h = (a.getAttribute('href') || '').toLowerCase();
+        return h.includes('youtube') || h.includes('behance') || h.includes('gumroad') || h.includes('discord');
+      });
+      if (hasSocial) ul = el;
+    });
+    if (!ul) return false;
+    if (ul.querySelector('[data-injected-twitter]')) { socialInjected = true; return true; }
+
+    /* Grab classes from an existing <li> and its <a> so new items blend in */
+    var existingLi = ul.querySelector('li');
+    var existingA  = existingLi ? existingLi.querySelector('a') : null;
+    var liClass    = existingLi ? existingLi.className : '';
+    var aClass     = existingA  ? existingA.className  : '';
+
+    /* Measure the existing icon circle so we match its size exactly */
+    var existingIcon = existingA ? existingA.querySelector('span') : null;
+    var iconW = existingIcon ? existingIcon.offsetWidth  || 32 : 32;
+    var iconH = existingIcon ? existingIcon.offsetHeight || 32 : 32;
+
+    var NEW_LINKS = [
+      {
+        url: SOCIAL_LINKS.twitter, label: 'Twitter',
+        bg: '#000',
+        svgContent: '<svg xmlns="http://www.w3.org/2000/svg" width="55%" height="55%" viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>',
+        attr: 'data-injected-twitter'
+      },
+      {
+        url: SOCIAL_LINKS.linkme, label: 'Link.me',
+        bg: 'linear-gradient(135deg,#6366f1,#8b5cf6)',
+        svgContent: '<svg xmlns="http://www.w3.org/2000/svg" width="55%" height="55%" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>',
+        attr: 'data-injected-linkme'
+      }
+    ];
+
+    NEW_LINKS.forEach(function(item) {
+      var li = document.createElement('li');
+      li.className = liClass;
+      li.setAttribute(item.attr, '1');
+
+      var a = document.createElement('a');
+      a.className = aClass;
+      a.href = item.url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+
+      /* Icon circle — built from scratch, no cloning */
+      var circle = document.createElement('span');
+      circle.style.cssText =
+        'display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;' +
+        'width:' + iconW + 'px;height:' + iconH + 'px;border-radius:50%;' +
+        'background:' + item.bg + ';';
+      circle.innerHTML = item.svgContent;
+
+      /* Text label */
+      var label = document.createElement('span');
+      label.textContent = item.label;
+
+      a.appendChild(circle);
+      a.appendChild(label);
+      li.appendChild(a);
+      ul.appendChild(li);
+    });
+
+    socialInjected = true;
+    return true;
+  }
+
+  /* Patch copyright text font → Clash Display 500 */
+  function patchCopyrightFont() {
+    var found = false;
+    document.querySelectorAll('*').forEach(function(el) {
+      if (found) return;
+      var t = (el.textContent || '').trim();
+      if (t.includes('All rights reserved') && el.children.length === 0) {
+        var P = 'important';
+        /* Style the paragraph/span itself */
+        var target = el.parentElement && el.parentElement.children.length === 1 ? el.parentElement : el;
+        target.style.setProperty('font-family', "'Clash Display','OpenSans',sans-serif", P);
+        target.style.setProperty('font-weight', '500', P);
+        target.style.setProperty('letter-spacing', '0.04em', P);
+        found = true;
+      }
+    });
+    return found;
+  }
+
+  /* Rename "Contact" nav link → "Hire Me" */
+  function renameNavContact() {
+    document.querySelectorAll('a.feum-nav-link').forEach(function(a) {
+      if ((a.textContent || '').trim() === 'Contact') {
+        a.textContent = 'Hire Me';
+      }
+    });
+  }
+
   /* Rename CTA button text */
   function renameCTA() {
     document.querySelectorAll('a, button').forEach(function(el) {
@@ -434,6 +543,68 @@
       btn.style.setProperty('border-color', 'rgba(255,255,255,0.12)', P);
     });
 
+    /* ── Behance icon button (appears next to "Show less") ─── */
+    var behanceBtn = document.createElement('a');
+    behanceBtn.href = VIEW_MORE_URL;
+    behanceBtn.target = '_blank';
+    behanceBtn.rel = 'noopener noreferrer';
+    behanceBtn.title = 'View on Behance';
+    behanceBtn.setAttribute('aria-label', 'View on Behance');
+    behanceBtn.innerHTML =
+      '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' +
+        '<path d="M7.443 5.35c.639 0 1.23.05 1.77.198.541.099.984.297 1.377.544.394.247.689.594.886 1.039.197.445.296.99.296 1.583 0 .693-.148 1.286-.493 1.731-.296.446-.788.841-1.378 1.138.836.247 1.476.693 1.919 1.336.444.644.64 1.435.64 2.326 0 .693-.148 1.336-.394 1.88-.296.545-.64.99-1.132 1.336-.493.347-1.034.594-1.624.742-.64.148-1.28.198-1.92.198H1V5.35h6.443zm-.394 5.54c.542 0 .984-.148 1.329-.445.344-.297.492-.742.492-1.286 0-.297-.049-.594-.148-.792-.099-.247-.247-.395-.444-.544-.197-.099-.394-.197-.64-.247-.246-.05-.492-.05-.788-.05H3.9v3.413h3.149v-.049zm.148 5.787c.296 0 .591-.05.887-.099.295-.099.54-.197.787-.346.246-.148.442-.346.59-.643.148-.297.247-.644.247-1.04 0-.791-.197-1.385-.64-1.73-.394-.347-.985-.495-1.723-.495H3.9v4.403h3.297v-.05zM16.643 16.985c.444.445 1.083.643 1.919.643.591 0 1.132-.148 1.575-.445.394-.297.64-.594.788-.891h2.41c-.394 1.237-1.034 2.128-1.772 2.673-.788.495-1.723.742-2.854.742-.788 0-1.477-.099-2.116-.346-.64-.248-1.181-.594-1.625-1.04-.443-.445-.788-.99-1.033-1.633-.246-.644-.345-1.336-.345-2.128 0-.742.099-1.435.345-2.078.247-.644.542-1.188 1.034-1.633.443-.445.984-.792 1.624-1.039.64-.247 1.329-.396 2.067-.396.837 0 1.575.149 2.215.495.591.297 1.132.742 1.525 1.286.394.545.69 1.188.837 1.88.099.693.148 1.435.099 2.227h-7.182c0 .891.196 1.534.69 1.98l-.001.001zm3.347-5.343c-.394-.346-.935-.544-1.624-.544-.493 0-.886.099-1.23.247-.345.148-.59.347-.788.594-.197.198-.345.445-.394.643-.099.248-.148.445-.148.644h4.773c-.148-.792-.394-1.286-.59-1.584z"/>' +
+      '</svg>';
+
+    var P = 'important';
+    behanceBtn.style.setProperty('display', 'flex', P);
+    behanceBtn.style.setProperty('align-items', 'center', P);
+    behanceBtn.style.setProperty('justify-content', 'center', P);
+    behanceBtn.style.setProperty('width', '46px', P);
+    behanceBtn.style.setProperty('height', '46px', P);
+    behanceBtn.style.setProperty('background', 'rgba(255,255,255,0.05)', P);
+    behanceBtn.style.setProperty('border', '1px solid rgba(255,255,255,0.12)', P);
+    behanceBtn.style.setProperty('border-radius', '999px', P);
+    behanceBtn.style.setProperty('color', 'rgba(255,255,255,0.85)', P);
+    behanceBtn.style.setProperty('cursor', 'pointer', P);
+    behanceBtn.style.setProperty('backdrop-filter', 'blur(14px)', P);
+    behanceBtn.style.setProperty('-webkit-backdrop-filter', 'blur(14px)', P);
+    behanceBtn.style.setProperty('text-decoration', 'none', P);
+    behanceBtn.style.setProperty('flex-shrink', '0', P);
+    behanceBtn.style.setProperty('opacity', '0', P);
+    behanceBtn.style.setProperty('transform', 'scale(0.7)', P);
+    behanceBtn.style.setProperty('pointer-events', 'none', P);
+    behanceBtn.style.setProperty('transition', 'opacity 0.3s cubic-bezier(0.34,1.56,0.64,1), transform 0.3s cubic-bezier(0.34,1.56,0.64,1), background 0.2s, border-color 0.2s', P);
+
+    behanceBtn.addEventListener('mouseenter', function() {
+      behanceBtn.style.setProperty('background', 'rgba(255,255,255,0.1)', P);
+      behanceBtn.style.setProperty('border-color', 'rgba(255,255,255,0.22)', P);
+    });
+    behanceBtn.addEventListener('mouseleave', function() {
+      behanceBtn.style.setProperty('background', 'rgba(255,255,255,0.05)', P);
+      behanceBtn.style.setProperty('border-color', 'rgba(255,255,255,0.12)', P);
+    });
+
+    /* Clip container: collapses to 0 width when hidden, expands when shown.
+       This keeps the Show More button perfectly centred at all times. */
+    var behanceClip = document.createElement('div');
+    behanceClip.style.setProperty('overflow', 'hidden', P);
+    behanceClip.style.setProperty('max-width', '0px', P);
+    behanceClip.style.setProperty('transition', 'max-width 0.35s cubic-bezier(0.34,1.56,0.64,1)', P);
+    /* Give the behanceBtn a left margin so there's a gap once the clip opens */
+    behanceBtn.style.setProperty('margin-left', '10px', P);
+    behanceClip.appendChild(behanceBtn);
+
+    /* Wrapper row to hold both buttons side-by-side */
+    var btnRow = document.createElement('div');
+    btnRow.style.setProperty('display', 'flex', P);
+    btnRow.style.setProperty('align-items', 'center', P);
+    btnRow.style.setProperty('justify-content', 'center', P);
+    btnRow.style.setProperty('margin', '2rem auto 0', P);
+    /* Move margin from btn to the row */
+    btn.style.setProperty('margin', '0', P);
+    btnRow.appendChild(btn);
+    btnRow.appendChild(behanceClip);
+
     var expanded = false;
     btn.addEventListener('click', function() {
       expanded = !expanded;
@@ -443,18 +614,28 @@
           if (i >= SHOW_MORE_LIMIT) item.style.display = '';
         });
         btn.textContent = 'Show less';
+        /* Animate Behance button in */
+        behanceClip.style.setProperty('max-width', '60px', P);
+        behanceBtn.style.setProperty('opacity', '1', P);
+        behanceBtn.style.setProperty('transform', 'scale(1)', P);
+        behanceBtn.style.setProperty('pointer-events', 'auto', P);
       } else {
         /* Hide again */
         items.forEach(function(item, i) {
           if (i >= SHOW_MORE_LIMIT) item.style.display = 'none';
         });
         btn.textContent = 'Show more';
+        /* Animate Behance button out */
+        behanceClip.style.setProperty('max-width', '0px', P);
+        behanceBtn.style.setProperty('opacity', '0', P);
+        behanceBtn.style.setProperty('transform', 'scale(0.7)', P);
+        behanceBtn.style.setProperty('pointer-events', 'none', P);
         /* Scroll back to the top of the grid so it's in view */
         thumbGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     });
 
-    thumbGrid.insertAdjacentElement('afterend', btn);
+    thumbGrid.insertAdjacentElement('afterend', btnRow);
     return true;
   }
 
@@ -500,6 +681,38 @@
     parent.insertBefore(statsSection, trustedSection.nextSibling);
 
     sectionsReordered = true;
+    return true;
+  }
+
+  /* ── Patch display headings: same font treatment as stats numbers ── */
+  var headingsFontPatched = false;
+  function patchDisplayHeadings() {
+    if (headingsFontPatched) return true;
+
+    var P = 'important';
+    var targets = document.querySelectorAll(
+      'h1, h2, h3, ' +
+      '[class*="text-4xl"],[class*="text-5xl"],[class*="text-6xl"],' +
+      '[class*="text-7xl"],[class*="text-8xl"],[class*="text-9xl"]'
+    );
+    if (!targets.length) return false;
+
+    targets.forEach(function(el) {
+      el.style.setProperty('font-family', "'Clash Display','OpenSans',sans-serif", P);
+      el.style.setProperty('font-weight', '700', P);
+      el.style.setProperty('letter-spacing', '-0.035em', P);
+    });
+
+    /* Preserve italic style on italic child spans */
+    document.querySelectorAll(
+      'h1 [class*="italic"],h2 [class*="italic"],h3 [class*="italic"],' +
+      '[class*="text-5xl"] [class*="italic"],[class*="text-6xl"] [class*="italic"],' +
+      '[class*="text-7xl"] [class*="italic"]'
+    ).forEach(function(el) {
+      el.style.setProperty('font-style', 'italic', P);
+    });
+
+    headingsFontPatched = true;
     return true;
   }
 
@@ -552,14 +765,19 @@
     return true;
   }
 
-  /* Inject stylesheet to strip nav pill outline — survives React re-renders */
+  /* Inject stylesheet — nav pill + gallery gradient overlays */
   (function () {
     if (document.getElementById('feum-nav-pill-reset')) return;
     var s = document.createElement('style');
     s.id = 'feum-nav-pill-reset';
     s.textContent =
-      'a.feum-nav-link { filter: none !important; text-shadow: none !important; }' +
-      'nav .flex.items-center { background: rgba(255,255,255,0.06) !important; backdrop-filter: blur(18px) saturate(180%) !important; -webkit-backdrop-filter: blur(18px) saturate(180%) !important; border: none !important; border-radius: 999px !important; padding: 5px !important; box-shadow: none !important; outline: none !important; }';
+      /* Nav pill */
+      'a.feum-nav-link { filter: none !important; text-shadow: none !important; font-family: \'Clash Display\',\'OpenSans\',sans-serif !important; font-weight: 600 !important; border-radius: 999px !important; }' +
+      'nav .flex.items-center { background: rgba(255,255,255,0.06) !important; backdrop-filter: blur(18px) saturate(180%) !important; -webkit-backdrop-filter: blur(18px) saturate(180%) !important; border: none !important; border-radius: 999px !important; padding: 5px !important; box-shadow: none !important; outline: none !important; }' +
+      /* Remove bottom-to-top gradient on main gallery thumbnails only.
+         Uses the 45% opacity variant class which is specific to the gallery —
+         the "Beyond" section cards use from-black/75 and are left untouched. */
+      '[class*="from-black/45"][class*="bg-gradient-to-t"] { display: none !important; }';
     document.head.appendChild(s);
   })();
 
@@ -575,6 +793,7 @@
     fixMobileFooterLinks();
     frostedGlassCTA();
     renameCTA();
+    renameNavContact();
     patchHeroHeadline();
     patchTrustedSection();
     hideAvailableBadge();
@@ -583,12 +802,16 @@
     reorderSections();
     if (!showMoreApplied) showMoreApplied = applyShowMore();
     if (!statsFontPatched) statsFontPatched = patchStatsFonts();
+    if (!headingsFontPatched) headingsFontPatched = patchDisplayHeadings();
+    if (!socialInjected) socialInjected = injectNewSocialLinks();
+    patchCopyrightFont();
     var needsRetry = !document.querySelector('.toolkit-glow') ||
                      (window.innerWidth <= 767 && !document.querySelector('[data-mobile-footer-fixed]')) ||
                      !showMoreApplied ||
                      !sectionsReordered ||
                      !footerLogoPatched ||
-                     !statsFontPatched;
+                     !statsFontPatched ||
+                     !headingsFontPatched;
     if (needsRetry && ++tries < 60) {
       setTimeout(runPatches, 200);
     } else {
