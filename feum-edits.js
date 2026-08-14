@@ -62,6 +62,27 @@
       url:  'https://youtube.com/@h0nritv',
       img:  './assets/h0nritv.jpg',
       glow: 'rgba(147, 112, 219, 0.55)'
+    },
+    {
+      name: 'Beeps',
+      subs: '56.3K Subscribers',
+      url:  'https://youtube.com/@Beepstv',
+      img:  'https://yt3.googleusercontent.com/ZZUiQA7YIvl2ziJkDtJSly_fPmty32ZMI6bmEkFSdgB5XAiOx3_iGMMNeAUqbVMtxJZNVzyA=s200-c-k-c0x00ffffff-no-rj',
+      glow: 'rgba(139, 92, 246, 0.55)'
+    },
+    {
+      name: 'Kremiii',
+      subs: '1.02K Subscribers',
+      url:  'https://youtube.com/@KremiiiYT',
+      img:  'https://yt3.googleusercontent.com/DSaQIG742mPCGg6MNkXlxx2IobJpYpC-xDn_qtghS-seOEM6KwRlzBCTaPzdXuC7ap8YJBhg=s200-c-k-c0x00ffffff-no-rj',
+      glow: 'rgba(236, 72, 153, 0.55)'
+    },
+    {
+      name: 'Unliving',
+      subs: '432 Subscribers',
+      url:  'https://youtube.com/@Unliving',
+      img:  'https://yt3.googleusercontent.com/OzSNhPDusgmpyjofuGWrz5Luna8fawDWI0XUNlWF8-71ODpz2WdnTxPuuejNtJ5qBQF9uSYn=s200-c-k-c0x00ffffff-no-rj',
+      glow: 'rgba(99, 102, 241, 0.55)'
     }
     /* Add more creators here:
     {
@@ -270,6 +291,159 @@
     });
   }
 
+  /* Patch Beyond thumbnails section: single Video Editings card linking to video gallery + blurred cover backdrop behind the card */
+  function patchBeyondSection() {
+    var beyondHeadings = document.querySelectorAll('h2');
+    beyondHeadings.forEach(function(h2) {
+      if ((h2.textContent || '').includes('Beyond')) {
+        var section = h2.closest('section');
+        if (!section) return;
+
+        /* Ensure section has no hard border lines or solid background boxes */
+        section.style.setProperty('border-top', 'none', 'important');
+        section.style.setProperty('border-bottom', 'none', 'important');
+        section.style.setProperty('border', 'none', 'important');
+        section.style.setProperty('background-color', 'transparent', 'important');
+        section.style.setProperty('background', 'transparent', 'important');
+
+        /* Style and center Beyond thumbnails heading to be solid 100% white, moved up */
+        h2.style.setProperty('text-align', 'center', 'important');
+        h2.style.setProperty('color', '#ffffff', 'important');
+        h2.style.setProperty('opacity', '1', 'important');
+        h2.style.setProperty('width', '100%', 'important');
+        h2.style.setProperty('font-weight', '700', 'important');
+        h2.style.setProperty('text-shadow', '0 2px 14px rgba(0,0,0,0.9)', 'important');
+        var h2Spans = h2.querySelectorAll('span');
+        h2Spans.forEach(function(sp) {
+          sp.style.setProperty('color', '#ffffff', 'important');
+          sp.style.setProperty('opacity', '1', 'important');
+          sp.style.setProperty('font-style', 'italic', 'important');
+          sp.style.setProperty('text-shadow', '0 2px 14px rgba(0,0,0,0.9)', 'important');
+        });
+        if (h2.parentElement) {
+          h2.parentElement.style.setProperty('display', 'flex', 'important');
+          h2.parentElement.style.setProperty('justify-content', 'center', 'important');
+          h2.parentElement.style.setProperty('align-items', 'center', 'important');
+          h2.parentElement.style.setProperty('text-align', 'center', 'important');
+          h2.parentElement.style.setProperty('width', '100%', 'important');
+          h2.parentElement.style.setProperty('margin-bottom', '3.5rem', 'important');
+          h2.parentElement.style.setProperty('transform', 'translateY(-12px)', 'important');
+          h2.parentElement.style.setProperty('position', 'relative', 'important');
+          h2.parentElement.style.setProperty('z-index', '20', 'important');
+        }
+
+        /* Remove the description text under Beyond thumbnails */
+        var descP = section.querySelector('p');
+        if (descP && (descP.textContent || '').toLowerCase().includes('long-form')) {
+          descP.remove();
+        }
+
+        /* Remove any old section-level backdrop if present */
+        var oldSecBg = section.querySelector('#beyond-ambient-backdrop');
+        if (oldSecBg) {
+          oldSecBg.remove();
+        }
+
+        var cards = section.querySelectorAll('a.group, a[class*="group"]');
+        if (cards.length > 1) {
+          cards.forEach(function(card) {
+            var txt = (card.textContent || '').toLowerCase();
+            if (txt.includes('editing') && !txt.includes('animation') && !txt.includes('video editing')) {
+              card.remove();
+            } else if (txt.includes('motion')) {
+              card.remove();
+            }
+          });
+        }
+        var remainingCards = section.querySelectorAll('a.group, a[class*="group"]');
+        remainingCards.forEach(function(card) {
+          card.href = './video-gallery.html';
+          card.removeAttribute('target');
+          card.removeAttribute('rel');
+          card.style.setProperty('width', '100%', 'important');
+          card.style.setProperty('max-width', '22rem', 'important');
+          card.style.setProperty('position', 'relative', 'important');
+          card.style.setProperty('z-index', '10', 'important');
+          card.style.setProperty('outline', 'none', 'important');
+          card.style.setProperty('border', 'none', 'important');
+          card.style.setProperty('margin-left', 'auto', 'important');
+          card.style.setProperty('margin-right', 'auto', 'important');
+
+          /* Remove any glowing backdrop image behind the card itself that causes cyan border */
+          var glowWrap = card.querySelector('div[class*="-inset-4"]');
+          if (glowWrap) {
+            glowWrap.remove();
+          }
+
+          var beyondSection = card.closest('section');
+          if (beyondSection) {
+            beyondSection.style.setProperty('overflow', 'visible', 'important');
+            beyondSection.style.setProperty('position', 'relative', 'important');
+          }
+
+          var titleEl = card.querySelector('h3');
+          if (titleEl) {
+            titleEl.textContent = 'Video Editings';
+            titleEl.style.setProperty('font-family', "'Satoshi', 'Inter', system-ui, -apple-system, sans-serif", 'important');
+            titleEl.style.setProperty('font-weight', '400', 'important');
+            titleEl.style.setProperty('letter-spacing', '0.01em', 'important');
+            titleEl.style.setProperty('font-size', '1.35rem', 'important');
+          }
+          var parentGrid = card.parentElement;
+          if (parentGrid) {
+            parentGrid.style.setProperty('display', 'flex', 'important');
+            parentGrid.style.setProperty('justify-content', 'center', 'important');
+            parentGrid.style.setProperty('max-width', '24rem', 'important');
+            parentGrid.style.setProperty('margin-left', 'auto', 'important');
+            parentGrid.style.setProperty('margin-right', 'auto', 'important');
+            parentGrid.style.setProperty('width', '100%', 'important');
+            parentGrid.style.setProperty('position', 'relative', 'important');
+
+            /* Check/inject ambient blurred background edge-to-edge behind the Video Editings card */
+            var bgWrap = parentGrid.querySelector('#card-ambient-backdrop');
+            if (!bgWrap) {
+              bgWrap = document.createElement('div');
+              bgWrap.id = 'card-ambient-backdrop';
+              bgWrap.setAttribute('aria-hidden', 'true');
+              parentGrid.insertBefore(bgWrap, parentGrid.firstChild);
+            }
+            bgWrap.className = 'beyond-ambient-backdrop';
+            bgWrap.style.cssText = 'position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:100vw;max-width:100vw;height:240%;min-height:750px;z-index:0;overflow:hidden;pointer-events:none;';
+
+            var bgImg = bgWrap.querySelector('img');
+            if (!bgImg) {
+              bgImg = document.createElement('img');
+              bgImg.src = './assets/animation-cover-CzzcJCy2.png';
+              bgImg.alt = '';
+              bgWrap.appendChild(bgImg);
+            }
+            bgImg.style.cssText = 'width:100%;height:100%;object-fit:cover;transform:scale(1.05);filter:blur(6px) brightness(0.85) saturate(1.2);opacity:0.95;pointer-events:none;' +
+              '-webkit-mask-image:linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.05) 10%, rgba(0,0,0,0.6) 24%, rgba(0,0,0,1) 38%, rgba(0,0,0,1) 65%, rgba(0,0,0,0.6) 78%, rgba(0,0,0,0.05) 92%, transparent 100%);' +
+              'mask-image:linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.05) 10%, rgba(0,0,0,0.6) 24%, rgba(0,0,0,1) 38%, rgba(0,0,0,1) 65%, rgba(0,0,0,0.6) 78%, rgba(0,0,0,0.05) 92%, transparent 100%);';
+
+            var fadeOverlay = bgWrap.querySelector('div');
+            if (!fadeOverlay) {
+              fadeOverlay = document.createElement('div');
+              bgWrap.appendChild(fadeOverlay);
+            }
+            fadeOverlay.style.cssText = 'position:absolute;inset:0;' +
+              'background:linear-gradient(to bottom, #000000 0%, rgba(0,0,0,0.92) 12%, rgba(0,0,0,0.5) 25%, rgba(0,0,0,0.08) 38%, transparent 46%, transparent 60%, rgba(0,0,0,0.08) 70%, rgba(0,0,0,0.5) 80%, rgba(0,0,0,0.92) 92%, #000000 100%);' +
+              'pointer-events:none;';
+
+            /* Make card thumbnail crisp and clear with no outlines */
+            var cardImg = card.querySelector('img:not([alt=""])');
+            if (cardImg) {
+              cardImg.classList.remove('cover-blur');
+              cardImg.style.setProperty('filter', 'none', 'important');
+              cardImg.style.setProperty('outline', 'none', 'important');
+              cardImg.style.setProperty('border', 'none', 'important');
+            }
+          }
+        });
+      }
+    });
+  }
+
   /* Hide "Available for new projects" badge */
   function hideAvailableBadge() {
     document.querySelectorAll('*').forEach(function(el) {
@@ -437,6 +611,32 @@
         a.textContent = 'Hire Me';
       }
     });
+  }
+
+  /* Ensure "Edits" nav link exists and links to ./video-gallery.html */
+  function injectEditsNavLink() {
+    var navContainer = document.querySelector('nav .flex.items-center, .flex:has(> a.feum-nav-link)');
+    if (!navContainer) return;
+    var hasEdits = false;
+    navContainer.querySelectorAll('a.feum-nav-link').forEach(function(a) {
+      var text = (a.textContent || '').trim().toLowerCase();
+      var href = (a.getAttribute('href') || '').toLowerCase();
+      if (text === 'edits' || href.includes('video-gallery')) {
+        hasEdits = true;
+      }
+    });
+    if (!hasEdits) {
+      var a = document.createElement('a');
+      a.href = './video-gallery.html';
+      a.className = 'text-base md:text-lg font-medium leading-none text-white/75 hover:text-white transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] feum-nav-link';
+      a.textContent = 'Edits';
+      var first = navContainer.querySelector('a.feum-nav-link');
+      if (first) {
+        navContainer.insertBefore(a, first);
+      } else {
+        navContainer.appendChild(a);
+      }
+    }
   }
 
   /* Rename CTA button text */
@@ -772,12 +972,13 @@
     s.id = 'feum-nav-pill-reset';
     s.textContent =
       /* Nav pill */
-      'a.feum-nav-link { filter: none !important; text-shadow: none !important; font-family: \'Clash Display\',\'OpenSans\',sans-serif !important; font-weight: 600 !important; border-radius: 999px !important; }' +
+      'a.feum-nav-link { filter: none !important; text-shadow: none !important; font-family: \'OpenSans\',\'Poppins\',\'Clash Display\',sans-serif !important; font-weight: 800 !important; border-radius: 999px !important; letter-spacing: -0.01em !important; }' +
       'nav .flex.items-center { background: rgba(255,255,255,0.06) !important; backdrop-filter: blur(18px) saturate(180%) !important; -webkit-backdrop-filter: blur(18px) saturate(180%) !important; border: none !important; border-radius: 999px !important; padding: 5px !important; box-shadow: none !important; outline: none !important; }' +
       /* Remove bottom-to-top gradient on main gallery thumbnails only.
          Uses the 45% opacity variant class which is specific to the gallery —
          the "Beyond" section cards use from-black/75 and are left untouched. */
-      '[class*="from-black/45"][class*="bg-gradient-to-t"] { display: none !important; }';
+      '[class*="from-black/45"][class*="bg-gradient-to-t"] { display: none !important; }' +
+      '.feum-hero-bg img, .feum-hero-bg > img { display: none !important; opacity: 0 !important; visibility: hidden !important; }';
     document.head.appendChild(s);
   })();
 
@@ -794,8 +995,10 @@
     frostedGlassCTA();
     renameCTA();
     renameNavContact();
+    injectEditsNavLink();
     patchHeroHeadline();
     patchTrustedSection();
+    patchBeyondSection();
     hideAvailableBadge();
     hideSelectedWorkHeader();
     removeViewMoreButton();

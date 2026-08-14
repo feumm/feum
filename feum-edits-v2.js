@@ -47,6 +47,41 @@
       img:  'https://yt3.googleusercontent.com/pOdPN9SZ13Dy6pumjp5jl_vBA4-xHP7Vh55kqG1On8zvCg1Bb2PUAUmk81rIFXxR1Qus8N2I0A=s200-c-k-c0x00ffffff-no-rj',
       glow: 'rgba(56, 189, 248, 0.55)'
     },
+    {
+      name: 'Icynutella2',
+      subs: '8.77K Subscribers',
+      url:  'https://youtube.com/@icynutella2',
+      img:  'https://yt3.googleusercontent.com/bzcNeMUIU7iD_Bb67Q5YYNlCnW9q8TvpKeLeBk14_i1_UaRly6Yqg-jA4RZ_th_klG0jmkZycUQ=s200-c-k-c0x00ffffff-no-rj',
+      glow: 'rgba(34, 211, 238, 0.55)'
+    },
+    {
+      name: 'H0nri',
+      subs: '2.75K Subscribers',
+      url:  'https://youtube.com/@h0nritv',
+      img:  './assets/h0nritv.jpg',
+      glow: 'rgba(147, 112, 219, 0.55)'
+    },
+    {
+      name: 'Beeps',
+      subs: '56.3K Subscribers',
+      url:  'https://youtube.com/@Beepstv',
+      img:  'https://yt3.googleusercontent.com/ZZUiQA7YIvl2ziJkDtJSly_fPmty32ZMI6bmEkFSdgB5XAiOx3_iGMMNeAUqbVMtxJZNVzyA=s200-c-k-c0x00ffffff-no-rj',
+      glow: 'rgba(139, 92, 246, 0.55)'
+    },
+    {
+      name: 'Kremiii',
+      subs: '1.02K Subscribers',
+      url:  'https://youtube.com/@KremiiiYT',
+      img:  'https://yt3.googleusercontent.com/DSaQIG742mPCGg6MNkXlxx2IobJpYpC-xDn_qtghS-seOEM6KwRlzBCTaPzdXuC7ap8YJBhg=s200-c-k-c0x00ffffff-no-rj',
+      glow: 'rgba(236, 72, 153, 0.55)'
+    },
+    {
+      name: 'Unliving',
+      subs: '432 Subscribers',
+      url:  'https://youtube.com/@Unliving',
+      img:  'https://yt3.googleusercontent.com/OzSNhPDusgmpyjofuGWrz5Luna8fawDWI0XUNlWF8-71ODpz2WdnTxPuuejNtJ5qBQF9uSYn=s200-c-k-c0x00ffffff-no-rj',
+      glow: 'rgba(99, 102, 241, 0.55)'
+    },
     /* Add more creators here:
     {
       name: 'CreatorName',
