@@ -28210,6 +28210,15 @@ Error generating stack: ` +
           document.currentScript.src) ||
           document.baseURI,
       ).href,
+    pwM =
+      "" +
+      new URL(
+        "thumb-13-prison-war.jpg",
+        (document.currentScript &&
+          document.currentScript.tagName.toUpperCase() === "SCRIPT" &&
+          document.currentScript.src) ||
+          document.baseURI,
+      ).href,
     SM =
       "" +
       new URL(
@@ -28325,7 +28334,7 @@ Error generating stack: ` +
         category: "Thumbnail",
         year: "",
         image: mM,
-        span: "md:col-span-2",
+        span: "md:col-span-1",
       },
       {
         title: "",
@@ -28369,28 +28378,21 @@ Error generating stack: ` +
         image: xM,
         span: "md:col-span-1",
       },
+      {
+        title: "Prison War",
+        category: "Thumbnail",
+        year: "",
+        image: pwM,
+        span: "md:col-span-1",
+      },
     ],
     CM = [
       {
         title: "Video Editing",
-        category: "Editing",
-        image: TM,
-        description: "Cuts that hold attention from frame one.",
-        count: "9 edits",
-      },
-      {
-        title: "Minecraft Animation",
-        category: "Animation",
+        category: "Video Editings",
         image: EM,
         description: "Cinematic worlds, scene-built and rendered.",
-        count: "2 animation",
-      },
-      {
-        title: "Motion Graphics",
-        category: "Motion",
-        image: AM,
-        description: "Type, transitions, and brand-grade motion.",
-        count: "1 motion",
+        count: "Watch gallery",
       },
     ],
     MM = [
@@ -28592,6 +28594,12 @@ Error generating stack: ` +
                 className: "flex items-center gap-6 md:gap-9",
                 children: [
                   T.jsx("a", {
+                    href: "./video-gallery.html",
+                    className:
+                      "text-base md:text-lg font-medium leading-none text-white/75 hover:text-white transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] feum-nav-link",
+                    children: "Edits",
+                  }),
+                  T.jsx("a", {
                     href: "https://feumm.github.io/feumvis",
                     target: "_blank",
                     rel: "noopener noreferrer",
@@ -28622,18 +28630,7 @@ Error generating stack: ` +
                 animate: { opacity: 1, scale: 1 },
                 transition: { duration: 2.4, ease: [0.22, 1, 0.36, 1] },
                 children: [
-                  T.jsx(_t.img, {
-                    src: SM,
-                    alt: "",
-                    className:
-                      "absolute inset-0 w-full h-full object-cover opacity-[0.12] blur-[14px] scale-110",
-                    animate: { scale: [1.1, 1.16, 1.1] },
-                    transition: {
-                      duration: 18,
-                      ease: "easeInOut",
-                      repeat: 1 / 0,
-                    },
-                  }),
+                  null,
                   T.jsx("span", {
                     className: "hero-orb hero-orb-a",
                     style: {
@@ -28896,110 +28893,106 @@ Error generating stack: ` +
           }),
           T.jsxs("section", {
             className:
-              "py-20 sm:py-28 md:py-32 px-6 md:px-12 lg:px-24 bg-muted/20 border-y border-border",
+              "relative overflow-visible pt-12 pb-20 sm:pt-16 sm:pb-28 md:pt-20 md:pb-32 px-6 md:px-12 lg:px-24 bg-transparent border-0",
             children: [
+              T.jsx("div", {
+                className:
+                  "relative z-20 mb-12 sm:mb-16 -translate-y-2 sm:-translate-y-4 flex justify-center items-center text-center w-full",
+                children: T.jsxs("h2", {
+                  className:
+                    "text-4xl md:text-5xl font-serif font-bold tracking-tight leading-[0.95] text-white text-center !opacity-100 drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]",
+                  style: { color: "#ffffff", opacity: 1 },
+                  children: [
+                    "Beyond ",
+                    T.jsx("span", {
+                      className: "italic font-serif text-white !opacity-100",
+                      style: { color: "#ffffff", opacity: 1 },
+                      children: "thumbnails.",
+                    }),
+                  ],
+                }),
+              }),
               T.jsxs("div", {
                 className:
-                  "mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6",
+                  "relative z-10 flex justify-center max-w-lg mx-auto w-full py-2",
                 children: [
-                  T.jsxs(_t.h2, {
-                    initial: { opacity: 0, y: 20 },
-                    whileInView: { opacity: 1, y: 0 },
-                    viewport: { once: !0 },
+                  T.jsxs("div", {
+                    "aria-hidden": "true",
                     className:
-                      "text-4xl md:text-5xl font-serif font-normal tracking-tight leading-[0.95]",
+                      "pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-screen max-w-none h-[240%] min-h-[750px] z-0 overflow-hidden",
                     children: [
-                      "Beyond ",
-                      T.jsx("span", {
-                        className: "italic text-muted-foreground",
-                        children: "thumbnails.",
+                      T.jsx("img", {
+                        src: EM,
+                        alt: "",
+                        className:
+                          "w-full h-full object-cover scale-105 blur-[6px] opacity-95 brightness-[0.85] saturate-120",
+                        style: {
+                          WebkitMaskImage:
+                            "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.05) 10%, rgba(0,0,0,0.6) 24%, rgba(0,0,0,1) 38%, rgba(0,0,0,1) 65%, rgba(0,0,0,0.6) 78%, rgba(0,0,0,0.05) 92%, transparent 100%)",
+                          maskImage:
+                            "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.05) 10%, rgba(0,0,0,0.6) 24%, rgba(0,0,0,1) 38%, rgba(0,0,0,1) 65%, rgba(0,0,0,0.6) 78%, rgba(0,0,0,0.05) 92%, transparent 100%)",
+                        },
+                      }),
+                      T.jsx("div", {
+                        className:
+                          "absolute inset-0 pointer-events-none",
+                        style: {
+                          background:
+                            "linear-gradient(to bottom, #000000 0%, rgba(0,0,0,0.92) 12%, rgba(0,0,0,0.5) 25%, rgba(0,0,0,0.08) 38%, transparent 46%, transparent 60%, rgba(0,0,0,0.08) 70%, rgba(0,0,0,0.5) 80%, rgba(0,0,0,0.92) 92%, #000000 100%)",
+                        },
                       }),
                     ],
                   }),
-                  T.jsx(_t.p, {
-                    initial: { opacity: 0 },
-                    whileInView: { opacity: 1 },
-                    viewport: { once: !0 },
-                    className:
-                      "text-muted-foreground max-w-sm text-sm md:text-base",
-                    children:
-                      "Long-form, motion, and everything that moves frame to frame.",
-                  }),
-                ],
-              }),
-              T.jsx("div", {
-                className:
-                  "grid grid-cols-3 gap-6 sm:gap-10",
-                children: CM.map((s, l) =>
-                  T.jsxs(
-                    _t.a,
-                    {
-                      href: "https://behance.net/feum",
-                      target: "_blank",
-                      rel: "noopener noreferrer",
-                      initial: { opacity: 0, y: 40 },
-                      whileInView: { opacity: 1, y: 0 },
-                      viewport: { once: !0 },
-                      transition: { duration: 0.6, delay: l * 0.1 },
-                      whileHover: { scale: 1.015, y: -4 },
-                      className: "group cursor-pointer block",
+                  ...CM.map((s, l) =>
+                    T.jsxs(
+                      _t.a,
+                      {
+                        href: "./video-gallery.html",
+                        initial: { opacity: 0, y: 40 },
+                        whileInView: { opacity: 1, y: 0 },
+                        viewport: { once: !0 },
+                        transition: { duration: 0.6, delay: l * 0.1 },
+                        whileHover: { scale: 1.015, y: -4 },
+                        className: "group cursor-pointer block w-full max-w-xs md:max-w-[22rem] mx-auto relative z-10",
                       children: [
-                        T.jsxs("div", {
+                        T.jsx("div", {
                           className: "relative mb-5",
-                          children: [
-                            T.jsx("div", {
-                              "aria-hidden": "true",
-                              className:
-                                "pointer-events-none absolute -inset-4",
-                              children: T.jsx("img", {
+                          children: T.jsxs("div", {
+                            className:
+                              "relative aspect-[4/3] overflow-hidden bg-background rounded-2xl md:rounded-3xl border-0 ring-0 outline-none shadow-[0_20px_60px_-20px_rgba(0,0,0,0.6)] transition-shadow duration-500 group-hover:shadow-[0_40px_100px_-20px_rgba(0,0,0,0.85)]",
+                            children: [
+                              T.jsx("img", {
                                 src: s.image,
-                                alt: "",
+                                alt: "gallery piece",
+                                loading: "lazy",
                                 className:
-                                  "w-full h-full object-cover blur-3xl opacity-50 scale-95 rounded-[2rem] saturate-150 transition-opacity duration-700 group-hover:opacity-80",
+                                  "object-cover w-full h-full border-0 outline-none ring-0 transition-transform duration-700 group-hover:scale-105",
                               }),
-                            }),
-                            T.jsxs("div", {
-                              className:
-                                "relative aspect-[4/3] overflow-hidden bg-background rounded-2xl md:rounded-3xl shadow-[0_20px_60px_-20px_rgba(0,0,0,0.6)] transition-shadow duration-500 group-hover:shadow-[0_40px_100px_-20px_rgba(0,0,0,0.85)]",
-                              children: [
-                                T.jsx("img", {
-                                  src: s.image,
-                                  alt: "gallery piece",
-                                  loading: "lazy",
+                              T.jsx("span", {
+                                "aria-hidden": "true",
+                                className:
+                                  "pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-[1500ms] ease-[cubic-bezier(0.22,1,0.36,1)]",
+                                style: {
+                                  background:
+                                    "linear-gradient(115deg, transparent 38%, rgba(255,255,255,0.10) 50%, transparent 62%)",
+                                },
+                              }),
+                              T.jsx("div", {
+                                className:
+                                  "pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/75 via-black/35 to-transparent",
+                              }),
+                              T.jsx("div", {
+                                className:
+                                  "absolute inset-x-0 bottom-0 p-5 md:p-6",
+                                children: T.jsx("h3", {
                                   className:
-                                    "cover-blur object-cover w-full h-full",
+                                    "font-sans text-xl md:text-2xl font-normal tracking-normal text-white leading-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] transition-transform duration-700 ease-out group-hover:-translate-y-0.5",
+                                  style: { fontFamily: "'Satoshi', 'Inter', system-ui, sans-serif", fontWeight: "400" },
+                                  children: s.category,
                                 }),
-                                T.jsx("span", {
-                                  "aria-hidden": "true",
-                                  className:
-                                    "pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-[1500ms] ease-[cubic-bezier(0.22,1,0.36,1)]",
-                                  style: {
-                                    background:
-                                      "linear-gradient(115deg, transparent 38%, rgba(255,255,255,0.10) 50%, transparent 62%)",
-                                  },
-                                }),
-                                T.jsx("div", {
-                                  className:
-                                    "pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/75 via-black/35 to-transparent",
-                                }),
-                                T.jsx("div", {
-                                  className:
-                                    "absolute inset-x-0 bottom-0 p-5 md:p-6",
-                                  children: T.jsxs("h3", {
-                                    className:
-                                      "font-sans text-2xl md:text-3xl font-bold tracking-[-0.02em] text-white leading-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] transition-transform duration-700 ease-out group-hover:-translate-y-0.5",
-                                    children: [
-                                      s.category,
-                                      T.jsx("span", {
-                                        className: "text-white/70",
-                                        children: "'s",
-                                      }),
-                                    ],
-                                  }),
-                                }),
-                              ],
-                            }),
-                          ],
+                              }),
+                            ],
+                          }),
                         }),
                         T.jsx("p", {
                           className:
@@ -29011,7 +29004,8 @@ Error generating stack: ` +
                     l,
                   ),
                 ),
-              }),
+              ],
+            }),
             ],
           }),
           T.jsxs("section", {
