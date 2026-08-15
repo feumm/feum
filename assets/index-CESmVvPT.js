@@ -27858,42 +27858,10 @@ Error generating stack: ` +
       ],
     });
   }
-  const eM =
-      "" +
-      new URL(
-        "wisp-BTkIpEJl.jpg",
-        (document.currentScript &&
-          document.currentScript.tagName.toUpperCase() === "SCRIPT" &&
-          document.currentScript.src) ||
-          document.baseURI,
-      ).href,
-    nM =
-      "" +
-      new URL(
-        "sharpness-ALt1l-_U.jpg",
-        (document.currentScript &&
-          document.currentScript.tagName.toUpperCase() === "SCRIPT" &&
-          document.currentScript.src) ||
-          document.baseURI,
-      ).href,
-    aM =
-      "" +
-      new URL(
-        "deadpoolzain-BFBIQ8_0.jpg",
-        (document.currentScript &&
-          document.currentScript.tagName.toUpperCase() === "SCRIPT" &&
-          document.currentScript.src) ||
-          document.baseURI,
-      ).href,
-    iM =
-      "" +
-      new URL(
-        "avoma-DA_fTJK2.jpg",
-        (document.currentScript &&
-          document.currentScript.tagName.toUpperCase() === "SCRIPT" &&
-          document.currentScript.src) ||
-          document.baseURI,
-      ).href,
+  const eM = "./assets/wisp-BTkIpEJl.jpg",
+    nM = "./assets/sharpness-ALt1l-_U.jpg",
+    aM = "./assets/deadpoolzain-BFBIQ8_0.jpg",
+    iM = "./assets/avoma-DA_fTJK2.jpg",
     xl = [
       {
         name: "Wisp",
@@ -28042,10 +28010,10 @@ Error generating stack: ` +
           }),
         }),
         T.jsx("div", {
-          className: "relative max-w-6xl mx-auto px-6 md:px-12 lg:px-24",
+          className: "relative max-w-5xl mx-auto px-4 sm:px-6 md:px-8 md:translate-x-3",
           ref: e,
           children: T.jsx("div", {
-            className: "grid grid-cols-2 md:grid-cols-4 gap-y-14 md:gap-y-0",
+            className: "grid grid-cols-4 gap-x-3 sm:gap-x-5 md:gap-x-6 gap-y-0",
             children: oM.map((r, s) =>
               T.jsxs(
                 _t.div,
@@ -28058,11 +28026,11 @@ Error generating stack: ` +
                     ease: [0.22, 1, 0.36, 1],
                   },
                   className:
-                    "relative group flex flex-col items-center text-center md:items-start md:text-left md:px-8",
+                    "relative group flex flex-col items-center text-center px-1 sm:px-2 md:px-3",
                   children: [
                     T.jsx("p", {
                       className:
-                        "relative font-serif tracking-[-0.02em] text-5xl md:text-6xl lg:text-7xl leading-none mb-4 bg-clip-text text-transparent transition-[filter] duration-500 group-hover:[filter:drop-shadow(0_0_18px_rgba(255,255,255,0.18))]",
+                        "relative font-serif tracking-[-0.02em] text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-none mb-3 bg-clip-text text-transparent transition-[filter] duration-500 group-hover:[filter:drop-shadow(0_0_18px_rgba(255,255,255,0.18))]",
                       style: {
                         backgroundImage:
                           "linear-gradient(180deg, #ffffff 0%, #ededed 45%, #b9b9b9 100%)",
@@ -28085,11 +28053,11 @@ Error generating stack: ` +
                         ease: [0.22, 1, 0.36, 1],
                       },
                       className:
-                        "block h-px w-10 mb-3 origin-left bg-gradient-to-r from-white/60 to-transparent",
+                        "block h-px w-10 mx-auto mb-3 origin-center bg-gradient-to-r from-transparent via-white/60 to-transparent",
                     }),
                     T.jsx("p", {
                       className:
-                        "text-[10px] md:text-[11px] uppercase tracking-[0.32em] text-muted-foreground font-sans",
+                        "text-[10px] md:text-[11px] uppercase tracking-[0.24em] md:tracking-[0.28em] text-muted-foreground font-sans text-center",
                       children: r.label,
                     }),
                   ],
@@ -28102,168 +28070,24 @@ Error generating stack: ` +
       ],
     });
   }
-  const uM =
-      "" +
-      new URL(
-        "thumb-1-sdwI8S1u.png",
-        (document.currentScript &&
-          document.currentScript.tagName.toUpperCase() === "SCRIPT" &&
-          document.currentScript.src) ||
-          document.baseURI,
-      ).href,
-    dM =
-      "" +
-      new URL(
-        "thumb-2-CyEzpHS5.png",
-        (document.currentScript &&
-          document.currentScript.tagName.toUpperCase() === "SCRIPT" &&
-          document.currentScript.src) ||
-          document.baseURI,
-      ).href,
-    fM =
-      "" +
-      new URL(
-        "thumb-3-C_5YDudQ.png",
-        (document.currentScript &&
-          document.currentScript.tagName.toUpperCase() === "SCRIPT" &&
-          document.currentScript.src) ||
-          document.baseURI,
-      ).href,
-    hM =
-      "" +
-      new URL(
-        "thumb-4-BmQC4asB.png",
-        (document.currentScript &&
-          document.currentScript.tagName.toUpperCase() === "SCRIPT" &&
-          document.currentScript.src) ||
-          document.baseURI,
-      ).href,
-    pM =
-      "" +
-      new URL(
-        "thumb-5-DVAM6kbF.png",
-        (document.currentScript &&
-          document.currentScript.tagName.toUpperCase() === "SCRIPT" &&
-          document.currentScript.src) ||
-          document.baseURI,
-      ).href,
-    mM =
-      "" +
-      new URL(
-        "thumb-6-DCC6NcHF.png",
-        (document.currentScript &&
-          document.currentScript.tagName.toUpperCase() === "SCRIPT" &&
-          document.currentScript.src) ||
-          document.baseURI,
-      ).href,
-    gM =
-      "" +
-      new URL(
-        "thumb-7-jP-HxhVf.png",
-        (document.currentScript &&
-          document.currentScript.tagName.toUpperCase() === "SCRIPT" &&
-          document.currentScript.src) ||
-          document.baseURI,
-      ).href,
-    vM =
-      "" +
-      new URL(
-        "thumb-8-troLJI_K.png",
-        (document.currentScript &&
-          document.currentScript.tagName.toUpperCase() === "SCRIPT" &&
-          document.currentScript.src) ||
-          document.baseURI,
-      ).href,
-    yM =
-      "" +
-      new URL(
-        "thumb-9-BvoT79p5.png",
-        (document.currentScript &&
-          document.currentScript.tagName.toUpperCase() === "SCRIPT" &&
-          document.currentScript.src) ||
-          document.baseURI,
-      ).href,
-    wM =
-      "" +
-      new URL(
-        "thumb-10-Df1gS4ZZ.png",
-        (document.currentScript &&
-          document.currentScript.tagName.toUpperCase() === "SCRIPT" &&
-          document.currentScript.src) ||
-          document.baseURI,
-      ).href,
-    bM =
-      "" +
-      new URL(
-        "thumb-11-DB7S105W.png",
-        (document.currentScript &&
-          document.currentScript.tagName.toUpperCase() === "SCRIPT" &&
-          document.currentScript.src) ||
-          document.baseURI,
-      ).href,
-    xM =
-      "" +
-      new URL(
-        "thumb-12-DyfEMGCk.png",
-        (document.currentScript &&
-          document.currentScript.tagName.toUpperCase() === "SCRIPT" &&
-          document.currentScript.src) ||
-          document.baseURI,
-      ).href,
-    pwM =
-      "" +
-      new URL(
-        "thumb-13-prison-war.jpg",
-        (document.currentScript &&
-          document.currentScript.tagName.toUpperCase() === "SCRIPT" &&
-          document.currentScript.src) ||
-          document.baseURI,
-      ).href,
-    SM =
-      "" +
-      new URL(
-        "20260428_171917_0_UTC_0_1777399937916-BNH46XcB.png",
-        (document.currentScript &&
-          document.currentScript.tagName.toUpperCase() === "SCRIPT" &&
-          document.currentScript.src) ||
-          document.baseURI,
-      ).href,
-    $i =
-      "" +
-      new URL(
-        "20260428_175913_0_UTC_0-Photoroom_1777401737096-DSin66vP.png",
-        (document.currentScript &&
-          document.currentScript.tagName.toUpperCase() === "SCRIPT" &&
-          document.currentScript.src) ||
-          document.baseURI,
-      ).href,
-    TM =
-      "" +
-      new URL(
-        "video-editing-CegdQhMm.jpg",
-        (document.currentScript &&
-          document.currentScript.tagName.toUpperCase() === "SCRIPT" &&
-          document.currentScript.src) ||
-          document.baseURI,
-      ).href,
-    EM =
-      "" +
-      new URL(
-        "animation-cover-CzzcJCy2.png",
-        (document.currentScript &&
-          document.currentScript.tagName.toUpperCase() === "SCRIPT" &&
-          document.currentScript.src) ||
-          document.baseURI,
-      ).href,
-    AM =
-      "" +
-      new URL(
-        "motion-cover-DFWRJZ7T.png",
-        (document.currentScript &&
-          document.currentScript.tagName.toUpperCase() === "SCRIPT" &&
-          document.currentScript.src) ||
-          document.baseURI,
-      ).href;
+  const uM = "./assets/thumb-1-sdwI8S1u.png",
+    dM = "./assets/thumb-2-CyEzpHS5.png",
+    fM = "./assets/thumb-3-C_5YDudQ.png",
+    hM = "./assets/thumb-4-BmQC4asB.png",
+    pM = "./assets/thumb-5-DVAM6kbF.png",
+    mM = "./assets/thumb-6-DCC6NcHF.png",
+    gM = "./assets/thumb-7-jP-HxhVf.png",
+    vM = "./assets/thumb-8-troLJI_K.png",
+    yM = "./assets/thumb-9-BvoT79p5.png",
+    wM = "./assets/thumb-10-Df1gS4ZZ.png",
+    bM = "./assets/thumb-11-DB7S105W.png",
+    xM = "./assets/thumb-12-DyfEMGCk.png",
+    pwM = "./assets/thumb-13-prison-war.png",
+    SM = "./assets/20260428_171917_0_UTC_0_1777399937916-BNH46XcB.png",
+    $i = "./assets/falw-logo-new.png",
+    TM = "./assets/video-editing-CegdQhMm.jpg",
+    EM = "./assets/animation-cover-CzzcJCy2.png",
+    AM = "./assets/motion-cover-DFWRJZ7T.png";
   function kM({ letters: e, bg: n, fg: r, className: s }) {
     return T.jsxs("svg", {
       viewBox: "0 0 64 64",
@@ -28285,7 +28109,7 @@ Error generating stack: ` +
           textAnchor: "middle",
           fontFamily: "'DM Sans', sans-serif",
           fontSize: "26",
-          fontWeight: "700",
+          fontWeight: "900",
           fill: r,
           letterSpacing: "-0.5",
           children: e,
@@ -28379,7 +28203,7 @@ Error generating stack: ` +
         span: "md:col-span-1",
       },
       {
-        title: "Prison War",
+        title: "",
         category: "Thumbnail",
         year: "",
         image: pwM,
@@ -28428,7 +28252,7 @@ Error generating stack: ` +
     DM = [
       {
         label: "YouTube",
-        url: "https://youtube.com/@fzrum",
+        url: "https://youtube.com/@ogjfr",
         color: "#FF0033",
         icon: T.jsx("svg", {
           viewBox: "0 0 24 24",
@@ -28442,7 +28266,7 @@ Error generating stack: ` +
       },
       {
         label: "Instagram",
-        url: "https://www.instagram.com/fzerium",
+        url: "https://www.instagram.com/ogsfre",
         color: "#E1306C",
         bg: "linear-gradient(45deg,#feda75 0%,#fa7e1e 25%,#d62976 50%,#962fbf 75%,#4f5bd5 100%)",
         icon: T.jsxs("svg", {
@@ -28475,7 +28299,7 @@ Error generating stack: ` +
       },
       {
         label: "Behance",
-        url: "https://www.behance.net/feum",
+        url: "https://www.behance.net/fre",
         color: "#1769FF",
         icon: T.jsx("svg", {
           viewBox: "0 0 24 24",
@@ -28503,7 +28327,7 @@ Error generating stack: ` +
       },
       {
         label: "Pinterest",
-        url: "https://www.pinterest.com/fzerium",
+        url: "https://www.pinterest.com/ogfrl",
         color: "#E60023",
         icon: T.jsx("svg", {
           viewBox: "0 0 24 24",
@@ -28517,7 +28341,7 @@ Error generating stack: ` +
       },
       {
         label: "Gumroad",
-        url: "https://feum.gumroad.com/",
+        url: "https://ogfr.gumroad.com/",
         color: "#FF90E8",
         icon: T.jsx("svg", {
           viewBox: "0 0 24 24",
@@ -28527,6 +28351,43 @@ Error generating stack: ` +
             fill: "#000",
             d: "M12.6 11.5h4c-.3 3-2.6 4.6-5.2 4.6-3 0-5.4-2.3-5.4-5.5 0-3.3 2.4-5.7 5.7-5.7 2.3 0 4 1 5 2.7l-2.2 1.5c-.5-1-1.4-1.6-2.6-1.6-1.7 0-3 1.4-3 3.2 0 1.7 1.1 3 2.8 3 1.3 0 2.2-.6 2.5-1.6h-1.6v-2.6h7v8h-2.6V12c-.4 0-.7 0-.4-.5z",
           }),
+        }),
+      },
+      {
+        label: "Twitter",
+        url: "https://twitter.com/designerfrl",
+        color: "#000000",
+        icon: T.jsx("svg", {
+          viewBox: "0 0 24 24",
+          className: "w-3.5 h-3.5",
+          "aria-hidden": "true",
+          children: T.jsx("path", {
+            fill: "#fff",
+            d: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z",
+          }),
+        }),
+      },
+      {
+        label: "Link.me",
+        url: "https://link.me/ofre",
+        color: "#6366F1",
+        icon: T.jsxs("svg", {
+          viewBox: "0 0 24 24",
+          className: "w-3.5 h-3.5",
+          fill: "none",
+          stroke: "#fff",
+          strokeWidth: "2",
+          strokeLinecap: "round",
+          strokeLinejoin: "round",
+          "aria-hidden": "true",
+          children: [
+            T.jsx("path", {
+              d: "M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71",
+            }),
+            T.jsx("path", {
+              d: "M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71",
+            }),
+          ],
         }),
       },
     ];
@@ -28771,53 +28632,6 @@ Error generating stack: ` +
                             },
                             children: s,
                           }),
-                        },
-                        l,
-                      ),
-                    ),
-                  }),
-                  T.jsx("div", {
-                    className:
-                      "mt-12 md:mt-16 feum-meta-grid",
-                    children: [
-                      {
-                        label: "Role",
-                        value: T.jsx("span", {
-                          className:
-                            "font-sans text-sm md:text-base text-foreground font-medium tracking-tight feum-meta-value",
-                          children: "Designer & Editor",
-                        }),
-                      },
-                      {
-                        label: "Location",
-                        value: T.jsx("span", {
-                          className: "feum-meta-value",
-                          children: "USA",
-                        }),
-                      },
-                    ].map((s, l) =>
-                      T.jsxs(
-                        _t.div,
-                        {
-                          initial: { opacity: 0, y: 10 },
-                          animate: { opacity: 1, y: 0 },
-                          transition: {
-                            duration: 0.6,
-                            delay: 0.4 + l * 0.08,
-                            ease: [0.22, 1, 0.36, 1],
-                          },
-                          className: "flex flex-col gap-2",
-                          children: [
-                            T.jsx("p", {
-                              className:
-                                "text-[10px] text-muted-foreground uppercase tracking-[0.25em]",
-                              children: s.label,
-                            }),
-                            T.jsx("div", {
-                              className: "leading-snug",
-                              children: s.value,
-                            }),
-                          ],
                         },
                         l,
                       ),
@@ -29208,17 +29022,26 @@ Error generating stack: ` +
                       whileInView: { opacity: 1, y: 0 },
                       viewport: { once: !0 },
                       className:
-                        "text-[2.75rem] sm:text-6xl md:text-8xl lg:text-[9rem] xl:text-[10rem] font-serif leading-[0.9] sm:leading-[0.85] tracking-tight sm:tracking-tighter mb-10 sm:mb-14 max-w-5xl bg-clip-text text-transparent",
+                        "cta-headline text-[2.75rem] sm:text-6xl md:text-8xl lg:text-[7.5rem] xl:text-[8.5rem] font-serif leading-[0.9] sm:leading-[0.85] tracking-tight sm:tracking-tighter mb-10 sm:mb-14 max-w-7xl bg-clip-text text-transparent",
                       style: {
                         backgroundImage:
                           "linear-gradient(180deg, #ffffff 0%, #ededed 45%, #b9b9b9 100%)",
                       },
                       children: [
-                        "Let's build something",
-                        " ",
                         T.jsx("span", {
-                          className: "italic",
-                          children: "clickable.",
+                          className: "cta-pc-line1",
+                          children: "Let's build",
+                        }),
+                        T.jsx("span", {
+                          className: "cta-pc-line2",
+                          children: "something",
+                        }),
+                        T.jsx("span", {
+                          className: "cta-pc-line3",
+                          children: T.jsx("span", {
+                            className: "italic",
+                            children: "clickable.",
+                          }),
                         }),
                       ],
                     }),
@@ -29396,7 +29219,7 @@ Error generating stack: ` +
                       ],
                     }),
                     T.jsx("ul", {
-                      className: "flex flex-wrap justify-center gap-3",
+                      className: "flex flex-wrap items-center justify-center gap-3",
                       children: DM.map((s, l) => {
                         var d;
                         return T.jsx(
@@ -29410,28 +29233,24 @@ Error generating stack: ` +
                               delay: l * 0.06,
                               ease: [0.22, 1, 0.36, 1],
                             },
-                            children: T.jsxs("a", {
+                            children: T.jsx("a", {
                               href: s.url,
                               target: "_blank",
                               rel: "noopener noreferrer",
+                              "aria-label": s.label,
+                              title: s.label,
                               style: { "--brand": s.color },
                               className:
-                                "group relative inline-flex items-center gap-3 pl-2 pr-4 py-2 rounded-full border border-border/60 bg-muted/20 text-sm font-sans font-medium text-foreground/85 hover:text-foreground hover:bg-muted/40 transition-all duration-300 hover:border-[color:var(--brand)] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_-8px_var(--brand)]",
-                              children: [
-                                T.jsx("span", {
-                                  className:
-                                    "relative inline-flex items-center justify-center w-7 h-7 rounded-full overflow-hidden shrink-0 transition-transform duration-300 group-hover:scale-110",
-                                  style: {
-                                    background:
-                                      (d = s.bg) != null ? d : s.color,
-                                  },
-                                  children: s.icon,
-                                }),
-                                T.jsx("span", {
-                                  className: "whitespace-nowrap",
-                                  children: s.label,
-                                }),
-                              ],
+                                "group relative inline-flex items-center justify-center w-11 h-11 rounded-full border border-border/60 bg-muted/20 text-foreground/85 hover:text-foreground hover:bg-muted/40 transition-all duration-300 hover:border-[color:var(--brand)] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_-8px_var(--brand)]",
+                              children: T.jsx("span", {
+                                className:
+                                  "relative inline-flex items-center justify-center w-7 h-7 rounded-full overflow-hidden shrink-0 transition-transform duration-300 group-hover:scale-110",
+                                style: {
+                                  background:
+                                    (d = s.bg) != null ? d : s.color,
+                                },
+                                children: s.icon,
+                              }),
                             }),
                           },
                           s.label,
