@@ -4,22 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
 
-    <title>Video Editings — falw</title>
-    <meta name="description" content="High-retention video edits, cinematic pacing, sound design, and Minecraft animations by falw." />
-    <meta name="keywords" content="video editing, minecraft animation, gaming edits, falw, youtube video editor, minecraft cinematic" />
-    <meta name="author" content="falw" />
+    <title>Video Editings — fre</title>
+    <meta name="description" content="High-retention video edits, cinematic pacing, sound design, and Minecraft animations by fre." />
+    <meta name="keywords" content="video editing, minecraft animation, gaming edits, fre, youtube video editor, minecraft cinematic" />
+    <meta name="author" content="fre" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#000000" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Video Editings — falw" />
-    <meta property="og:description" content="High-retention video edits, cinematic pacing, and Minecraft animations by falw." />
+    <meta property="og:title" content="Video Editings — fre" />
+    <meta property="og:description" content="High-retention video edits, cinematic pacing, and Minecraft animations by fre." />
     <meta property="og:url" content="https://feumm.github.io/feum/video-gallery.html" />
     <meta property="og:image" content="./assets/opengraph.jpg" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Video Editings — falw" />
-    <meta name="twitter:description" content="High-retention video edits and Minecraft animations by falw." />
+    <meta name="twitter:title" content="Video Editings — fre" />
+    <meta name="twitter:description" content="High-retention video edits and Minecraft animations by fre." />
     <meta name="twitter:image" content="./assets/opengraph.jpg" />
 
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
@@ -86,9 +86,22 @@
         background: rgba(255, 255, 255, 0.35);
       }
 
-      @media (max-width: 767px) {
-        ::-webkit-scrollbar { display: none !important; }
-        body { -ms-overflow-style: none !important; scrollbar-width: none !important; }
+      @media (max-width: 768px) {
+        html, body, *, *::before, *::after {
+          -ms-overflow-style: none !important;
+          scrollbar-width: none !important;
+        }
+        ::-webkit-scrollbar {
+          display: none !important;
+          width: 0 !important;
+          height: 0 !important;
+          background: transparent !important;
+        }
+        ::-webkit-scrollbar-thumb,
+        ::-webkit-scrollbar-track {
+          display: none !important;
+          background: transparent !important;
+        }
       }
 
       html, body {
@@ -123,15 +136,16 @@
         align-items: center;
         justify-content: space-between;
         gap: 1.5rem;
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(18px) saturate(180%);
-        -webkit-backdrop-filter: blur(18px) saturate(180%);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border: none;
+        outline: none;
         border-radius: 999px;
-        padding: 0.5rem 1.25rem;
+        padding: 0.5rem 1.35rem;
         max-width: 900px;
         width: 100%;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 10px 32px rgba(0, 0, 0, 0.5);
       }
 
       .nav-brand {
@@ -142,7 +156,7 @@
       }
 
       .nav-logo {
-        height: 28px;
+        height: 32px;
         width: auto;
         mix-blend-mode: screen;
       }
@@ -150,16 +164,16 @@
       .nav-links {
         display: flex;
         align-items: center;
-        gap: 1rem;
+        gap: 0.75rem;
       }
 
       .nav-link {
-        color: rgba(255, 255, 255, 0.85);
-        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.98rem;
         font-weight: 700;
         text-decoration: none;
         transition: color 0.2s, background-color 0.2s;
-        padding: 0.4rem 0.85rem;
+        padding: 0.48rem 1rem;
         border-radius: 999px;
         display: flex;
         align-items: center;
@@ -315,6 +329,22 @@
       }
 
       @media (max-width: 640px) {
+        .navbar {
+          padding: 1rem 1.25rem;
+        }
+        .nav-inner {
+          padding: 0.45rem 1rem;
+          gap: 1.25rem;
+        }
+        .nav-logo {
+          height: 30px;
+        }
+        .nav-link {
+          font-size: 0.9rem;
+          padding: 0.45rem 0.95rem;
+          font-weight: 700;
+          white-space: nowrap;
+        }
         .video-grid {
           grid-template-columns: 1fr;
           gap: 1.5rem;
@@ -775,7 +805,7 @@
     <div id="site-preloader" aria-hidden="true">
       <div class="preloader-content">
         <div class="preloader-glow"></div>
-        <img src="./assets/falw-logo-new.png" alt="falw" class="preloader-logo" />
+        <img src="./assets/falw-logo-new.png" alt="fre" class="preloader-logo" />
         <div class="preloader-track">
           <div class="preloader-bar"></div>
         </div>
@@ -813,7 +843,7 @@
     <header class="navbar" id="navbar">
       <nav class="nav-inner">
         <a href="./index.html" class="nav-brand" title="Back to Home">
-          <img src="./assets/falw-logo-new.png" alt="falw*" class="nav-logo" />
+          <img src="./assets/falw-logo-new.png" alt="fre" class="nav-logo" />
         </a>
         <div class="nav-links">
           <a href="./index.html" class="nav-link">

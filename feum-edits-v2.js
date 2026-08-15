@@ -95,8 +95,8 @@
 
   /* ── 3. Page meta text ───────────────────────────────────── */
   var META = {
-    title:       '@falw',
-    description: 'Scroll-stoppers, made to click. professional minecraft thumbnail design by paid.'
+    title:       'fre',
+    description: 'Scroll-stoppers, made to click. Professional Minecraft thumbnail design by fre.'
   };
 
   /* ── 4. Toolkit app labels (shown as tooltip on mobile) ─── */

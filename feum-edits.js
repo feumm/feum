@@ -97,8 +97,8 @@
 
   /* ── 3. Page meta text ───────────────────────────────────── */
   var META = {
-    title:       '@falw',
-    description: 'Scroll-stoppers, made to click. Professional Minecraft thumbnail design by feum.'
+    title:       'fre',
+    description: 'Scroll-stoppers, made to click. Professional Minecraft thumbnail design by fre.'
   };
 
   /* ── 4. Toolkit app labels (shown as tooltip on mobile) ─── */
@@ -169,50 +169,69 @@
     });
   }
 
-  /* Fix footer social links on mobile — force 3-column grid via inline styles */
+  /* Fix footer social links — ensure icon-only circular buttons arranged neatly */
   function fixMobileFooterLinks() {
-    if (window.innerWidth > 767) return;
-    if (document.querySelector('[data-mobile-footer-fixed]')) return;
-
     /* Find the social links list by looking for a ul with social platform hrefs */
     var ul = null;
     document.querySelectorAll('ul').forEach(function(el) {
       if (ul) return;
       var anchors = Array.from(el.querySelectorAll('a'));
-      if (anchors.length < 4) return;
+      if (anchors.length < 3) return;
       var hasSocial = anchors.some(function(a) {
         var h = (a.getAttribute('href') || '').toLowerCase();
-        return h.includes('instagram') || h.includes('behance') || h.includes('discord') || h.includes('youtube') || h.includes('pinterest') || h.includes('gumroad');
+        return h.includes('instagram') || h.includes('behance') || h.includes('discord') || h.includes('youtube') || h.includes('pinterest') || h.includes('gumroad') || h.includes('twitter') || h.includes('link.me');
       });
       if (hasSocial) ul = el;
     });
     if (!ul) return;
 
-    ul.setAttribute('data-mobile-footer-fixed', '1');
+    ul.setAttribute('data-footer-icons-fixed', '1');
 
-    /* Force 3-column grid via setProperty (priority 'important' overrides any class) */
     var P = 'important';
-    ul.style.setProperty('display', 'grid', P);
-    ul.style.setProperty('grid-template-columns', 'repeat(3, 1fr)', P);
-    ul.style.setProperty('gap', '0.5rem', P);
-    ul.style.setProperty('padding', '0 1rem 0.5rem', P);
+    ul.style.setProperty('display', 'flex', P);
+    ul.style.setProperty('flex-wrap', 'wrap', P);
+    ul.style.setProperty('justify-content', 'center', P);
+    ul.style.setProperty('align-items', 'center', P);
+    ul.style.setProperty('gap', '0.75rem', P);
+    ul.style.setProperty('max-width', '36rem', P);
+    ul.style.setProperty('margin-left', 'auto', P);
+    ul.style.setProperty('margin-right', 'auto', P);
+    ul.style.setProperty('padding', '0 0.5rem', P);
     ul.style.setProperty('overflow', 'visible', P);
-    ul.style.setProperty('flex-wrap', 'unset', P);
     ul.style.setProperty('width', '100%', P);
 
     /* Style each direct child (li or a) */
     Array.from(ul.children).forEach(function(child) {
-      child.style.setProperty('width', '100%', P);
+      child.style.setProperty('display', 'inline-flex', P);
+      child.style.setProperty('flex', '0 0 auto', P);
+      child.style.setProperty('width', 'auto', P);
+      child.style.setProperty('margin', '0', P);
       var a = child.tagName === 'A' ? child : child.querySelector('a');
       if (!a) return;
-      a.style.setProperty('display', 'flex', P);
-      a.style.setProperty('width', '100%', P);
+      a.style.setProperty('display', 'inline-flex', P);
+      a.style.setProperty('align-items', 'center', P);
       a.style.setProperty('justify-content', 'center', P);
-      a.style.setProperty('padding', '0.5rem 0.25rem', P);
-      a.style.setProperty('font-size', '0.7rem', P);
-      a.style.setProperty('white-space', 'nowrap', P);
-      a.style.setProperty('border-radius', '10px', P);
+      a.style.setProperty('width', '2.75rem', P);
+      a.style.setProperty('height', '2.75rem', P);
+      a.style.setProperty('padding', '0', P);
+      a.style.setProperty('border-radius', '9999px', P);
       a.style.setProperty('box-sizing', 'border-box', P);
+
+      var spans = a.querySelectorAll('span');
+      if (spans.length >= 1) {
+        /* Icon circle */
+        spans[0].style.setProperty('display', 'inline-flex', P);
+        spans[0].style.setProperty('align-items', 'center', P);
+        spans[0].style.setProperty('justify-content', 'center', P);
+        spans[0].style.setProperty('width', '1.85rem', P);
+        spans[0].style.setProperty('height', '1.85rem', P);
+        spans[0].style.setProperty('flex-shrink', '0', P);
+        spans[0].style.setProperty('border-radius', '50%', P);
+      }
+      /* Hide label text */
+      for (var i = 1; i < spans.length; i++) {
+        spans[i].style.setProperty('display', 'none', P);
+      }
     });
   }
 
@@ -305,31 +324,16 @@
         section.style.setProperty('border', 'none', 'important');
         section.style.setProperty('background-color', 'transparent', 'important');
         section.style.setProperty('background', 'transparent', 'important');
+        section.style.setProperty('padding-top', '3rem', 'important');
+        section.style.setProperty('padding-bottom', '5rem', 'important');
+        section.style.setProperty('margin-top', '3rem', 'important');
+        section.style.setProperty('z-index', '5', 'important');
 
-        /* Style and center Beyond thumbnails heading to be solid 100% white, moved up */
-        h2.style.setProperty('text-align', 'center', 'important');
-        h2.style.setProperty('color', '#ffffff', 'important');
-        h2.style.setProperty('opacity', '1', 'important');
-        h2.style.setProperty('width', '100%', 'important');
-        h2.style.setProperty('font-weight', '700', 'important');
-        h2.style.setProperty('text-shadow', '0 2px 14px rgba(0,0,0,0.9)', 'important');
-        var h2Spans = h2.querySelectorAll('span');
-        h2Spans.forEach(function(sp) {
-          sp.style.setProperty('color', '#ffffff', 'important');
-          sp.style.setProperty('opacity', '1', 'important');
-          sp.style.setProperty('font-style', 'italic', 'important');
-          sp.style.setProperty('text-shadow', '0 2px 14px rgba(0,0,0,0.9)', 'important');
-        });
+        /* Hide Beyond thumbnails heading completely */
+        h2.classList.add('beyond-title');
+        h2.style.setProperty('display', 'none', 'important');
         if (h2.parentElement) {
-          h2.parentElement.style.setProperty('display', 'flex', 'important');
-          h2.parentElement.style.setProperty('justify-content', 'center', 'important');
-          h2.parentElement.style.setProperty('align-items', 'center', 'important');
-          h2.parentElement.style.setProperty('text-align', 'center', 'important');
-          h2.parentElement.style.setProperty('width', '100%', 'important');
-          h2.parentElement.style.setProperty('margin-bottom', '3.5rem', 'important');
-          h2.parentElement.style.setProperty('transform', 'translateY(-12px)', 'important');
-          h2.parentElement.style.setProperty('position', 'relative', 'important');
-          h2.parentElement.style.setProperty('z-index', '20', 'important');
+          h2.parentElement.style.setProperty('display', 'none', 'important');
         }
 
         /* Remove the description text under Beyond thumbnails */
@@ -361,7 +365,7 @@
           card.removeAttribute('target');
           card.removeAttribute('rel');
           card.style.setProperty('width', '100%', 'important');
-          card.style.setProperty('max-width', '22rem', 'important');
+          card.style.setProperty('max-width', '32rem', 'important');
           card.style.setProperty('position', 'relative', 'important');
           card.style.setProperty('z-index', '10', 'important');
           card.style.setProperty('outline', 'none', 'important');
@@ -385,15 +389,15 @@
           if (titleEl) {
             titleEl.textContent = 'Video Editings';
             titleEl.style.setProperty('font-family', "'Satoshi', 'Inter', system-ui, -apple-system, sans-serif", 'important');
-            titleEl.style.setProperty('font-weight', '400', 'important');
+            titleEl.style.setProperty('font-weight', '600', 'important');
             titleEl.style.setProperty('letter-spacing', '0.01em', 'important');
-            titleEl.style.setProperty('font-size', '1.35rem', 'important');
+            titleEl.style.setProperty('font-size', '1.15rem', 'important');
           }
           var parentGrid = card.parentElement;
           if (parentGrid) {
             parentGrid.style.setProperty('display', 'flex', 'important');
             parentGrid.style.setProperty('justify-content', 'center', 'important');
-            parentGrid.style.setProperty('max-width', '24rem', 'important');
+            parentGrid.style.setProperty('max-width', '36rem', 'important');
             parentGrid.style.setProperty('margin-left', 'auto', 'important');
             parentGrid.style.setProperty('margin-right', 'auto', 'important');
             parentGrid.style.setProperty('width', '100%', 'important');
@@ -408,7 +412,7 @@
               parentGrid.insertBefore(bgWrap, parentGrid.firstChild);
             }
             bgWrap.className = 'beyond-ambient-backdrop';
-            bgWrap.style.cssText = 'position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:100vw;max-width:100vw;height:240%;min-height:750px;z-index:0;overflow:hidden;pointer-events:none;';
+            bgWrap.style.cssText = 'position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:100vw;max-width:100vw;height:160%;min-height:560px;z-index:0;overflow:hidden;pointer-events:none;';
 
             var bgImg = bgWrap.querySelector('img');
             if (!bgImg) {
@@ -417,9 +421,9 @@
               bgImg.alt = '';
               bgWrap.appendChild(bgImg);
             }
-            bgImg.style.cssText = 'width:100%;height:100%;object-fit:cover;transform:scale(1.05);filter:blur(6px) brightness(0.85) saturate(1.2);opacity:0.95;pointer-events:none;' +
-              '-webkit-mask-image:linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.05) 10%, rgba(0,0,0,0.6) 24%, rgba(0,0,0,1) 38%, rgba(0,0,0,1) 65%, rgba(0,0,0,0.6) 78%, rgba(0,0,0,0.05) 92%, transparent 100%);' +
-              'mask-image:linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.05) 10%, rgba(0,0,0,0.6) 24%, rgba(0,0,0,1) 38%, rgba(0,0,0,1) 65%, rgba(0,0,0,0.6) 78%, rgba(0,0,0,0.05) 92%, transparent 100%);';
+            bgImg.style.cssText = 'width:100%;height:100%;object-fit:cover;transform:scale(1.04);filter:blur(6px) brightness(0.9) saturate(1.15);opacity:0.85;pointer-events:none;' +
+              '-webkit-mask-image:linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 14%, rgba(0,0,0,1) 32%, rgba(0,0,0,1) 68%, rgba(0,0,0,0.5) 86%, transparent 100%);' +
+              'mask-image:linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 14%, rgba(0,0,0,1) 32%, rgba(0,0,0,1) 68%, rgba(0,0,0,0.5) 86%, transparent 100%);';
 
             var fadeOverlay = bgWrap.querySelector('div');
             if (!fadeOverlay) {
@@ -427,7 +431,7 @@
               bgWrap.appendChild(fadeOverlay);
             }
             fadeOverlay.style.cssText = 'position:absolute;inset:0;' +
-              'background:linear-gradient(to bottom, #000000 0%, rgba(0,0,0,0.92) 12%, rgba(0,0,0,0.5) 25%, rgba(0,0,0,0.08) 38%, transparent 46%, transparent 60%, rgba(0,0,0,0.08) 70%, rgba(0,0,0,0.5) 80%, rgba(0,0,0,0.92) 92%, #000000 100%);' +
+              'background:linear-gradient(to bottom, #000000 0%, rgba(0,0,0,0.6) 12%, transparent 28%, transparent 72%, rgba(0,0,0,0.6) 88%, #000000 100%);' +
               'pointer-events:none;';
 
             /* Make card thumbnail crisp and clear with no outlines */
@@ -506,82 +510,29 @@
     return done.line1 && done.line2;
   }
 
-  /* Inject Twitter + link.me into footer social list */
-  var socialInjected = false;
+  /* Deduplicate and sanitize footer social links (ensure single Twitter, single Link.me) */
+  var socialInjected = true;
   function injectNewSocialLinks() {
-    if (socialInjected) return true;
+    /* Twitter and Link.me are already rendered natively by React in the bundle.
+       Clean up any duplicate injected items or extra links in the DOM. */
+    document.querySelectorAll('ul').forEach(function(ul) {
+      var seenLinks = new Set();
+      var lis = Array.from(ul.querySelectorAll('li'));
+      lis.forEach(function(li) {
+        var a = li.querySelector('a');
+        if (!a) return;
+        var href = (a.getAttribute('href') || '').toLowerCase().trim();
+        var label = (li.textContent || '').toLowerCase().trim();
+        var key = href || label;
+        if (!key) return;
 
-    /* Find the footer social <ul> */
-    var ul = null;
-    document.querySelectorAll('ul').forEach(function(el) {
-      if (ul) return;
-      var anchors = Array.from(el.querySelectorAll('a'));
-      if (anchors.length < 3) return;
-      var hasSocial = anchors.some(function(a) {
-        var h = (a.getAttribute('href') || '').toLowerCase();
-        return h.includes('youtube') || h.includes('behance') || h.includes('gumroad') || h.includes('discord');
+        if (seenLinks.has(key) || li.hasAttribute('data-injected-twitter') || li.hasAttribute('data-injected-linkme')) {
+          li.remove();
+        } else {
+          seenLinks.add(key);
+        }
       });
-      if (hasSocial) ul = el;
     });
-    if (!ul) return false;
-    if (ul.querySelector('[data-injected-twitter]')) { socialInjected = true; return true; }
-
-    /* Grab classes from an existing <li> and its <a> so new items blend in */
-    var existingLi = ul.querySelector('li');
-    var existingA  = existingLi ? existingLi.querySelector('a') : null;
-    var liClass    = existingLi ? existingLi.className : '';
-    var aClass     = existingA  ? existingA.className  : '';
-
-    /* Measure the existing icon circle so we match its size exactly */
-    var existingIcon = existingA ? existingA.querySelector('span') : null;
-    var iconW = existingIcon ? existingIcon.offsetWidth  || 32 : 32;
-    var iconH = existingIcon ? existingIcon.offsetHeight || 32 : 32;
-
-    var NEW_LINKS = [
-      {
-        url: SOCIAL_LINKS.twitter, label: 'Twitter',
-        bg: '#000',
-        svgContent: '<svg xmlns="http://www.w3.org/2000/svg" width="55%" height="55%" viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>',
-        attr: 'data-injected-twitter'
-      },
-      {
-        url: SOCIAL_LINKS.linkme, label: 'Link.me',
-        bg: 'linear-gradient(135deg,#6366f1,#8b5cf6)',
-        svgContent: '<svg xmlns="http://www.w3.org/2000/svg" width="55%" height="55%" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>',
-        attr: 'data-injected-linkme'
-      }
-    ];
-
-    NEW_LINKS.forEach(function(item) {
-      var li = document.createElement('li');
-      li.className = liClass;
-      li.setAttribute(item.attr, '1');
-
-      var a = document.createElement('a');
-      a.className = aClass;
-      a.href = item.url;
-      a.target = '_blank';
-      a.rel = 'noopener noreferrer';
-
-      /* Icon circle — built from scratch, no cloning */
-      var circle = document.createElement('span');
-      circle.style.cssText =
-        'display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;' +
-        'width:' + iconW + 'px;height:' + iconH + 'px;border-radius:50%;' +
-        'background:' + item.bg + ';';
-      circle.innerHTML = item.svgContent;
-
-      /* Text label */
-      var label = document.createElement('span');
-      label.textContent = item.label;
-
-      a.appendChild(circle);
-      a.appendChild(label);
-      li.appendChild(a);
-      ul.appendChild(li);
-    });
-
-    socialInjected = true;
     return true;
   }
 
@@ -613,29 +564,45 @@
     });
   }
 
-  /* Ensure "Edits" nav link exists and links to ./video-gallery.html */
-  function injectEditsNavLink() {
-    var navContainer = document.querySelector('nav .flex.items-center, .flex:has(> a.feum-nav-link)');
+  /* Ensure nav has Edits, Shop, and Hire Me links */
+  function ensureNavLinks() {
+    var navContainer = document.querySelector('nav .flex.items-center, nav div[class*="items-center"]');
     if (!navContainer) return;
-    var hasEdits = false;
-    navContainer.querySelectorAll('a.feum-nav-link').forEach(function(a) {
-      var text = (a.textContent || '').trim().toLowerCase();
-      var href = (a.getAttribute('href') || '').toLowerCase();
-      if (text === 'edits' || href.includes('video-gallery')) {
-        hasEdits = true;
+
+    var expected = [
+      { text: 'Edits', href: './video-gallery.html', target: false },
+      { text: 'Shop', href: 'https://feumm.github.io/feumvis', target: true },
+      { text: 'Hire Me', href: 'https://discord.com/users/1071929676223762452', target: true }
+    ];
+
+    var currentLinks = Array.from(navContainer.querySelectorAll('a.feum-nav-link'));
+    
+    /* Rename any Contact to Hire Me */
+    currentLinks.forEach(function(a) {
+      var t = (a.textContent || '').trim();
+      if (t.toLowerCase() === 'contact') {
+        a.textContent = 'Hire Me';
       }
     });
-    if (!hasEdits) {
-      var a = document.createElement('a');
-      a.href = './video-gallery.html';
-      a.className = 'text-base md:text-lg font-medium leading-none text-white/75 hover:text-white transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] feum-nav-link';
-      a.textContent = 'Edits';
-      var first = navContainer.querySelector('a.feum-nav-link');
-      if (first) {
-        navContainer.insertBefore(a, first);
-      } else {
+
+    /* Check if all 3 links exist */
+    var hasEdits = currentLinks.some(function(a) { return (a.textContent || '').trim() === 'Edits' || (a.getAttribute('href') || '').includes('video-gallery'); });
+    var hasShop = currentLinks.some(function(a) { return (a.textContent || '').trim().toLowerCase() === 'shop' || (a.getAttribute('href') || '').includes('feumvis'); });
+    var hasHireMe = currentLinks.some(function(a) { return (a.textContent || '').trim().toLowerCase() === 'hire me' || (a.textContent || '').trim().toLowerCase() === 'contact' || (a.getAttribute('href') || '').includes('discord'); });
+
+    if (!hasEdits || !hasShop || !hasHireMe) {
+      navContainer.innerHTML = '';
+      expected.forEach(function(item) {
+        var a = document.createElement('a');
+        a.href = item.href;
+        if (item.target) {
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+        }
+        a.className = 'text-base md:text-lg font-medium leading-none text-white/75 hover:text-white transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] feum-nav-link';
+        a.textContent = item.text;
         navContainer.appendChild(a);
-      }
+      });
     }
   }
 
@@ -657,6 +624,53 @@
             span.textContent = '';
           }
         });
+      }
+    });
+
+    /* Format CTA headline: "Let's build" line 1, "something clickable." line 2 for PC only */
+    document.querySelectorAll('h2').forEach(function(h2) {
+      var text = (h2.textContent || '');
+      if (text.includes("Let's build") || text.includes('build something')) {
+        var P = 'important';
+        var isMobile = window.innerWidth <= 768;
+        h2.classList.add('cta-headline');
+        h2.style.setProperty('font-size', isMobile ? 'clamp(3rem, 13vw, 5rem)' : 'clamp(3.5rem, 7.5vw, 7.5rem)', P);
+        h2.style.setProperty('line-height', isMobile ? '0.92' : '0.9', P);
+        h2.style.setProperty('letter-spacing', isMobile ? '-0.035em' : '-0.04em', P);
+        h2.style.setProperty('color', '#ffffff', P);
+        h2.style.setProperty('-webkit-text-fill-color', '#ffffff', P);
+        h2.style.setProperty('background', 'none', P);
+        h2.style.setProperty('max-width', '90rem', P);
+        h2.style.setProperty('width', '100%', P);
+        h2.style.setProperty('text-align', 'center', P);
+
+        if (!h2.getAttribute('data-cta-line-split')) {
+          h2.setAttribute('data-cta-line-split', '1');
+          h2.innerHTML = '<span class="cta-pc-line1" style="display:' + (isMobile ? 'inline' : 'block') + ' !important; width:' + (isMobile ? 'auto' : '100%') + ' !important; white-space:' + (isMobile ? 'normal' : 'nowrap') + ' !important;">Let\'s build' + (isMobile ? ' ' : '') + '</span>' +
+            '<span class="cta-pc-line2" style="display:' + (isMobile ? 'inline' : 'block') + ' !important; width:' + (isMobile ? 'auto' : '100%') + ' !important; white-space:' + (isMobile ? 'normal' : 'nowrap') + ' !important;">something' + (isMobile ? ' ' : '') + '</span>' +
+            '<span class="cta-pc-line3" style="display:' + (isMobile ? 'inline' : 'block') + ' !important; width:' + (isMobile ? 'auto' : '100%') + ' !important; white-space:' + (isMobile ? 'normal' : 'nowrap') + ' !important;"><span class="italic">clickable.</span></span>';
+        } else {
+          var line1 = h2.querySelector('.cta-pc-line1');
+          var line2 = h2.querySelector('.cta-pc-line2');
+          var line3 = h2.querySelector('.cta-pc-line3');
+          if (line1) {
+            line1.style.setProperty('display', isMobile ? 'inline' : 'block', P);
+            line1.style.setProperty('width', isMobile ? 'auto' : '100%', P);
+            line1.style.setProperty('white-space', isMobile ? 'normal' : 'nowrap', P);
+            line1.textContent = isMobile ? "Let's build " : "Let's build";
+          }
+          if (line2) {
+            line2.style.setProperty('display', isMobile ? 'inline' : 'block', P);
+            line2.style.setProperty('width', isMobile ? 'auto' : '100%', P);
+            line2.style.setProperty('white-space', isMobile ? 'normal' : 'nowrap', P);
+            line2.textContent = isMobile ? "something " : "something";
+          }
+          if (line3) {
+            line3.style.setProperty('display', isMobile ? 'inline' : 'block', P);
+            line3.style.setProperty('width', isMobile ? 'auto' : '100%', P);
+            line3.style.setProperty('white-space', isMobile ? 'normal' : 'nowrap', P);
+          }
+        }
       }
     });
   }
@@ -799,7 +813,9 @@
     btnRow.style.setProperty('display', 'flex', P);
     btnRow.style.setProperty('align-items', 'center', P);
     btnRow.style.setProperty('justify-content', 'center', P);
-    btnRow.style.setProperty('margin', '2rem auto 0', P);
+    btnRow.style.setProperty('position', 'relative', P);
+    btnRow.style.setProperty('z-index', '25', P);
+    btnRow.style.setProperty('margin', '2.5rem auto 1.5rem', P);
     /* Move margin from btn to the row */
     btn.style.setProperty('margin', '0', P);
     btnRow.appendChild(btn);
@@ -898,6 +914,9 @@
     if (!targets.length) return false;
 
     targets.forEach(function(el) {
+      if ((el.textContent || '').includes('Beyond') || el.classList.contains('beyond-title')) {
+        return;
+      }
       el.style.setProperty('font-family', "'Clash Display','OpenSans',sans-serif", P);
       el.style.setProperty('font-weight', '700', P);
       el.style.setProperty('letter-spacing', '-0.035em', P);
@@ -917,10 +936,9 @@
   }
 
   /* ── Patch stats section: apply Clash Display 700 to numbers ── */
+  /* ── Patch stats section: enforce single line 4-column layout & Clash Display numbers ── */
   var statsFontPatched = false;
   function patchStatsFonts() {
-    if (statsFontPatched) return true;
-
     /* Find the stats section the same way reorderSections does */
     var statsSection = null;
     var sections = Array.from(document.querySelectorAll(
@@ -933,6 +951,50 @@
     });
     if (!statsSection) return false;
 
+    var P = 'important';
+    var isDesktop = window.innerWidth >= 768;
+    statsSection.classList.add('feum-stats-section');
+    var container = statsSection.querySelector('.max-w-6xl, .max-w-5xl, div[class*="max-w"]');
+    if (container) {
+      container.style.setProperty('max-width', '58rem', P);
+      container.style.setProperty('margin-left', 'auto', P);
+      container.style.setProperty('margin-right', 'auto', P);
+      if (isDesktop) {
+        container.style.setProperty('transform', 'translateX(0.75rem)', P);
+      }
+    }
+    var grid = statsSection.querySelector('div[class*="grid"]');
+    if (grid) {
+      grid.classList.add('feum-stats-grid');
+      grid.style.setProperty('display', 'grid', P);
+      grid.style.setProperty('grid-template-columns', 'repeat(4, minmax(0, 1fr))', P);
+      grid.style.setProperty('column-gap', isDesktop ? '1.25rem' : '0.5rem', P);
+      grid.style.setProperty('row-gap', '0px', P);
+      grid.style.setProperty('justify-content', 'center', P);
+      grid.style.setProperty('align-items', 'center', P);
+      Array.from(grid.children).forEach(function(col) {
+        col.style.setProperty('display', 'flex', P);
+        col.style.setProperty('flex-direction', 'column', P);
+        col.style.setProperty('align-items', 'center', P);
+        col.style.setProperty('text-align', 'center', P);
+        col.style.setProperty('padding-left', '0.25rem', P);
+        col.style.setProperty('padding-right', '0.25rem', P);
+      });
+    }
+
+    /* Target the divider line elements */
+    statsSection.querySelectorAll('span[class*="h-px"]').forEach(function(line) {
+      line.style.setProperty('margin-left', 'auto', P);
+      line.style.setProperty('margin-right', 'auto', P);
+      line.style.setProperty('transform-origin', 'center', P);
+    });
+
+    /* Target the label elements */
+    statsSection.querySelectorAll('p[class*="uppercase"]').forEach(function(label) {
+      label.classList.add('feum-stat-label');
+      label.style.setProperty('text-align', 'center', P);
+    });
+
     /* Target the large number elements — font-serif class + big text-size classes */
     var targets = statsSection.querySelectorAll(
       '[class*="font-serif"], [class*="text-5xl"], [class*="text-6xl"], ' +
@@ -940,8 +1002,8 @@
     );
     if (!targets.length) return false;
 
-    var P = 'important';
     targets.forEach(function(el) {
+      el.classList.add('feum-stat-number');
       el.style.setProperty('font-family', "'Clash Display', 'OpenSans', sans-serif", P);
       el.style.setProperty('font-weight', '700', P);
       el.style.setProperty('letter-spacing', '-0.035em', P);
@@ -952,31 +1014,63 @@
     return true;
   }
 
-  /* ── Patch footer brand logo ("PAID" image → new falw* logo) ── */
+  /* ── Remove Role & Location block unconditionally ── */
+  function removeRoleAndLocation() {
+    var metaEls = document.querySelectorAll('.feum-meta-grid, [class*="feum-meta"]');
+    metaEls.forEach(function(el) { el.remove(); });
+    document.querySelectorAll('p, div, span').forEach(function(el) {
+      var text = (el.textContent || '').trim();
+      if (text === 'ROLE' || text === 'LOCATION' || text === 'Designer & Editor') {
+        var parentBox = el.closest('.flex.flex-col') || el.closest('.feum-meta-grid') || el.parentElement;
+        if (parentBox && (parentBox.textContent || '').includes('Role') || (parentBox.textContent || '').includes('Location')) {
+          parentBox.remove();
+        }
+      }
+    });
+  }
+
+  /* ── Patch footer & header brand logo ── */
   function patchFooterLogo() {
+    removeRoleAndLocation();
     /* The bundle renders the footer logo as <img alt="feum" src="...Photoroom...">
-       at two locations (main footer + a blurred bg copy). Replace both. */
-    var imgs = document.querySelectorAll('img[alt="feum"], img[src*="Photoroom"]');
+       at two locations (main footer + a blurred bg copy). Replace both image and mask. */
+    var imgs = document.querySelectorAll('img[alt="feum"], img[alt="falw"], img[alt="fre"], img[src*="Photoroom"], img[src*="falw-logo"], footer img, a[aria-label="feum"], a[aria-label="fre"] img');
     if (!imgs.length) return false;
     imgs.forEach(function(img) {
       img.src = './assets/falw-logo-new.png';
-      img.alt = 'falw*';
+      img.alt = 'fre';
+      img.onerror = function() {
+        this.src = './assets/falw-nav-logo.png';
+      };
     });
+
+    /* Also update any shimmer mask overlays */
+    document.querySelectorAll('span[style*="mask"], span[style*="Mask"]').forEach(function(span) {
+      if (span.style.maskImage && (span.style.maskImage.includes('Photoroom') || span.style.maskImage.includes('falw') || span.style.maskImage.includes('20260428'))) {
+        span.style.maskImage = "url('./assets/falw-logo-new.png')";
+      }
+      if (span.style.webkitMaskImage && (span.style.webkitMaskImage.includes('Photoroom') || span.style.webkitMaskImage.includes('falw') || span.style.webkitMaskImage.includes('20260428'))) {
+        span.style.webkitMaskImage = "url('./assets/falw-logo-new.png')";
+      }
+    });
+
     return true;
   }
 
-  /* Inject stylesheet — nav pill + gallery gradient overlays */
+  /* Inject stylesheet — clean navbar styles + gallery gradient overlays */
   (function () {
     if (document.getElementById('feum-nav-pill-reset')) return;
     var s = document.createElement('style');
     s.id = 'feum-nav-pill-reset';
     s.textContent =
-      /* Nav pill */
-      'a.feum-nav-link { filter: none !important; text-shadow: none !important; font-family: \'OpenSans\',\'Poppins\',\'Clash Display\',sans-serif !important; font-weight: 800 !important; border-radius: 999px !important; letter-spacing: -0.01em !important; }' +
-      'nav .flex.items-center { background: rgba(255,255,255,0.06) !important; backdrop-filter: blur(18px) saturate(180%) !important; -webkit-backdrop-filter: blur(18px) saturate(180%) !important; border: none !important; border-radius: 999px !important; padding: 5px !important; box-shadow: none !important; outline: none !important; }' +
-      /* Remove bottom-to-top gradient on main gallery thumbnails only.
-         Uses the 45% opacity variant class which is specific to the gallery —
-         the "Beyond" section cards use from-black/75 and are left untouched. */
+      'a.feum-nav-link { filter: none !important; text-shadow: none !important; font-family: \'OpenSans\',\'Poppins\',sans-serif !important; font-weight: 700 !important; font-size: 0.98rem !important; border-radius: 9999px !important; letter-spacing: -0.01em !important; white-space: nowrap !important; line-height: 1.2 !important; padding: 0.45rem 1.15rem !important; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; text-transform: none !important; transition: background 0.2s ease, color 0.2s ease !important; border: none !important; outline: none !important; background: transparent !important; }' +
+      'a.feum-nav-link:hover { background: rgba(255, 255, 255, 0.14) !important; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; }' +
+      'nav .flex.items-center, .flex:has(> a.feum-nav-link) { background: rgba(255, 255, 255, 0.08) !important; backdrop-filter: blur(20px) saturate(180%) !important; -webkit-backdrop-filter: blur(20px) saturate(180%) !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; outline: none !important; border-radius: 9999px !important; padding: 0.4rem 0.6rem !important; gap: 0.35rem !important; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45) !important; display: inline-flex !important; align-items: center !important; }' +
+      'nav.fixed, nav[class*="fixed"] { top: 1.25rem !important; padding: 0 2rem !important; background: transparent !important; }' +
+      '.feum-nav-logo { height: 32px !important; width: auto !important; mix-blend-mode: screen !important; }' +
+      '@media (max-width: 768px) { nav.fixed, nav[class*="fixed"] { top: 1rem !important; padding: 0 1.25rem !important; } .feum-nav-logo { height: 30px !important; } nav .flex.items-center, .flex:has(> a.feum-nav-link) { padding: 0.35rem 0.45rem !important; gap: 0.2rem !important; border-radius: 9999px !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; outline: none !important; background: rgba(255, 255, 255, 0.08) !important; backdrop-filter: blur(20px) saturate(180%) !important; -webkit-backdrop-filter: blur(20px) saturate(180%) !important; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45) !important; } a.feum-nav-link { padding: 0.4rem 0.9rem !important; font-size: 0.92rem !important; font-weight: 700 !important; } html, body, #root, *, *::before, *::after { -ms-overflow-style: none !important; scrollbar-width: none !important; } ::-webkit-scrollbar, ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-track { display: none !important; width: 0 !important; height: 0 !important; background: transparent !important; } }' +
+      '@media (max-width: 380px) { nav.fixed, nav[class*="fixed"] { top: 0.85rem !important; padding: 0 1rem !important; } .feum-nav-logo { height: 28px !important; } nav .flex.items-center, .flex:has(> a.feum-nav-link) { padding: 0.3rem 0.4rem !important; gap: 0.15rem !important; } a.feum-nav-link { padding: 0.35rem 0.75rem !important; font-size: 0.85rem !important; } }' +
+      /* Remove bottom-to-top gradient on main gallery thumbnails only */
       '[class*="from-black/45"][class*="bg-gradient-to-t"] { display: none !important; }' +
       '.feum-hero-bg img, .feum-hero-bg > img { display: none !important; opacity: 0 !important; visibility: hidden !important; }';
     document.head.appendChild(s);
@@ -994,8 +1088,7 @@
     fixMobileFooterLinks();
     frostedGlassCTA();
     renameCTA();
-    renameNavContact();
-    injectEditsNavLink();
+    ensureNavLinks();
     patchHeroHeadline();
     patchTrustedSection();
     patchBeyondSection();

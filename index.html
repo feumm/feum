@@ -4,25 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
 
-    <title>falw</title>
+    <title>fre</title>
     <meta name="description" content="Professional Minecraft thumbnail designer. Scroll-stoppers, made to click. Trusted by creators worldwide." />
-    <meta name="keywords" content="minecraft thumbnail designer, feum, minecraft thumbnail, youtube thumbnail designer, gaming thumbnail, paid portfolio, thumbnail artist" />
-    <meta name="author" content="falw" />
+    <meta name="keywords" content="minecraft thumbnail designer, fre, minecraft thumbnail, youtube thumbnail designer, gaming thumbnail, paid portfolio, thumbnail artist" />
+    <meta name="author" content="fre" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#000000" />
 
     <meta property="og:type"        content="website" />
-    <meta property="og:title"       content="falw" />
+    <meta property="og:title"       content="fre" />
     <meta property="og:description" content="Professional Minecraft thumbnail designer, trusted by creators worldwide." />
     <meta property="og:url"         content="https://feumm.github.io/feum/" />
     <meta property="og:image"       content="https://feumm.github.io/feum/opengraph.jpg" />
     <meta property="og:image:width"  content="1280" />
     <meta property="og:image:height" content="720" />
-    <meta property="og:image:alt"   content="falw" />
-    <meta property="og:site_name"   content="falw" />
+    <meta property="og:image:alt"   content="fre" />
+    <meta property="og:site_name"   content="fre" />
 
     <meta name="twitter:card"        content="summary_large_image" />
-    <meta name="twitter:title"       content="falw" />
+    <meta name="twitter:title"       content="fre" />
     <meta name="twitter:description" content="Professional Minecraft thumbnail designer, trusted by creators worldwide." />
     <meta name="twitter:image"       content="https://feumm.github.io/feum/opengraph.jpg" />
 
@@ -30,8 +30,8 @@
     <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="feum" />
-    <meta name="application-name" content="feum" />
+    <meta name="apple-mobile-web-app-title" content="fre" />
+    <meta name="application-name" content="fre" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="generator" content="" />
 
@@ -41,7 +41,7 @@
     {
       "@context": "https://schema.org",
       "@type": "Person",
-      "name": "feum",
+      "name": "fre",
       "url": "https://feumm.github.io/feum/",
       "image": "https://feumm.github.io/feum/opengraph.jpg",
       "jobTitle": "Minecraft Thumbnail Designer",
@@ -231,6 +231,87 @@
         ) !important;
       }
 
+      /* Stats Section: Single row (4 columns across), centered alignment, tighter spacing, shifted a bit right on desktop */
+      section:has(div > div[class*="grid-cols-2"][class*="md:grid-cols-4"]) div[class*="grid-cols-2"],
+      section:has(div > div[class*="grid"]) div[class*="grid"],
+      .feum-stats-grid {
+        display: grid !important;
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+        column-gap: clamp(0.25rem, 1.5vw, 1.5rem) !important;
+        row-gap: 0 !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+      }
+      section:has(div > div[class*="grid"]) .max-w-6xl,
+      section:has(div > div[class*="grid"]) .max-w-5xl,
+      .feum-stats-section .max-w-6xl,
+      .feum-stats-section .max-w-5xl {
+        padding-left: clamp(0.75rem, 3vw, 2.5rem) !important;
+        padding-right: clamp(0.75rem, 3vw, 2.5rem) !important;
+        max-width: 58rem !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+      @media (min-width: 768px) {
+        section:has(div > div[class*="grid"]) .max-w-6xl,
+        section:has(div > div[class*="grid"]) .max-w-5xl,
+        .feum-stats-section .max-w-6xl,
+        .feum-stats-section .max-w-5xl {
+          transform: translateX(0.75rem) !important;
+        }
+      }
+      section:has(div > div[class*="grid"]) div[class*="group"],
+      .feum-stats-grid > div {
+        padding-left: clamp(0.1rem, 0.6vw, 0.75rem) !important;
+        padding-right: clamp(0.1rem, 0.6vw, 0.75rem) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        justify-content: center !important;
+      }
+      @media (min-width: 768px) {
+        section:has(div > div[class*="grid"]) div[class*="group"],
+        .feum-stats-grid > div {
+          align-items: center !important;
+          text-align: center !important;
+        }
+      }
+      section:has(div > div[class*="grid"]) p[class*="font-serif"],
+      .feum-stat-number {
+        font-family: 'Clash Display', 'OpenSans', sans-serif !important;
+        font-weight: 700 !important;
+        letter-spacing: -0.035em !important;
+        font-style: normal !important;
+        font-size: clamp(1.4rem, 4.6vw, 4.2rem) !important;
+        line-height: 1 !important;
+        margin-bottom: clamp(0.2rem, 0.6vw, 0.6rem) !important;
+        white-space: nowrap !important;
+        text-align: center !important;
+      }
+      section:has(div > div[class*="grid"]) span[class*="h-px"] {
+        width: clamp(1.2rem, 2.8vw, 2.2rem) !important;
+        margin: 0 auto clamp(0.2rem, 0.5vw, 0.5rem) auto !important;
+        background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.6) 50%, transparent 100%) !important;
+        transform-origin: center !important;
+      }
+      section:has(div > div[class*="grid"]) p[class*="uppercase"],
+      .feum-stat-label {
+        font-size: clamp(7.5px, 1.15vw, 10.5px) !important;
+        letter-spacing: clamp(0.08em, 0.22vw, 0.26em) !important;
+        text-align: center !important;
+      }
+        line-height: 1.25 !important;
+        white-space: normal !important;
+      }
+      @media (max-width: 640px) {
+        section:has(div > div[class*="grid-cols-2"][class*="md:grid-cols-4"]) span[class*="h-px"] {
+          margin-left: auto !important;
+          margin-right: auto !important;
+        }
+      }
+
       h1[class*="font-serif"] {
         font-family: 'Clash Display', 'OpenSans', sans-serif !important;
         font-weight: 600 !important;
@@ -245,16 +326,58 @@
         font-weight: 600 !important;
         letter-spacing: -0.02em !important;
       }
-      a[href*="video-gallery"] {
-        max-width: 22rem !important;
+      .beyond-title,
+      section:has(a.group[href*="video-gallery"]) h2,
+      section:has(a.group[href*="video-gallery"]) div:has(> h2) {
+        display: none !important;
+      }
+      a.group[href*="video-gallery"],
+      section a[href*="video-gallery"]:not(.feum-nav-link) {
+        width: 100% !important;
+        max-width: 32rem !important;
         margin-left: auto !important;
         margin-right: auto !important;
       }
-      section:has(a[href*="video-gallery"]),
+      @media (max-width: 768px) {
+        a.group[href*="video-gallery"],
+        section a[href*="video-gallery"]:not(.feum-nav-link) {
+          max-width: 26rem !important;
+        }
+      }
+      @media (max-width: 480px) {
+        a.group[href*="video-gallery"],
+        section a[href*="video-gallery"]:not(.feum-nav-link) {
+          max-width: 100% !important;
+        }
+      }
+      section:has(a.group[href*="video-gallery"]),
+      /* Selected Work section + Show more buttons spacing & stacking */
+      section:has(div[class*="gap-x-8"][class*="gap-y-14"]),
+      section:has([data-show-more-btn]) {
+        position: relative !important;
+        z-index: 15 !important;
+        padding-bottom: 2rem !important;
+      }
+      [data-show-more-btn],
+      div:has(> [data-show-more-btn]) {
+        position: relative !important;
+        z-index: 25 !important;
+      }
+
+      /* Beyond thumbnails / Video Editings section & ambient backdrop */
       section:has(#card-ambient-backdrop),
-      section:has([class*="beyond-ambient-backdrop"]) {
+      section:has([class*="beyond-ambient-backdrop"]),
+      section:has(a.group[href*="video-gallery"]) {
         overflow: visible !important;
         position: relative !important;
+        z-index: 5 !important;
+        padding-top: 4rem !important;
+        padding-bottom: 6rem !important;
+        margin-top: 2rem !important;
+      }
+      section:has(a.group[href*="video-gallery"]) > div,
+      section:has(a.group[href*="video-gallery"]) .max-w-6xl {
+        margin-top: 0 !important;
       }
       #card-ambient-backdrop,
       .beyond-ambient-backdrop {
@@ -264,8 +387,8 @@
         transform: translate(-50%, -50%) !important;
         width: 100vw !important;
         max-width: 100vw !important;
-        height: 240% !important;
-        min-height: 750px !important;
+        height: 160% !important;
+        min-height: 560px !important;
         z-index: 0 !important;
         overflow: hidden !important;
         pointer-events: none !important;
@@ -275,18 +398,98 @@
         width: 100% !important;
         height: 100% !important;
         object-fit: cover !important;
-        transform: scale(1.05) !important;
-        filter: blur(6px) brightness(0.85) saturate(1.2) !important;
-        opacity: 0.95 !important;
-        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.05) 10%, rgba(0,0,0,0.6) 24%, rgba(0,0,0,1) 38%, rgba(0,0,0,1) 65%, rgba(0,0,0,0.6) 78%, rgba(0,0,0,0.05) 92%, transparent 100%) !important;
-        mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.05) 10%, rgba(0,0,0,0.6) 24%, rgba(0,0,0,1) 38%, rgba(0,0,0,1) 65%, rgba(0,0,0,0.6) 78%, rgba(0,0,0,0.05) 92%, transparent 100%) !important;
+        transform: scale(1.04) !important;
+        filter: blur(6px) brightness(0.9) saturate(1.15) !important;
+        opacity: 0.85 !important;
+        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 14%, rgba(0,0,0,1) 32%, rgba(0,0,0,1) 68%, rgba(0,0,0,0.5) 86%, transparent 100%) !important;
+        mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 14%, rgba(0,0,0,1) 32%, rgba(0,0,0,1) 68%, rgba(0,0,0,0.5) 86%, transparent 100%) !important;
       }
       #card-ambient-backdrop div,
       .beyond-ambient-backdrop div {
         position: absolute !important;
         inset: 0 !important;
-        background: linear-gradient(to bottom, #000000 0%, rgba(0,0,0,0.92) 12%, rgba(0,0,0,0.5) 25%, rgba(0,0,0,0.08) 38%, transparent 46%, transparent 60%, rgba(0,0,0,0.08) 70%, rgba(0,0,0,0.5) 80%, rgba(0,0,0,0.92) 92%, #000000 100%) !important;
+        background: linear-gradient(to bottom, #000000 0%, rgba(0,0,0,0.6) 12%, transparent 28%, transparent 72%, rgba(0,0,0,0.6) 88%, #000000 100%) !important;
         pointer-events: none !important;
+      }
+
+      /* Keep the CTA section crisp, bright and above backdrops */
+      section:has(a[href*="discord"]) {
+        position: relative !important;
+        z-index: 10 !important;
+      }
+      /* Specific targeting for the bottom CTA "Let's build" / "something clickable." headline */
+      footer h2,
+      section:has(a[href*="discord"]) h2,
+      .cta-headline {
+        background: none !important;
+        -webkit-text-fill-color: #ffffff !important;
+        color: #ffffff !important;
+        line-height: 0.9 !important;
+        letter-spacing: -0.04em !important;
+        max-width: 90rem !important;
+        width: 100% !important;
+        text-align: center !important;
+      }
+      @media (min-width: 769px) {
+        footer h2,
+        section:has(a[href*="discord"]) h2,
+        .cta-headline {
+          font-size: clamp(3.5rem, 8vw, 8.5rem) !important;
+        }
+        .cta-pc-line1,
+        .cta-pc-line2,
+        .cta-pc-line3 {
+          display: block !important;
+          width: 100% !important;
+          text-align: center !important;
+          white-space: nowrap !important;
+        }
+        .cta-pc-br {
+          display: inline !important;
+        }
+        .cta-mob-sp {
+          display: none !important;
+        }
+      }
+      @media (max-width: 768px) {
+        footer h2,
+        section:has(a[href*="discord"]) h2,
+        .cta-headline {
+          font-size: clamp(3rem, 13vw, 5rem) !important;
+          line-height: 0.92 !important;
+          letter-spacing: -0.035em !important;
+        }
+        .cta-pc-line1,
+        .cta-pc-line2,
+        .cta-pc-line3 {
+          display: inline !important;
+        }
+        .cta-pc-line1::after,
+        .cta-pc-line2::after {
+          content: " " !important;
+        }
+        .cta-pc-br {
+          display: none !important;
+        }
+        .cta-mob-sp {
+          display: inline !important;
+        }
+      }
+
+      /* Beyond thumbnails heading styling: smaller, spaced out */
+      .beyond-heading,
+      h2.beyond-title,
+      section:has(a[href*="video-gallery"]) h2 {
+        font-size: clamp(1.75rem, 3.8vw, 2.5rem) !important;
+        line-height: 1.15 !important;
+        letter-spacing: -0.005em !important;
+        word-spacing: 0.28em !important;
+        font-weight: 700 !important;
+      }
+      section:has(a[href*="video-gallery"]) h2 span.italic {
+        margin-left: 0.22em !important;
+        display: inline-block !important;
+        font-style: italic !important;
       }
       a[href*="video-gallery"] h3,
       .group h3 {
@@ -342,67 +545,209 @@
         display: none !important;
       }
 
-      /* Remove Instagram, Pinterest and Discord from footer social links
-         (scoped to the <li> pills only, so the nav "Contact" link — which
-         also points to Discord — is not affected) */
-      li:has(a[href*="instagram.com"]),
-      li:has(a[href*="pinterest"]),
-      li:has(a[href*="discord.com"]),
-      li > a[href*="instagram.com"],
-      li > a[href*="pinterest"],
-      li > a[href*="discord.com"] {
-        display: none !important;
+      /* Frosted glass — neatly arranged footer social icon buttons */
+      footer ul {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 0.75rem !important;
+        list-style: none !important;
+        padding: 0 !important;
+        margin: 0 auto !important;
+        max-width: 36rem !important;
       }
-
-      /* Frosted glass — footer social link pills */
+      footer ul li {
+        display: inline-flex !important;
+        flex: 0 0 auto !important;
+        width: auto !important;
+        margin: 0 !important;
+      }
       footer ul li a,
       footer ul a {
-        background: rgba(255, 255, 255, 0.03) !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 2.75rem !important;
+        height: 2.75rem !important;
+        padding: 0 !important;
+        border-radius: 9999px !important;
+        text-decoration: none !important;
+        background: rgba(255, 255, 255, 0.035) !important;
         backdrop-filter: blur(20px) saturate(180%) !important;
         -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-        border: 1px solid rgba(255, 255, 255, 0.05) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
         box-shadow:
-          0 4px 24px rgba(0, 0, 0, 0.35),
-          inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
-        transition: background 0.25s ease, border-color 0.25s ease !important;
+          0 4px 20px rgba(0, 0, 0, 0.4),
+          inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+        transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+                    background 0.25s ease,
+                    border-color 0.25s ease,
+                    box-shadow 0.25s ease !important;
       }
       footer ul li a:hover,
       footer ul a:hover {
-        background: rgba(255, 255, 255, 0.06) !important;
-        border-color: rgba(255, 255, 255, 0.09) !important;
+        background: rgba(255, 255, 255, 0.08) !important;
+        border-color: var(--brand, rgba(255, 255, 255, 0.25)) !important;
+        transform: translateY(-2px) scale(1.06) !important;
+        box-shadow:
+          0 8px 24px -4px var(--brand, rgba(255, 255, 255, 0.3)),
+          inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+      }
+      footer ul li a span:first-child,
+      footer ul a span:first-child {
+        width: 1.85rem !important;
+        height: 1.85rem !important;
+        border-radius: 50% !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-shrink: 0 !important;
+        transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1) !important;
+      }
+      footer ul li a:hover span:first-child,
+      footer ul a:hover span:first-child {
+        transform: scale(1.08) !important;
+      }
+      /* Hide text labels completely to only show social icons */
+      footer ul li a span:not(:first-child),
+      footer ul a span:not(:first-child),
+      footer ul li a span.whitespace-nowrap,
+      footer ul a span.whitespace-nowrap {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        overflow: hidden !important;
+        position: absolute !important;
+      }
+      @media (max-width: 768px) {
+        footer ul {
+          gap: 0.6rem !important;
+          max-width: 22rem !important;
+          padding: 0 0.5rem !important;
+        }
+        footer ul li a,
+        footer ul a {
+          width: 2.5rem !important;
+          height: 2.5rem !important;
+        }
+        footer ul li a span:first-child,
+        footer ul a span:first-child {
+          width: 1.7rem !important;
+          height: 1.7rem !important;
+        }
       }
 
       .feum-nav-link {
-        font-family: 'Satoshi', sans-serif !important;
-        font-weight: 800 !important;
-        letter-spacing: 0.01em !important;
-        text-transform: capitalize !important;
+        font-family: 'OpenSans', 'Poppins', sans-serif !important;
+        font-weight: 700 !important;
+        font-size: 0.98rem !important;
+        letter-spacing: -0.01em !important;
+        text-transform: none !important;
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
         display: inline-flex !important;
         align-items: center !important;
-        padding: 12px 24px !important;
-        border-radius: 0 !important;
+        justify-content: center !important;
+        padding: 0.45rem 1.15rem !important;
+        border-radius: 9999px !important;
         background: transparent !important;
         border: none !important;
-        font-size: 13px !important;
-        font-weight: 500 !important;
-        color: rgba(255,255,255,0.75) !important;
+        outline: none !important;
         text-decoration: none !important;
-        transition: background 0.2s, color 0.2s !important;
+        transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease !important;
         position: relative !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+        text-shadow: none !important;
+        filter: none !important;
       }
       .feum-nav-link:hover {
-        background: rgba(255,255,255,0.13) !important;
-        color: rgba(255,255,255,1) !important;
+        background: rgba(255, 255, 255, 0.14) !important;
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
       }
+      nav .flex.items-center,
       .flex:has(> a.feum-nav-link) {
-        gap: 0 !important;
-        background: rgba(20,20,20,0.72) !important;
-        border: 1px solid rgba(255,255,255,0.12) !important;
-        border-radius: 999px !important;
-        backdrop-filter: blur(24px) saturate(140%) !important;
-        -webkit-backdrop-filter: blur(24px) saturate(140%) !important;
+        gap: 0.35rem !important;
+        background: rgba(255, 255, 255, 0.08) !important;
+        border: none !important;
+        outline: none !important;
+        border-radius: 9999px !important;
+        backdrop-filter: blur(20px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
         overflow: hidden !important;
-        box-shadow: 0 2px 16px rgba(0,0,0,0.5) !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45) !important;
+        padding: 0.4rem 0.6rem !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        flex-shrink: 0 !important;
+      }
+
+      /* Navigation Bar Layout & Positioning */
+      nav.fixed,
+      nav[class*="fixed"] {
+        top: 1.25rem !important;
+        padding: 0 2rem !important;
+        background: transparent !important;
+        max-width: 100% !important;
+      }
+      .feum-nav-logo {
+        height: 32px !important;
+        width: auto !important;
+        mix-blend-mode: screen !important;
+      }
+
+      /* Mobile Navigation Bar Optimizations */
+      @media (max-width: 768px) {
+        nav.fixed,
+        nav[class*="fixed"] {
+          top: 1rem !important;
+          padding: 0 1.25rem !important;
+        }
+        .feum-nav-logo {
+          height: 30px !important;
+        }
+        nav .flex.items-center,
+        .flex:has(> a.feum-nav-link) {
+          padding: 0.35rem 0.45rem !important;
+          gap: 0.2rem !important;
+          border-radius: 9999px !important;
+          border: none !important;
+          outline: none !important;
+          background: rgba(255, 255, 255, 0.08) !important;
+          backdrop-filter: blur(20px) saturate(180%) !important;
+          -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45) !important;
+        }
+        .feum-nav-link {
+          padding: 0.4rem 0.9rem !important;
+          font-size: 0.92rem !important;
+          font-weight: 700 !important;
+          white-space: nowrap !important;
+          letter-spacing: -0.01em !important;
+        }
+      }
+      @media (max-width: 380px) {
+        nav.fixed,
+        nav[class*="fixed"] {
+          top: 0.85rem !important;
+          padding: 0 1rem !important;
+        }
+        .feum-nav-logo {
+          height: 28px !important;
+        }
+        .flex:has(> a.feum-nav-link),
+        nav .flex.items-center {
+          padding: 0.3rem 0.4rem !important;
+          gap: 0.15rem !important;
+        }
+        .feum-nav-link {
+          padding: 0.35rem 0.75rem !important;
+          font-size: 0.85rem !important;
+        }
       }
 
       *:has(> .toolkit-glow) {
@@ -426,9 +771,22 @@
         .grid.gap-y-14 { row-gap: 1.75rem !important; }
       }
 
-      @media (max-width: 767px) {
-        ::-webkit-scrollbar { display: none !important; }
-        body { -ms-overflow-style: none !important; scrollbar-width: none !important; }
+      @media (max-width: 768px) {
+        html, body, #root, *, *::before, *::after {
+          -ms-overflow-style: none !important;
+          scrollbar-width: none !important;
+        }
+        ::-webkit-scrollbar {
+          display: none !important;
+          width: 0 !important;
+          height: 0 !important;
+          background: transparent !important;
+        }
+        ::-webkit-scrollbar-thumb,
+        ::-webkit-scrollbar-track {
+          display: none !important;
+          background: transparent !important;
+        }
 
         .grid.gap-y-14 {
           grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
@@ -603,7 +961,7 @@
 
     </style>
 
-    <script defer src="./assets/index-CESmVvPT.js?v=4"></script>
+    <script defer src="./assets/index-CESmVvPT.js?v=19"></script>
 
     <script>
       (function(){
@@ -625,7 +983,7 @@
     </script>
 
     <script defer src="./perf.js"></script>
-    <script defer src="./feum-edits.js"></script>
+    <script defer src="./feum-edits.js?v=19"></script>
 
     <script>
       (function() {
@@ -644,7 +1002,7 @@
           wrap.className = 'feum-nav-logo-wrap';
           var img = document.createElement('img');
           img.src = './assets/falw-logo-new.png';
-          img.alt = 'falw*';
+          img.alt = 'fre';
           img.className = 'feum-nav-logo';
           wrap.appendChild(img);
           logo.parentNode.replaceChild(wrap, logo);
@@ -665,7 +1023,7 @@
           wrap.className = 'feum-hero-logo-wrap';
           var img = document.createElement('img');
           img.src = './assets/falw-logo-new.png';
-          img.alt = 'falw*';
+          img.alt = 'fre';
           img.className = 'feum-hero-logo';
           wrap.appendChild(img);
           h1.parentNode.replaceChild(wrap, h1);
@@ -850,14 +1208,15 @@
     #root { opacity: 0; }
     #root.feum-ready { opacity: 1; transition: opacity 0.25s ease; }
     /* nav pill — applied immediately so it's correct from first paint */
-    a.feum-nav-link { filter: none !important; text-shadow: none !important; }
-    nav .flex.items-center {
+    a.feum-nav-link { filter: none !important; text-shadow: none !important; white-space: nowrap !important; }
+    nav .flex.items-center,
+    .flex:has(> a.feum-nav-link) {
       background: rgba(255,255,255,0.06) !important;
       backdrop-filter: blur(18px) saturate(180%) !important;
       -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
-      border: none !important;
+      border: 1px solid rgba(255,255,255,0.08) !important;
       border-radius: 999px !important;
-      padding: 0.4rem 1.25rem !important;
+      padding: 4px !important;
       box-shadow: none !important;
       outline: none !important;
     }
@@ -978,7 +1337,7 @@
     <div id="site-preloader" aria-hidden="true">
       <div class="preloader-content">
         <div class="preloader-glow"></div>
-        <img src="./assets/falw-logo-new.png" alt="falw" class="preloader-logo" />
+        <img src="./assets/falw-logo-new.png" alt="fre" class="preloader-logo" />
         <div class="preloader-track">
           <div class="preloader-bar"></div>
         </div>
