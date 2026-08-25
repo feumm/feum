@@ -1,6 +1,6 @@
 {
-  "name": "",
-  "description": "",
+  "name": "feum - Thumbnail Designer",
+  "description": "Professional Minecraft thumbnail designer and video editing portfolio.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

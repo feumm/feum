@@ -30,8 +30,8 @@
   /* ── 1. Social footer links ──────────────────────────────── */
   var SOCIAL_LINKS = {
     youtube:   'https://www.youtube.com/@fldrz',
-    instagram: 'https://www.instagram.com/0fldr',
-    behance:   'https://www.behance.net/fre',
+    instagram: 'https://www.instagram.com/@0fldr',
+    behance:   'https://be.net/fre',
     discord:   'https://discord.com/users/1071929676223762452',
     pinterest: 'https://pinterest.com/2fldr',
     gumroad:   'https://fldrz.gumroad.com',
@@ -83,6 +83,13 @@
       url:  'https://youtube.com/@Unliving',
       img:  'https://yt3.googleusercontent.com/OzSNhPDusgmpyjofuGWrz5Luna8fawDWI0XUNlWF8-71ODpz2WdnTxPuuejNtJ5qBQF9uSYn=s200-c-k-c0x00ffffff-no-rj',
       glow: 'rgba(99, 102, 241, 0.55)'
+    },
+    {
+      name: 'Reddoons',
+      subs: '752K Subscribers',
+      url:  'https://youtube.com/@reddoons',
+      img:  './assets/reddoons.jpg',
+      glow: 'rgba(239, 68, 68, 0.55)'
     }
     /* Add more creators here:
     {
@@ -150,18 +157,22 @@
     var links = document.querySelectorAll('footer a, [class*="footer"] a, ul li a');
     links.forEach(function(a) {
       var href = (a.getAttribute('href') || '').toLowerCase();
-      if (href.includes('youtube.com/@fldrz') && SOCIAL_LINKS.youtube)
+      if ((href.includes('youtube.com') || href.includes('youtu.be')) && !href.includes('watch') && SOCIAL_LINKS.youtube)
         a.href = SOCIAL_LINKS.youtube;
-      if (href.includes('instagram.com/0fldr') && SOCIAL_LINKS.instagram)
+      if (href.includes('instagram.com') && SOCIAL_LINKS.instagram)
         a.href = SOCIAL_LINKS.instagram;
-      if (href.includes('behance.net/fre') && SOCIAL_LINKS.behance)
+      if ((href.includes('behance.net') || href.includes('be.net')) && !href.includes('/gallery/') && SOCIAL_LINKS.behance)
         a.href = SOCIAL_LINKS.behance;
       if (href.includes('discord.com/') && SOCIAL_LINKS.discord)
         a.href = SOCIAL_LINKS.discord;
-      if (href.includes('pinterest.com/2fldr') && SOCIAL_LINKS.pinterest)
+      if (href.includes('pinterest.com') && SOCIAL_LINKS.pinterest)
         a.href = SOCIAL_LINKS.pinterest;
-      if (href.includes('fldrz.gumroad.com') && SOCIAL_LINKS.gumroad)
+      if (href.includes('gumroad.com') && SOCIAL_LINKS.gumroad)
         a.href = SOCIAL_LINKS.gumroad;
+      if ((href.includes('twitter.com') || href.includes('x.com')) && SOCIAL_LINKS.twitter)
+        a.href = SOCIAL_LINKS.twitter;
+      if (href.includes('link.me') && SOCIAL_LINKS.linkme)
+        a.href = SOCIAL_LINKS.linkme;
     });
     /* View more link */
     document.querySelectorAll('a.view-more-link').forEach(function(a) {
@@ -277,8 +288,14 @@
       var groupSize = 4;
       var numGroups = Math.floor(links.length / groupSize);
       for (var r = numGroups - 1; r >= 0; r--) {
-        var insertAfter = links[r * groupSize + groupSize - 1];
-        CREATORS.slice().reverse().forEach(function(creator) {
+        var groupLinks = links.slice(r * groupSize, (r + 1) * groupSize);
+        var sharpnessCard = groupLinks.find(function(l) {
+          return (l.textContent || '').includes('Sharpness') || (l.href || '').includes('sharpnessyt');
+        });
+        var reddoonsCreator = CREATORS.find(function(c) { return c.name === 'Reddoons'; });
+        var otherCreators = CREATORS.filter(function(c) { return c.name !== 'Reddoons'; });
+
+        function createEl(creator) {
           var a = document.createElement('a');
           a.href = creator.url;
           a.target = '_blank';
@@ -293,7 +310,16 @@
               '<span class="font-semibold text-sm">' + creator.name + '</span>' +
               '<span class="text-xs text-muted-foreground">' + creator.subs + '</span>' +
             '</span>';
-          insertAfter.insertAdjacentElement('afterend', a);
+          return a;
+        }
+
+        if (sharpnessCard && reddoonsCreator) {
+          sharpnessCard.insertAdjacentElement('afterend', createEl(reddoonsCreator));
+        }
+
+        var insertAfter = groupLinks[groupLinks.length - 1];
+        otherCreators.slice().reverse().forEach(function(creator) {
+          insertAfter.insertAdjacentElement('afterend', createEl(creator));
         });
       }
     });
@@ -558,49 +584,346 @@
   /* Rename "Contact" nav link → "Hire Me" */
   function renameNavContact() {
     document.querySelectorAll('a.feum-nav-link').forEach(function(a) {
-      if ((a.textContent || '').trim() === 'Contact') {
+      var t = (a.textContent || '').trim().toLowerCase();
+      if (t === 'contact') {
         a.textContent = 'Hire Me';
+      } else if (t === 'edits' || t === 'shop') {
+        a.remove();
       }
     });
   }
 
-  /* Ensure nav has Edits, Shop, and Hire Me links */
+  /* ── Hire / Contact Modal ────────────────────────────────── */
+  function openHireModal(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    if (e && e.stopPropagation) e.stopPropagation();
+    
+    var modal = document.getElementById('feum-hire-modal');
+    if (!modal) {
+      injectHireModal();
+      modal = document.getElementById('feum-hire-modal');
+    }
+    if (modal) {
+      var formView = modal.querySelector('#feum-modal-form-view');
+      var successView = modal.querySelector('#feum-modal-success-view');
+      if (formView) {
+        formView.classList.remove('feum-hidden');
+        formView.style.display = 'block';
+      }
+      if (successView) {
+        successView.classList.remove('feum-show');
+        successView.style.display = 'none';
+      }
+      
+      // Trigger smooth spring animation
+      modal.style.display = 'flex';
+      void modal.offsetWidth; // force reflow
+      
+      requestAnimationFrame(function() {
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      });
+    }
+  }
+
+  function closeHireModal(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    if (e && e.stopPropagation) e.stopPropagation();
+    var modal = document.getElementById('feum-hire-modal');
+    if (modal) {
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+  }
+
+  function isHireModalOpen() {
+    var modal = document.getElementById('feum-hire-modal');
+    return modal && modal.classList.contains('active');
+  }
+
+  window.openHireModal = openHireModal;
+  window.closeHireModal = closeHireModal;
+
+  function injectHireModal() {
+    var existing = document.getElementById('feum-hire-modal');
+    if (existing) {
+      attachModalEvents(existing);
+      return;
+    }
+
+    var modal = document.createElement('div');
+    modal.id = 'feum-hire-modal';
+    modal.className = 'feum-hire-modal';
+    modal.setAttribute('aria-hidden', 'true');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-labelledby', 'feum-modal-title');
+
+    modal.innerHTML = 
+      '<div class="feum-modal-overlay" id="feum-modal-overlay" onclick="window.closeHireModal(event)"></div>' +
+      '<div class="feum-modal-container">' +
+        '<div class="feum-modal-card">' +
+          '<button type="button" class="feum-modal-close" id="feum-modal-close-btn" aria-label="Close modal" onclick="window.closeHireModal(event)">' +
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>' +
+          '</button>' +
+          
+          '<div id="feum-modal-form-view" class="feum-modal-form-view">' +
+            '<div class="feum-modal-header">' +
+              '<h3 id="feum-modal-title" class="feum-modal-title">Let\'s Work Together</h3>' +
+              '<p class="feum-modal-subtitle">Send a message or reach out directly on Discord to discuss your project.</p>' +
+            '</div>' +
+
+            '<div class="feum-modal-discord-wrap">' +
+              '<a href="https://discord.com/users/1071929676223762452" target="_blank" rel="noopener noreferrer" class="feum-modal-discord-btn">' +
+                '<div class="feum-discord-left">' +
+                  '<svg class="feum-discord-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.893.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>' +
+                  '<span>Chat on Discord</span>' +
+                  '<span class="feum-discord-badge">FASTEST</span>' +
+                '</div>' +
+                '<svg class="feum-arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' +
+              '</a>' +
+            '</div>' +
+
+            '<div class="feum-modal-divider">' +
+              '<span>OR SEND A MESSAGE</span>' +
+            '</div>' +
+
+            '<form id="feum-hire-form" class="feum-hire-form">' +
+              '<div class="feum-form-group">' +
+                '<label for="feum-hire-email" class="feum-form-label">Your Email <span class="feum-req">*</span></label>' +
+                '<input type="email" id="feum-hire-email" name="email" required placeholder="your.email@example.com" class="feum-modal-input" autocomplete="email" />' +
+              '</div>' +
+              '<div class="feum-form-group">' +
+                '<label for="feum-hire-name" class="feum-form-label">Your Name / Handle</label>' +
+                '<input type="text" id="feum-hire-name" name="name" placeholder="Name or channel handle (optional)" class="feum-modal-input" autocomplete="name" />' +
+              '</div>' +
+              '<div class="feum-form-group">' +
+                '<label for="feum-hire-message" class="feum-form-label">What do you need? <span class="feum-req">*</span></label>' +
+                '<textarea id="feum-hire-message" name="message" required rows="3" placeholder="Describe your video project, editing style, timeline, or details..." class="feum-modal-input feum-modal-textarea"></textarea>' +
+              '</div>' +
+              '<button type="submit" id="feum-hire-submit-btn" class="feum-modal-submit-btn">' +
+                '<span class="feum-submit-label">Send Message</span>' +
+                '<svg class="feum-submit-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>' +
+              '</button>' +
+            '</form>' +
+          '</div>' +
+
+          /* Success state (strictly hidden by default) */
+          '<div id="feum-modal-success-view" class="feum-modal-success-view">' +
+            '<div class="feum-success-icon-wrap">' +
+              '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>' +
+            '</div>' +
+            '<h3 class="feum-success-title">Message Sent!</h3>' +
+            '<p class="feum-success-desc" id="feum-success-msg">Thank you for reaching out! Your message has been sent successfully. I will get back to you shortly.</p>' +
+            '<div class="feum-success-actions">' +
+              '<button type="button" class="feum-modal-submit-btn" onclick="window.closeHireModal(event)">Done</button>' +
+              '<button type="button" class="feum-modal-secondary-btn" id="feum-reset-form-btn">Send Another Message</button>' +
+            '</div>' +
+          '</div>' +
+
+        '</div>' +
+      '</div>';
+
+    document.body.appendChild(modal);
+    attachModalEvents(modal);
+  }
+
+  function attachModalEvents(modal) {
+    if (!modal) return;
+    var closeBtn = modal.querySelector('#feum-modal-close-btn');
+    var overlay = modal.querySelector('#feum-modal-overlay');
+    var form = modal.querySelector('#feum-hire-form');
+    var resetBtn = modal.querySelector('#feum-reset-form-btn');
+    var formView = modal.querySelector('#feum-modal-form-view');
+    var successView = modal.querySelector('#feum-modal-success-view');
+
+    if (closeBtn) {
+      closeBtn.onclick = function(e) {
+        closeHireModal(e);
+      };
+    }
+    if (overlay) {
+      overlay.onclick = function(e) {
+        closeHireModal(e);
+      };
+    }
+
+    if (resetBtn) {
+      resetBtn.onclick = function(e) {
+        e.preventDefault();
+        if (form) form.reset();
+        if (formView) {
+          formView.classList.remove('feum-hidden');
+          formView.style.display = 'block';
+        }
+        if (successView) {
+          successView.classList.remove('feum-show');
+          successView.style.display = 'none';
+        }
+      };
+    }
+
+    if (form && !form.dataset.attached) {
+      form.dataset.attached = 'true';
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var submitBtn = modal.querySelector('#feum-hire-submit-btn');
+        var nameInput = modal.querySelector('#feum-hire-name');
+        var emailInput = modal.querySelector('#feum-hire-email');
+        var messageInput = modal.querySelector('#feum-hire-message');
+
+        var email = (emailInput ? emailInput.value : '').trim();
+        var name = (nameInput ? nameInput.value : '').trim() || email;
+        var message = (messageInput ? messageInput.value : '').trim();
+
+        if (!email || !message) return;
+
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = '<span class="feum-spinner"></span><span>Sending...</span>';
+        }
+
+        var payload = {
+          name: name,
+          email: email,
+          message: message,
+          _subject: 'New Project Inquiry from ' + name + ' (feum portfolio)',
+          _template: 'box',
+          _captcha: 'false'
+        };
+
+        /* Send email directly to recipient via FormSubmit AJAX */
+        fetch('https://formsubmit.co/ajax/hundredrackies@gmail.com', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        })
+        .then(function(res) {
+          return res.json().catch(function() { return { success: true }; });
+        })
+        .then(function(data) {
+          showSuccess();
+        })
+        .catch(function(err) {
+          /* Fallback: construct mailto trigger */
+          var mailtoUrl = 'mailto:hundredrackies@gmail.com?subject=' + encodeURIComponent('Project Inquiry from ' + name) +
+                          '&body=' + encodeURIComponent('From: ' + name + ' (' + email + ')\n\n' + message);
+          var a = document.createElement('a');
+          a.href = mailtoUrl;
+          a.style.display = 'none';
+          document.body.appendChild(a);
+          a.click();
+          setTimeout(function() { document.body.removeChild(a); }, 100);
+
+          showSuccess();
+        })
+        .finally(function() {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<span class="feum-submit-label">Send Message</span><svg class="feum-submit-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>';
+          }
+        });
+      });
+    }
+
+    function showSuccess() {
+      if (formView) {
+        formView.classList.add('feum-hidden');
+        formView.style.display = 'none';
+      }
+      if (successView) {
+        successView.classList.add('feum-show');
+        successView.style.display = 'flex';
+      }
+    }
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && isHireModalOpen()) {
+      closeHireModal(e);
+    }
+  });
+
+  /* Global click interceptor for Hire / Contact triggers */
+  document.addEventListener('click', function(e) {
+    var target = e.target;
+    var a = target.closest('a, button');
+    if (!a) return;
+
+    /* Don't intercept clicks inside the hire modal itself */
+    if (a.closest('#feum-hire-modal')) return;
+
+    var text = (a.textContent || '').trim().toLowerCase();
+    var href = a.getAttribute('href') || '';
+
+    var isHireLink = a.classList.contains('feum-nav-link') ||
+                     a.classList.contains('nav-cta') ||
+                     a.classList.contains('cta-btn') ||
+                     a.classList.contains('cta-button') ||
+                     text === 'hire me' ||
+                     text === 'hire' ||
+                     text.includes("let's work together") ||
+                     text.includes('start a project') ||
+                     href.includes('discord.com/users/1071929676223762452');
+
+    if (isHireLink) {
+      e.preventDefault();
+      e.stopPropagation();
+      openHireModal(e);
+    }
+  }, true);
+
+  /* Ensure nav has ONLY the Hire Me link */
   function ensureNavLinks() {
     var navContainer = document.querySelector('nav .flex.items-center, nav div[class*="items-center"]');
     if (!navContainer) return;
 
     var expected = [
-      { text: 'Edits', href: './video-gallery.html', target: false },
-      { text: 'Shop', href: 'https://feumm.github.io/feumvis', target: true },
-      { text: 'Hire Me', href: 'https://discord.com/users/1071929676223762452', target: true }
+      { text: 'Hire Me', href: '#hire', target: false }
     ];
 
-    var currentLinks = Array.from(navContainer.querySelectorAll('a.feum-nav-link'));
+    var currentLinks = Array.from(navContainer.querySelectorAll('a.feum-nav-link, a'));
     
-    /* Rename any Contact to Hire Me */
+    /* Remove Edits and Shop */
     currentLinks.forEach(function(a) {
-      var t = (a.textContent || '').trim();
-      if (t.toLowerCase() === 'contact') {
+      var t = (a.textContent || '').trim().toLowerCase();
+      var href = a.getAttribute('href') || '';
+      if (t === 'edits' || t === 'shop' || href.includes('video-gallery') || href.includes('feumvis')) {
+        a.remove();
+      } else if (t === 'contact' || t === 'hire me') {
         a.textContent = 'Hire Me';
+        a.href = '#hire';
+        a.removeAttribute('target');
+        a.removeAttribute('rel');
+        a.onclick = function(e) {
+          e.preventDefault();
+          openHireModal(e);
+        };
       }
     });
 
-    /* Check if all 3 links exist */
-    var hasEdits = currentLinks.some(function(a) { return (a.textContent || '').trim() === 'Edits' || (a.getAttribute('href') || '').includes('video-gallery'); });
-    var hasShop = currentLinks.some(function(a) { return (a.textContent || '').trim().toLowerCase() === 'shop' || (a.getAttribute('href') || '').includes('feumvis'); });
-    var hasHireMe = currentLinks.some(function(a) { return (a.textContent || '').trim().toLowerCase() === 'hire me' || (a.textContent || '').trim().toLowerCase() === 'contact' || (a.getAttribute('href') || '').includes('discord'); });
+    var remaining = Array.from(navContainer.querySelectorAll('a.feum-nav-link, a'));
+    var hasHireMe = remaining.some(function(a) { 
+      var t = (a.textContent || '').trim().toLowerCase();
+      return t === 'hire me'; 
+    });
 
-    if (!hasEdits || !hasShop || !hasHireMe) {
+    if (!hasHireMe || remaining.length !== 1) {
       navContainer.innerHTML = '';
       expected.forEach(function(item) {
         var a = document.createElement('a');
         a.href = item.href;
-        if (item.target) {
-          a.target = '_blank';
-          a.rel = 'noopener noreferrer';
-        }
         a.className = 'text-base md:text-lg font-medium leading-none text-white/75 hover:text-white transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] feum-nav-link';
         a.textContent = item.text;
+        a.onclick = function(e) {
+          e.preventDefault();
+          openHireModal(e);
+        };
         navContainer.appendChild(a);
       });
     }
@@ -1065,14 +1388,64 @@
     s.textContent =
       'a.feum-nav-link { filter: none !important; text-shadow: none !important; font-family: \'OpenSans\',\'Poppins\',sans-serif !important; font-weight: 700 !important; font-size: 0.98rem !important; border-radius: 9999px !important; letter-spacing: -0.01em !important; white-space: nowrap !important; line-height: 1.2 !important; padding: 0.45rem 1.15rem !important; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; text-transform: none !important; transition: background 0.2s ease, color 0.2s ease !important; border: none !important; outline: none !important; background: transparent !important; }' +
       'a.feum-nav-link:hover { background: rgba(255, 255, 255, 0.14) !important; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; }' +
-      'nav .flex.items-center, .flex:has(> a.feum-nav-link) { background: rgba(255, 255, 255, 0.08) !important; backdrop-filter: blur(20px) saturate(180%) !important; -webkit-backdrop-filter: blur(20px) saturate(180%) !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; outline: none !important; border-radius: 9999px !important; padding: 0.4rem 0.6rem !important; gap: 0.35rem !important; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45) !important; display: inline-flex !important; align-items: center !important; }' +
+      'nav .flex.items-center, .flex:has(> a.feum-nav-link) { background: rgba(255, 255, 255, 0.05) !important; backdrop-filter: blur(20px) saturate(180%) !important; -webkit-backdrop-filter: blur(20px) saturate(180%) !important; border: none !important; outline: none !important; border-radius: 9999px !important; padding: 0.4rem 0.6rem !important; gap: 0.35rem !important; box-shadow: none !important; display: inline-flex !important; align-items: center !important; }' +
       'nav.fixed, nav[class*="fixed"] { top: 1.25rem !important; padding: 0 2rem !important; background: transparent !important; }' +
       '.feum-nav-logo { height: 32px !important; width: auto !important; mix-blend-mode: screen !important; }' +
-      '@media (max-width: 768px) { nav.fixed, nav[class*="fixed"] { top: 1rem !important; padding: 0 1.25rem !important; } .feum-nav-logo { height: 30px !important; } nav .flex.items-center, .flex:has(> a.feum-nav-link) { padding: 0.35rem 0.45rem !important; gap: 0.2rem !important; border-radius: 9999px !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; outline: none !important; background: rgba(255, 255, 255, 0.08) !important; backdrop-filter: blur(20px) saturate(180%) !important; -webkit-backdrop-filter: blur(20px) saturate(180%) !important; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45) !important; } a.feum-nav-link { padding: 0.4rem 0.9rem !important; font-size: 0.92rem !important; font-weight: 700 !important; } html, body, #root, *, *::before, *::after { -ms-overflow-style: none !important; scrollbar-width: none !important; } ::-webkit-scrollbar, ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-track { display: none !important; width: 0 !important; height: 0 !important; background: transparent !important; } }' +
+      '@media (max-width: 768px) { nav.fixed, nav[class*="fixed"] { top: 1rem !important; padding: 0 1.25rem !important; } .feum-nav-logo { height: 30px !important; } nav .flex.items-center, .flex:has(> a.feum-nav-link) { padding: 0.35rem 0.45rem !important; gap: 0.2rem !important; border-radius: 9999px !important; border: none !important; outline: none !important; background: rgba(255, 255, 255, 0.05) !important; backdrop-filter: blur(20px) saturate(180%) !important; -webkit-backdrop-filter: blur(20px) saturate(180%) !important; box-shadow: none !important; } a.feum-nav-link { padding: 0.4rem 0.9rem !important; font-size: 0.92rem !important; font-weight: 700 !important; } html, body, #root, *, *::before, *::after { -ms-overflow-style: none !important; scrollbar-width: none !important; } ::-webkit-scrollbar, ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-track { display: none !important; width: 0 !important; height: 0 !important; background: transparent !important; } }' +
       '@media (max-width: 380px) { nav.fixed, nav[class*="fixed"] { top: 0.85rem !important; padding: 0 1rem !important; } .feum-nav-logo { height: 28px !important; } nav .flex.items-center, .flex:has(> a.feum-nav-link) { padding: 0.3rem 0.4rem !important; gap: 0.15rem !important; } a.feum-nav-link { padding: 0.35rem 0.75rem !important; font-size: 0.85rem !important; } }' +
       /* Remove bottom-to-top gradient on main gallery thumbnails only */
       '[class*="from-black/45"][class*="bg-gradient-to-t"] { display: none !important; }' +
-      '.feum-hero-bg img, .feum-hero-bg > img { display: none !important; opacity: 0 !important; visibility: hidden !important; }';
+      '.feum-hero-bg img, .feum-hero-bg > img { display: none !important; opacity: 0 !important; visibility: hidden !important; }' +
+      /* ── Hire / Contact Modal Styles (Pure Black & White Frosted Glass with Spring Popup) ── */
+      '.feum-hire-modal { position: fixed !important; inset: 0 !important; z-index: 999999999 !important; display: flex !important; align-items: center !important; justify-content: center !important; padding: 1.25rem !important; pointer-events: none !important; opacity: 0 !important; visibility: hidden !important; transition: opacity 0.32s cubic-bezier(0.32, 0.72, 0, 1), visibility 0.32s cubic-bezier(0.32, 0.72, 0, 1) !important; box-sizing: border-box !important; }' +
+      '.feum-hire-modal.active { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }' +
+      '.feum-modal-overlay { position: fixed !important; inset: 0 !important; background: rgba(0, 0, 0, 0.8) !important; backdrop-filter: blur(16px) saturate(100%) !important; -webkit-backdrop-filter: blur(16px) saturate(100%) !important; z-index: 1 !important; cursor: pointer !important; opacity: 0 !important; transition: opacity 0.32s cubic-bezier(0.32, 0.72, 0, 1), backdrop-filter 0.32s ease, -webkit-backdrop-filter 0.32s ease !important; }' +
+      '.feum-hire-modal.active .feum-modal-overlay { opacity: 1 !important; }' +
+      '.feum-modal-container { position: relative !important; z-index: 2 !important; width: 100% !important; max-width: 460px !important; display: flex !important; justify-content: center !important; }' +
+      '.feum-modal-card { position: relative !important; width: 100% !important; background: rgba(14, 14, 14, 0.95) !important; backdrop-filter: blur(36px) saturate(100%) !important; -webkit-backdrop-filter: blur(36px) saturate(100%) !important; border: none !important; outline: none !important; border-radius: 24px !important; padding: 2.25rem 2rem 1.85rem !important; box-shadow: 0 25px 80px rgba(0, 0, 0, 0.95) !important; opacity: 0 !important; transform: scale(0.92) translateY(18px) !important; transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.28s cubic-bezier(0.32, 0.72, 0, 1) !important; box-sizing: border-box !important; color: #ffffff !important; font-family: \'OpenSans\', \'Poppins\', sans-serif !important; will-change: transform, opacity !important; }' +
+      '.feum-hire-modal.active .feum-modal-card { opacity: 1 !important; transform: scale(1) translateY(0) !important; transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1) !important; }' +
+      '.feum-modal-close { position: absolute !important; top: 1.25rem !important; right: 1.25rem !important; width: 34px !important; height: 34px !important; border-radius: 50% !important; background: rgba(255, 255, 255, 0.08) !important; border: none !important; outline: none !important; color: #ffffff !important; cursor: pointer !important; display: flex !important; align-items: center !important; justify-content: center !important; transition: all 0.2s ease !important; z-index: 10 !important; }' +
+      '.feum-modal-close:hover { background: rgba(255, 255, 255, 0.22) !important; color: #ffffff !important; transform: scale(1.08) !important; }' +
+      '.feum-modal-close:active { transform: scale(0.95) !important; }' +
+      '.feum-modal-header { text-align: left !important; margin-bottom: 1.25rem !important; padding-right: 2rem !important; }' +
+      '.feum-modal-title { font-family: \'Clash Display\', \'OpenSans\', sans-serif !important; font-size: 1.65rem !important; font-weight: 700 !important; letter-spacing: -0.03em !important; color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; margin: 0 0 0.35rem 0 !important; line-height: 1.15 !important; }' +
+      '.feum-modal-subtitle { font-size: 0.85rem !important; color: rgba(255, 255, 255, 0.6) !important; margin: 0 !important; line-height: 1.45 !important; }' +
+      '.feum-modal-discord-wrap { margin-bottom: 1rem !important; }' +
+      '.feum-modal-discord-btn { display: flex !important; align-items: center !important; justify-content: space-between !important; padding: 0.75rem 1.15rem !important; border-radius: 14px !important; background: rgba(255, 255, 255, 0.06) !important; border: none !important; outline: none !important; color: #ffffff !important; text-decoration: none !important; transition: all 0.2s ease !important; font-weight: 600 !important; font-size: 0.88rem !important; }' +
+      '.feum-modal-discord-btn:hover { background: rgba(255, 255, 255, 0.12) !important; transform: translateY(-1px) !important; color: #ffffff !important; }' +
+      '.feum-discord-left { display: flex !important; align-items: center !important; gap: 0.65rem !important; }' +
+      '.feum-discord-icon { width: 20px !important; height: 20px !important; color: #ffffff !important; flex-shrink: 0 !important; }' +
+      '.feum-discord-badge { font-size: 0.65rem !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: 0.05em !important; padding: 0.15rem 0.45rem !important; border-radius: 9999px !important; background: rgba(255, 255, 255, 0.15) !important; color: #ffffff !important; }' +
+      '.feum-arrow-icon { color: rgba(255, 255, 255, 0.4) !important; transition: transform 0.2s ease, color 0.2s ease !important; }' +
+      '.feum-modal-discord-btn:hover .feum-arrow-icon { transform: translateX(3px) !important; color: #ffffff !important; }' +
+      '.feum-modal-divider { display: flex !important; align-items: center !important; text-align: center !important; margin: 1rem 0 !important; color: rgba(255, 255, 255, 0.4) !important; font-size: 0.68rem !important; font-weight: 700 !important; letter-spacing: 0.08em !important; }' +
+      '.feum-modal-divider::before, .feum-modal-divider::after { content: \'\' !important; flex: 1 !important; border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important; }' +
+      '.feum-modal-divider span { padding: 0 0.75rem !important; }' +
+      '.feum-modal-form-view { display: block !important; }' +
+      '.feum-modal-form-view.feum-hidden { display: none !important; }' +
+      '.feum-hire-form { display: flex !important; flex-direction: column !important; gap: 0.75rem !important; text-align: left !important; }' +
+      '.feum-form-group { display: flex !important; flex-direction: column !important; gap: 0.35rem !important; }' +
+      '.feum-form-label { font-size: 0.78rem !important; font-weight: 600 !important; color: rgba(255, 255, 255, 0.8) !important; letter-spacing: 0.01em !important; }' +
+      '.feum-req { color: rgba(255, 255, 255, 0.6) !important; font-weight: 700 !important; }' +
+      '.feum-modal-input { width: 100% !important; background: rgba(255, 255, 255, 0.06) !important; border: none !important; outline: none !important; border-radius: 12px !important; padding: 0.68rem 0.85rem !important; color: #ffffff !important; font-size: 0.88rem !important; font-family: inherit !important; box-sizing: border-box !important; transition: all 0.2s ease !important; }' +
+      '.feum-modal-input:focus { background: rgba(255, 255, 255, 0.1) !important; box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35) !important; }' +
+      '.feum-modal-input::placeholder { color: rgba(255, 255, 255, 0.35) !important; }' +
+      '.feum-modal-textarea { resize: vertical !important; min-height: 80px !important; max-height: 180px !important; }' +
+      '.feum-modal-submit-btn { display: inline-flex !important; align-items: center !important; justify-content: center !important; gap: 0.5rem !important; width: 100% !important; padding: 0.8rem 1.25rem !important; border-radius: 14px !important; background: #ffffff !important; border: none !important; outline: none !important; color: #000000 !important; font-size: 0.92rem !important; font-weight: 700 !important; cursor: pointer !important; transition: all 0.2s ease !important; box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15) !important; }' +
+      '.feum-modal-submit-btn:hover { background: #e8e8e8 !important; transform: translateY(-1px) !important; color: #000000 !important; box-shadow: 0 6px 24px rgba(255, 255, 255, 0.22) !important; }' +
+      '.feum-modal-submit-btn:active { background: #d4d4d4 !important; transform: translateY(0) !important; }' +
+      '.feum-modal-submit-btn:disabled { opacity: 0.65 !important; cursor: not-allowed !important; transform: none !important; }' +
+      '.feum-modal-success-view { display: none !important; flex-direction: column !important; align-items: center !important; text-align: center !important; padding: 1.25rem 0 !important; gap: 0.85rem !important; }' +
+      '.feum-modal-success-view.feum-show { display: flex !important; }' +
+      '.feum-success-icon-wrap { width: 56px !important; height: 56px !important; border-radius: 50% !important; background: rgba(255, 255, 255, 0.1) !important; display: flex !important; align-items: center !important; justify-content: center !important; margin-bottom: 0.25rem !important; }' +
+      '.feum-success-title { font-size: 1.45rem !important; font-weight: 700 !important; color: #ffffff !important; margin: 0 !important; letter-spacing: -0.02em !important; font-family: \'Clash Display\', \'OpenSans\', sans-serif !important; }' +
+      '.feum-success-desc { font-size: 0.86rem !important; color: rgba(255, 255, 255, 0.65) !important; margin: 0 !important; line-height: 1.5 !important; max-width: 340px !important; }' +
+      '.feum-success-actions { display: flex !important; flex-direction: column !important; gap: 0.5rem !important; width: 100% !important; margin-top: 0.75rem !important; }' +
+      '.feum-modal-secondary-btn { width: 100% !important; padding: 0.65rem 1rem !important; border-radius: 12px !important; background: rgba(255, 255, 255, 0.08) !important; border: none !important; outline: none !important; color: #ffffff !important; font-size: 0.82rem !important; font-weight: 600 !important; cursor: pointer !important; transition: all 0.2s ease !important; }' +
+      '.feum-modal-secondary-btn:hover { background: rgba(255, 255, 255, 0.15) !important; color: #ffffff !important; }' +
+      '.feum-spinner { display: inline-block !important; width: 14px !important; height: 14px !important; border: 2px solid rgba(0, 0, 0, 0.3) !important; border-radius: 50% !important; border-top-color: #000000 !important; animation: feum-spin 0.8s linear infinite !important; margin-right: 0.4rem !important; }' +
+      '@keyframes feum-spin { to { transform: rotate(360deg); } }' +
+      '@media (max-width: 480px) { .feum-modal-card { padding: 1.85rem 1.25rem 1.4rem !important; border-radius: 22px !important; } .feum-modal-title { font-size: 1.45rem !important; } }';
     document.head.appendChild(s);
   })();
 
@@ -1081,6 +1454,7 @@
   var showMoreApplied = false;
   var footerLogoPatched = false;
   function runPatches() {
+    injectHireModal();
     patchSocialLinks();
     if (!footerLogoPatched) footerLogoPatched = patchFooterLogo();
     patchThumbnails();

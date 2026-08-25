@@ -29,12 +29,14 @@
 (function () {
   /* ── 1. Social footer links ──────────────────────────────── */
   var SOCIAL_LINKS = {
-    youtube:   'https://youtube.com/@falws',
-    instagram: '',
-    behance:   'https://www.behance.net/falw',
+    youtube:   'https://www.youtube.com/@fldrz',
+    instagram: 'https://www.instagram.com/@0fldr',
+    behance:   'https://be.net/fre',
     discord:   'https://discord.com/users/1071929676223762452',
-    pinterest: '',
-    gumroad:   'https://gumroad.com/falw'
+    pinterest: 'https://pinterest.com/2fldr',
+    gumroad:   'https://fldrz.gumroad.com',
+    twitter:   'https://twitter.com/@designerfldr',
+    linkme:    'https://link.me/fld'
   };
 
   /* ── 2. Marquee creator cards ────────────────────────────── */
@@ -81,6 +83,13 @@
       url:  'https://youtube.com/@Unliving',
       img:  'https://yt3.googleusercontent.com/OzSNhPDusgmpyjofuGWrz5Luna8fawDWI0XUNlWF8-71ODpz2WdnTxPuuejNtJ5qBQF9uSYn=s200-c-k-c0x00ffffff-no-rj',
       glow: 'rgba(99, 102, 241, 0.55)'
+    },
+    {
+      name: 'Reddoons',
+      subs: '752K Subscribers',
+      url:  'https://youtube.com/@reddoons',
+      img:  './assets/reddoons.jpg',
+      glow: 'rgba(239, 68, 68, 0.55)'
     },
     /* Add more creators here:
     {
@@ -256,8 +265,14 @@
       var groupSize = 4;
       var numGroups = Math.floor(links.length / groupSize);
       for (var r = numGroups - 1; r >= 0; r--) {
-        var insertAfter = links[r * groupSize + groupSize - 1];
-        CREATORS.slice().reverse().forEach(function(creator) {
+        var groupLinks = links.slice(r * groupSize, (r + 1) * groupSize);
+        var sharpnessCard = groupLinks.find(function(l) {
+          return (l.textContent || '').includes('Sharpness') || (l.href || '').includes('sharpnessyt');
+        });
+        var reddoonsCreator = CREATORS.find(function(c) { return c.name === 'Reddoons'; });
+        var otherCreators = CREATORS.filter(function(c) { return c.name !== 'Reddoons'; });
+
+        function createEl(creator) {
           var a = document.createElement('a');
           a.href = creator.url;
           a.target = '_blank';
@@ -272,7 +287,16 @@
               '<span class="font-semibold text-sm">' + creator.name + '</span>' +
               '<span class="text-xs text-muted-foreground">' + creator.subs + '</span>' +
             '</span>';
-          insertAfter.insertAdjacentElement('afterend', a);
+          return a;
+        }
+
+        if (sharpnessCard && reddoonsCreator) {
+          sharpnessCard.insertAdjacentElement('afterend', createEl(reddoonsCreator));
+        }
+
+        var insertAfter = groupLinks[groupLinks.length - 1];
+        otherCreators.slice().reverse().forEach(function(creator) {
+          insertAfter.insertAdjacentElement('afterend', createEl(creator));
         });
       }
     });
