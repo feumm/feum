@@ -28252,7 +28252,7 @@ Error generating stack: ` +
     DM = [
       {
         label: "YouTube",
-        url: "https://youtube.com/@ogjfr",
+        url: "https://www.youtube.com/@fldrz",
         color: "#FF0033",
         icon: T.jsx("svg", {
           viewBox: "0 0 24 24",
@@ -28266,7 +28266,7 @@ Error generating stack: ` +
       },
       {
         label: "Instagram",
-        url: "https://www.instagram.com/ogsfre",
+        url: "https://www.instagram.com/@0fldr",
         color: "#E1306C",
         bg: "linear-gradient(45deg,#feda75 0%,#fa7e1e 25%,#d62976 50%,#962fbf 75%,#4f5bd5 100%)",
         icon: T.jsxs("svg", {
@@ -28299,7 +28299,7 @@ Error generating stack: ` +
       },
       {
         label: "Behance",
-        url: "https://www.behance.net/fre",
+        url: "https://be.net/fre",
         color: "#1769FF",
         icon: T.jsx("svg", {
           viewBox: "0 0 24 24",
@@ -28327,7 +28327,7 @@ Error generating stack: ` +
       },
       {
         label: "Pinterest",
-        url: "https://www.pinterest.com/ogfrl",
+        url: "https://pinterest.com/2fldr",
         color: "#E60023",
         icon: T.jsx("svg", {
           viewBox: "0 0 24 24",
@@ -28341,7 +28341,7 @@ Error generating stack: ` +
       },
       {
         label: "Gumroad",
-        url: "https://ogfr.gumroad.com/",
+        url: "https://fldrz.gumroad.com",
         color: "#FF90E8",
         icon: T.jsx("svg", {
           viewBox: "0 0 24 24",
@@ -28355,7 +28355,7 @@ Error generating stack: ` +
       },
       {
         label: "Twitter",
-        url: "https://twitter.com/designerfrl",
+        url: "https://twitter.com/@designerfldr",
         color: "#000000",
         icon: T.jsx("svg", {
           viewBox: "0 0 24 24",
@@ -28369,7 +28369,7 @@ Error generating stack: ` +
       },
       {
         label: "Link.me",
-        url: "https://link.me/ofre",
+        url: "https://link.me/fld",
         color: "#6366F1",
         icon: T.jsxs("svg", {
           viewBox: "0 0 24 24",
