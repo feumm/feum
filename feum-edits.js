@@ -29,14 +29,14 @@
 (function () {
   /* ── 1. Social footer links ──────────────────────────────── */
   var SOCIAL_LINKS = {
-    youtube:   'https://www.youtube.com/@falws',
-    instagram: 'https://www.instagram.com/',
-    behance:   'https://www.behance.net/falw',
+    youtube:   'https://www.youtube.com/@fldrz',
+    instagram: 'https://www.instagram.com/0fldr',
+    behance:   'https://www.behance.net/fre',
     discord:   'https://discord.com/users/1071929676223762452',
-    pinterest: 'https://pinterest.com/',
-    gumroad:   'https://gumroad.com/falw',
-    twitter:   'https://twitter.com/@designerfalw',
-    linkme:    'https://link.me/falw'
+    pinterest: 'https://pinterest.com/2fldr',
+    gumroad:   'https://fldrz.gumroad.com',
+    twitter:   'https://twitter.com/@designerfldr',
+    linkme:    'https://link.me/fld'
   };
 
   /* ── 2. Marquee creator cards ────────────────────────────── */
@@ -150,17 +150,17 @@
     var links = document.querySelectorAll('footer a, [class*="footer"] a, ul li a');
     links.forEach(function(a) {
       var href = (a.getAttribute('href') || '').toLowerCase();
-      if (href.includes('youtube.com/@falws') && SOCIAL_LINKS.youtube)
+      if (href.includes('youtube.com/@fldrz') && SOCIAL_LINKS.youtube)
         a.href = SOCIAL_LINKS.youtube;
-      if (href.includes('instagram.com') && SOCIAL_LINKS.instagram)
+      if (href.includes('instagram.com/0fldr') && SOCIAL_LINKS.instagram)
         a.href = SOCIAL_LINKS.instagram;
-      if (href.includes('behance.net/falw') && SOCIAL_LINKS.behance)
+      if (href.includes('behance.net/fre') && SOCIAL_LINKS.behance)
         a.href = SOCIAL_LINKS.behance;
-      if (href.includes('discord.com') && SOCIAL_LINKS.discord)
+      if (href.includes('discord.com/') && SOCIAL_LINKS.discord)
         a.href = SOCIAL_LINKS.discord;
-      if (href.includes('pinterest') && SOCIAL_LINKS.pinterest)
+      if (href.includes('pinterest.com/2fldr') && SOCIAL_LINKS.pinterest)
         a.href = SOCIAL_LINKS.pinterest;
-      if (href.includes('gumroad.con/falw') && SOCIAL_LINKS.gumroad)
+      if (href.includes('fldrz.gumroad.com') && SOCIAL_LINKS.gumroad)
         a.href = SOCIAL_LINKS.gumroad;
     });
     /* View more link */
