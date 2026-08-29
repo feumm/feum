@@ -104,7 +104,7 @@
 
   /* ── 3. Page meta text ───────────────────────────────────── */
   var META = {
-    title:       'fre',
+    title:       'fld',
     description: 'Scroll-stoppers, made to click. Professional Minecraft thumbnail design by fre.'
   };
 
