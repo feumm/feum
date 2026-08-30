@@ -27905,7 +27905,7 @@ Error generating stack: ` +
       children: T.jsx(_t.div, {
         className: "flex gap-8 md:gap-10 w-max",
         animate: { x: ["0%", "-50%"] },
-        transition: { duration: 45, ease: "linear", repeat: 1 / 0 },
+        transition: { duration: 36, ease: "linear", repeat: 1 / 0 },
         children: rM.map((e, n) =>
           T.jsxs(
             "a",
