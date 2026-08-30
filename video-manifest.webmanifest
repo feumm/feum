@@ -1,0 +1,25 @@
+{
+  "name": "fld | Video Editing",
+  "short_name": "fld Edits",
+  "description": "Minecraft thumbnails, video editing, and selected work by fld.",
+  "start_url": "./video-gallery.html",
+  "scope": "./",
+  "id": "./video-gallery.html",
+  "display": "standalone",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "orientation": "any",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

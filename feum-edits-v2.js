@@ -88,7 +88,7 @@
       name: 'Reddoons',
       subs: '752K Subscribers',
       url:  'https://youtube.com/@reddoons',
-      img:  'https://yt3.googleusercontent.com/CshQ5ks6dTuGk101WG7MyLp1azWguJr94l5VFJfy4-wFwdK6S9L5bJyDb_bx2vhMJXBlnNwe=s120-c-k-c0x00ffffff-no-rj',
+      img:  './assets/reddoons.jpg',
       glow: 'rgba(239, 68, 68, 0.55)'
     },
     /* Add more creators here:

@@ -88,7 +88,7 @@
       name: 'Reddoons',
       subs: '752K Subscribers',
       url:  'https://youtube.com/@reddoons',
-      img:  'https://yt3.googleusercontent.com/CshQ5ks6dTuGk101WG7MyLp1azWguJr94l5VFJfy4-wFwdK6S9L5bJyDb_bx2vhMJXBlnNwe=s200-c-k-c0x00ffffff-no-rj',
+      img:  './assets/reddoons.jpg',
       glow: 'rgba(239, 68, 68, 0.55)'
     }
     /* Add more creators here:
@@ -447,7 +447,7 @@
               bgImg.alt = '';
               bgWrap.appendChild(bgImg);
             }
-            bgImg.style.cssText = 'width:100%;height:100%;object-fit:cover;transform:scale(1.04);filter:blur(6px) brightness(0.9) saturate(1.15);opacity:0.85;pointer-events:none;' +
+            bgImg.style.cssText = 'width:100%;height:100%;object-fit:cover;transform:scale(1.04);filter:blur(6px) brightness(0.48) saturate(1.15);opacity:0.85;pointer-events:none;' +
               '-webkit-mask-image:linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 14%, rgba(0,0,0,1) 32%, rgba(0,0,0,1) 68%, rgba(0,0,0,0.5) 86%, transparent 100%);' +
               'mask-image:linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.5) 14%, rgba(0,0,0,1) 32%, rgba(0,0,0,1) 68%, rgba(0,0,0,0.5) 86%, transparent 100%);';
 
@@ -701,7 +701,7 @@
               '</div>' +
               '<div class="feum-form-group">' +
                 '<label for="feum-hire-message" class="feum-form-label">What do you need? <span class="feum-req">*</span></label>' +
-                '<textarea id="feum-hire-message" name="message" required rows="3" placeholder="Describe your video project, editing style, timeline, or details..." class="feum-modal-input feum-modal-textarea"></textarea>' +
+                '<textarea id="feum-hire-message" name="message" required rows="3" placeholder="Tell me what you need: a custom Minecraft thumbnail or video editing, plus any style or deadline details..." class="feum-modal-input feum-modal-textarea"></textarea>' +
               '</div>' +
               '<button type="submit" id="feum-hire-submit-btn" class="feum-modal-submit-btn">' +
                 '<span class="feum-submit-label">Send Message</span>' +
