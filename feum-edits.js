@@ -1337,6 +1337,101 @@
     return true;
   }
 
+  /* ── Stats story carousel: show one metric at a time ───────── */
+  var statsCarouselSet = false;
+  function setupStatsCarousel() {
+    var statsSection = document.querySelector('.feum-stats-section');
+    if (!statsSection) return false;
+
+    var grid = statsSection.querySelector('.feum-stats-grid, div[class*="grid"]');
+    if (!grid) return false;
+
+    var slides = Array.from(grid.children);
+    if (slides.length < 2) return false;
+    if (grid.getAttribute('data-stats-carousel') === '1') return true;
+
+    grid.setAttribute('data-stats-carousel', '1');
+    grid.classList.add('feum-stats-carousel');
+    grid.style.setProperty('display', 'block', 'important');
+    grid.style.setProperty('grid-template-columns', 'none', 'important');
+    grid.style.setProperty('position', 'relative', 'important');
+
+    slides.forEach(function(slide, index) {
+      slide.classList.add('feum-stat-slide');
+      slide.style.setProperty('display', 'flex', 'important');
+      slide.style.setProperty('flex-direction', 'column', 'important');
+      slide.style.setProperty('align-items', 'center', 'important');
+      slide.style.setProperty('justify-content', 'center', 'important');
+      slide.style.setProperty('text-align', 'center', 'important');
+      slide.setAttribute('aria-hidden', index === 0 ? 'false' : 'true');
+      if (index === 0) slide.classList.add('is-active');
+    });
+
+    var controls = document.createElement('div');
+    controls.className = 'feum-stats-story-controls';
+    controls.setAttribute('role', 'tablist');
+    controls.setAttribute('aria-label', 'Portfolio stats');
+
+    var activeIndex = 0;
+    var updateSlide = function(nextIndex) {
+      activeIndex = (nextIndex + slides.length) % slides.length;
+      slides.forEach(function(slide, index) {
+        var active = index === activeIndex;
+        slide.classList.toggle('is-active', active);
+        slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+      });
+      Array.from(controls.children).forEach(function(button, index) {
+        var active = index === activeIndex;
+        button.classList.toggle('is-active', active);
+        button.setAttribute('aria-selected', active ? 'true' : 'false');
+        button.setAttribute('tabindex', active ? '0' : '-1');
+      });
+    };
+
+    slides.forEach(function(slide, index) {
+      var label = (slide.textContent || '').replace(/\s+/g, ' ').trim();
+      var button = document.createElement('button');
+      button.type = 'button';
+      button.setAttribute('role', 'tab');
+      button.setAttribute('aria-label', 'Show ' + (label || 'stat ' + (index + 1)));
+      button.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
+      button.setAttribute('tabindex', index === 0 ? '0' : '-1');
+      button.innerHTML = '<span aria-hidden="true"></span>';
+      button.addEventListener('click', function() {
+        updateSlide(index);
+        restartTimer();
+      });
+      controls.appendChild(button);
+    });
+
+    grid.insertAdjacentElement('afterend', controls);
+
+    var timer = null;
+    var startTimer = function() {
+      if (timer) window.clearInterval(timer);
+      timer = window.setInterval(function() {
+        updateSlide(activeIndex + 1);
+      }, 4200);
+    };
+    var stopTimer = function() {
+      if (timer) {
+        window.clearInterval(timer);
+        timer = null;
+      }
+    };
+    var restartTimer = function() {
+      stopTimer();
+      startTimer();
+    };
+
+    controls.addEventListener('mouseenter', stopTimer);
+    controls.addEventListener('mouseleave', startTimer);
+    controls.addEventListener('focusin', stopTimer);
+    controls.addEventListener('focusout', startTimer);
+    startTimer();
+    return true;
+  }
+
   /* ── Remove Role & Location block unconditionally ── */
   function removeRoleAndLocation() {
     var metaEls = document.querySelectorAll('.feum-meta-grid, [class*="feum-meta"]');
@@ -1472,6 +1567,7 @@
     reorderSections();
     if (!showMoreApplied) showMoreApplied = applyShowMore();
     if (!statsFontPatched) statsFontPatched = patchStatsFonts();
+    if (!statsCarouselSet) statsCarouselSet = setupStatsCarousel();
     if (!headingsFontPatched) headingsFontPatched = patchDisplayHeadings();
     if (!socialInjected) socialInjected = injectNewSocialLinks();
     patchCopyrightFont();
@@ -1481,6 +1577,7 @@
                      !sectionsReordered ||
                      !footerLogoPatched ||
                      !statsFontPatched ||
+                     !statsCarouselSet ||
                      !headingsFontPatched;
     if (needsRetry && ++tries < 60) {
       setTimeout(runPatches, 200);

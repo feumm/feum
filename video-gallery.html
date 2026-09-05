@@ -224,9 +224,18 @@
         position: relative;
         padding: 6.5rem 1.5rem 1rem;
         text-align: center;
-        max-width: 1000px;
+        width: 100%;
+        max-width: none;
+        min-height: 360px;
+        box-sizing: border-box;
         margin: 0 auto;
         overflow: hidden;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        background:
+          linear-gradient(to bottom, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.2) 42%, #000000 100%),
+          url("./assets/hero-white-fldr.jpeg") center 42% / cover no-repeat;
       }
 
       .hero-glow {
@@ -288,7 +297,9 @@
         align-items: center;
         gap: 0.6rem;
         flex-wrap: wrap;
-        margin: 1.5rem auto 3rem;
+        position: relative;
+        z-index: 1;
+        margin: 0 auto;
         padding: 0 1rem;
         background: transparent;
         border: none;
@@ -400,8 +411,10 @@
         }
 
         .hero-section {
-          padding: 5.5rem 0 0.5rem;
+          min-height: 300px;
+          padding: 5.5rem 0 1.25rem;
           overflow: visible;
+          background-position: center center;
         }
 
         .filters-wrapper {
@@ -476,7 +489,8 @@
         }
 
         .hero-section {
-          padding: 5rem 0 0.5rem;
+          min-height: 270px;
+          padding: 5rem 0 1rem;
         }
       }
 
@@ -1435,48 +1449,11 @@
         </div>
       </div>
     </div>
-    <div id="site-preloader" aria-hidden="true">
-      <div class="preloader-content">
-        <div class="preloader-glow"></div>
-        <img src="./assets/falw-logo-new.png" alt="fre" class="preloader-logo" />
-        <div class="preloader-track">
-          <div class="preloader-bar"></div>
-        </div>
-      </div>
-    </div>
-    <script>
-      (function() {
-        var startTime = Date.now();
-        var minDisplayTime = 700;
-        
-        function dismissPreloader() {
-          var preloader = document.getElementById('site-preloader');
-          if (!preloader || preloader.classList.contains('preloader-hidden')) return;
-          
-          var elapsed = Date.now() - startTime;
-          var delay = Math.max(0, minDisplayTime - elapsed);
-          
-          setTimeout(function() {
-            preloader.classList.add('preloader-hidden');
-            setTimeout(function() {
-              if (preloader && preloader.parentNode) preloader.remove();
-            }, 700);
-          }, delay);
-        }
-
-        if (document.readyState === 'complete') {
-          dismissPreloader();
-        } else {
-          window.addEventListener('load', dismissPreloader);
-          setTimeout(dismissPreloader, 3500);
-        }
-      })();
-    </script>
     <!-- Navigation -->
     <header class="navbar" id="navbar">
       <nav class="nav-inner">
         <a href="./index.html" class="nav-brand" title="Back to Home">
-          <img src="./assets/falw-logo-new.png" alt="fre" class="nav-logo" />
+          <img src="./assets/falw-logo-new.png" alt="fld" class="nav-logo" />
         </a>
         <div class="nav-links">
           <a href="./index.html" class="nav-link">
