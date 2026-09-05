@@ -147,7 +147,10 @@
       }
 
       .feum-hero-bg {
-        filter: grayscale(100%) brightness(0.45) !important;
+        filter: none !important;
+        background:
+          linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.22) 48%, #000000 100%),
+          url("./assets/hero-white-fldr.jpeg") center 42% / cover no-repeat !important;
       }
       .feum-hero-bg img,
       .feum-hero-bg > img,
@@ -208,6 +211,9 @@
         align-items: center !important;
         text-align: center !important;
       }
+      section:first-of-type h1 {
+        display: none !important;
+      }
       section:first-of-type .max-w-6xl {
         margin-left: auto !important;
         margin-right: auto !important;
@@ -215,19 +221,10 @@
       /* Smooth out the hero vignette so it blends continuously into the
          page background instead of leaving a visible ring/seam at the fold */
       section:first-of-type [class*="ellipse_at_center"] {
-        background: radial-gradient(
-          ellipse at center,
-          rgba(0, 0, 0, 0.18) 0%,
-          rgba(0, 0, 0, 0.32) 30%,
-          rgba(0, 0, 0, 0.48) 50%,
-          rgba(0, 0, 0, 0.66) 65%,
-          rgba(0, 0, 0, 0.82) 78%,
-          rgba(0, 0, 0, 0.93) 88%,
-          #000 100%
-        ) !important;
+        background: none !important;
       }
       section:first-of-type [class*="h-40"][class*="bg-gradient-to-b"] {
-        height: 340px !important;
+        height: 280px !important;
         background: linear-gradient(
           to bottom,
           transparent 0%,
@@ -312,6 +309,92 @@
         section:has(div > div[class*="grid-cols-2"][class*="md:grid-cols-4"]) span[class*="h-px"] {
           margin-left: auto !important;
           margin-right: auto !important;
+        }
+      }
+
+      /* Stats story carousel */
+      .feum-stats-grid.feum-stats-carousel {
+        display: block !important;
+        position: relative !important;
+        min-height: 8.75rem !important;
+      }
+      .feum-stats-grid.feum-stats-carousel > .feum-stat-slide {
+        position: absolute !important;
+        inset: 0 !important;
+        width: 100% !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        transform: translateX(18px) !important;
+        transition: opacity 0.45s ease, transform 0.45s ease, visibility 0.45s ease !important;
+        pointer-events: none !important;
+      }
+      .feum-stats-grid.feum-stats-carousel > .feum-stat-slide.is-active {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateX(0) !important;
+        pointer-events: auto !important;
+      }
+      .feum-stats-grid.feum-stats-carousel .feum-stat-number {
+        font-size: clamp(2.15rem, 6vw, 5.5rem) !important;
+      }
+      .feum-stats-story-controls {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0.15rem !important;
+        width: max-content !important;
+        margin: 0.2rem auto 0 !important;
+        padding: 0.42rem 0.55rem !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-radius: 999px !important;
+        background: rgba(255, 255, 255, 0.08) !important;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.18) !important;
+        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
+      }
+      .feum-stats-story-controls button {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 1.25rem !important;
+        height: 0.9rem !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: 0 !important;
+        border-radius: 999px !important;
+        background: transparent !important;
+        cursor: pointer !important;
+        appearance: none !important;
+      }
+      .feum-stats-story-controls button span {
+        display: block !important;
+        width: 0.42rem !important;
+        height: 0.42rem !important;
+        border-radius: 999px !important;
+        background: rgba(255, 255, 255, 0.42) !important;
+        transition: width 0.3s ease, background 0.3s ease, opacity 0.3s ease !important;
+      }
+      .feum-stats-story-controls button.is-active {
+        width: 2.4rem !important;
+      }
+      .feum-stats-story-controls button.is-active span {
+        width: 100% !important;
+        background: rgba(255, 255, 255, 0.78) !important;
+      }
+      .feum-stats-story-controls button:hover span,
+      .feum-stats-story-controls button:focus-visible span {
+        background: rgba(255, 255, 255, 0.9) !important;
+      }
+      .feum-stats-story-controls button:focus-visible {
+        outline: 2px solid rgba(255, 255, 255, 0.7) !important;
+        outline-offset: 3px !important;
+      }
+      @media (max-width: 640px) {
+        .feum-stats-grid.feum-stats-carousel {
+          min-height: 7.5rem !important;
+        }
+        .feum-stats-story-controls {
+          margin-top: 0 !important;
         }
       }
 
@@ -990,6 +1073,7 @@
 
     <script type="module" src="./perf.js"></script>
     <script type="module" src="./feum-edits.js"></script>
+    <script type="module" src="./feum-live-subs.js"></script>
 
     <script>
       (function() {
@@ -1022,26 +1106,6 @@
         if (document.readyState === 'complete') pollNav();
         else window.addEventListener('load', pollNav);
 
-        function injectHeroLogo() {
-          var h1 = document.querySelector('h1');
-          if (!h1) return false;
-          var wrap = document.createElement('div');
-          wrap.className = 'feum-hero-logo-wrap';
-          var img = document.createElement('img');
-          img.src = './assets/falw-logo-new.png';
-          img.alt = 'fre';
-          img.className = 'feum-hero-logo';
-          wrap.appendChild(img);
-          h1.parentNode.replaceChild(wrap, h1);
-          return true;
-        }
-        var tries = 0;
-        function poll() {
-          if (injectHeroLogo()) return;
-          if (++tries < 80) setTimeout(poll, 100);
-        }
-        if (document.readyState === 'complete') poll();
-        else window.addEventListener('load', poll);
       })();
     </script>
 
@@ -1158,39 +1222,9 @@
         if (document.readyState === 'complete') poll();
         else window.addEventListener('load', poll);
 
-        function formatSubs(raw) {
-          var m = raw.match(/([\d.]+)\s*([KMB]?)\s*subscriber/i);
-          if (!m) return null;
-          return m[1] + (m[2] ? m[2].toUpperCase() : '') + ' Subscribers';
-        }
-        function updateSubCount(name, count) {
-          document.querySelectorAll('a.liquid-glass').forEach(function(card) {
-            var nameEl = card.querySelector('span.font-semibold');
-            var subEl  = card.querySelector('span.text-muted-foreground');
-            if (nameEl && subEl && nameEl.textContent.trim() === name) subEl.textContent = count;
-          });
-        }
-        function fetchSubs(handle, displayName) {
-          var proxy = 'https://corsproxy.io/?url=' + encodeURIComponent('https://www.youtube.com/@' + handle);
-          fetch(proxy)
-            .then(function(r) { return r.text(); })
-            .then(function(html) {
-              var m = html.match(/"([\d.]+\s*[KMB]?\s*subscriber[^"]*?)"/i);
-              if (m) { var c = formatSubs(m[1]); if (c) updateSubCount(displayName, c); }
-            }).catch(function() {});
-        }
-        window.addEventListener('load', function() {
-          setTimeout(function() {
-            fetchSubs('icynutella',  'Icynutella');
-            fetchSubs('icynutella2', 'Icynutella2');
-            fetchSubs('h0nritv',     'H0nri');
-            fetchSubs('Beepstv',     'Beeps');
-            fetchSubs('KremiiiYT',   'Kremiii');
-            fetchSubs('Unliving',    'Unliving');
-            fetchSubs('sharpnessyt', 'Sharpness');
-            fetchSubs('reddoons',    'Reddoons');
-          }, 1500);
-        });
+        /* Live subscriber updates are handled by feum-live-subs.js.
+           Keeping the creator injection here preserves the original site
+           structure while the live module owns fetching and sorting. */
       })();
     </script>
 
@@ -1751,7 +1785,7 @@
               </div>
               <div class="feum-form-group">
                 <label for="feum-hire-message" class="feum-form-label">What do you need? <span class="feum-req">*</span></label>
-                <textarea id="feum-hire-message" name="message" required rows="3" placeholder="Describe your video project, editing style, timeline, or details..." class="feum-modal-input feum-modal-textarea"></textarea>
+                <textarea id="feum-hire-message" name="message" required rows="3" placeholder="Tell me what you need: a custom Minecraft thumbnail or video editing, plus any style or deadline details..." class="feum-modal-input feum-modal-textarea"></textarea>
               </div>
               <button type="submit" id="feum-hire-submit-btn" class="feum-modal-submit-btn">
                 <span class="feum-submit-label">Send Message</span>
